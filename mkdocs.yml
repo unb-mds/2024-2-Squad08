@@ -9,15 +9,15 @@ theme:
     - navigation.tabs
   palette:
     - media: "(prefers-color-scheme: light)"
-      primary: green 
+      primary: indigo    
+      accent: deep-orange  
       toggle:
         icon: material/brightness-7
         name: alterar para modo dark
-      accent: white
-
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: green
+      primary: indigo    
+      accent: deep-orange
       toggle: 
         icon: material/brightness-4
         name: alterar para modo light
@@ -28,6 +28,7 @@ nav:
     - Reunião 30/10: atas/30-10-24.md 
   - Sprint Backlog: 
     - Sprint 1: sprints/sprint1.md
+    - Sprint 2: sprints/sprint2.md
   - Protótipo: prototipo/figma.md
   - Requisitos: requisitos/requisitos.md
   - Roadmap: roadmap/roadmap.md
