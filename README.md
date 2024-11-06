@@ -38,7 +38,7 @@ Contribuições são bem-vindas! Siga os passos abaixo para contribuir:
       <td align="center"><a href="https://github.com/Beatriz-ge"><img style="border-radius: 50%;" src="https://github.com/Beatriz-ge.png" width="100px;" alt=""/><br/><sub><b>Beatriz Lins</b></sub></a><br/>
       <td align="center"><a href="https://github.com/CerqPaulo"><img style="border-radius: 50%;" src="https://github.com/CerqPaulo.png" width="100px;" alt=""/><br/><sub><b>Paulo Cerqueira</b></sub></a><br/>
        <td align="center"><a href="https://github.com/Mach1r0"><img style="border-radius: 50%;" src="https://github.com/Mach1r0.png" width="100px;" alt=""/><br/><sub><b>Danie Ferreira Nunes</b></sub></a><br/>
-    <td align="center"><a href="https://github.com/DanNunes777"><img style="border-radius: 50%;" src="https://github.com/DanNunes777.png" width="100px;" alt=""/><br/><sub><b></b></sub></a><br/>
+    <td align="center"><a href="https://github.com/DanNunes777"><img style="border-radius: 50%;" src="https://github.com/DanNunes777.png" width="100px;" alt=""/><br/><sub><b>Daniel Nunes Duarte</b></sub></a><br/>
     <td align="center"><a href=""><img style="border-radius: 50%;" src="" width="100px;" alt=""/><br/><sub><b></b></sub></a><br/>
       <td align="center"><a href=""><img style="border-radius: 50%;" src="" width="100px;" alt=""/><br/><sub><b></b></sub></a><br/>
   </tr>
