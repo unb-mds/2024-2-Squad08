@@ -7,6 +7,6 @@
 
 ## **Acesso**
 
-<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="allowfullscreen></iframe>
+<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/design/num8z1OAJ4yBkmS03hBeh1/MDS-Figma?node-id=0-1&embed-host=share" allowfullscreen></iframe>
 
-<center>Autora: </center>
+<center>Autora: Beatriz Lins</center>
