@@ -77,7 +77,8 @@ A documentação do projeto pode ser encontrada clicando [aqui](https://unb-mds.
   </tr>
 </table>
 
-Estamos sempre abertos para feedback, sugestões e parcerias! Junte-se a nós na luta contra a violência.
+<center> Estamos sempre abertos para feedback, sugestões e parcerias! </center> 
+<center>Junte-se a nós na luta contra a violência. </center>
 
-## Licença
+## 📍 Licença
 Este projeto está licenciado sob a [MIT License](LICENSE).
