@@ -6,8 +6,8 @@ O objetivo da sprint 1 é que a equipe defina os dias e horários das reuniões,
 
 **Datas da Sprint:**
 
-- **Início:** 28/10/2024
-- **Término:** 04/11/2024
+- **Início:** 30/10/2024
+- **Término:** 06/11/2024
 
 **Backlog da Sprint:**
 

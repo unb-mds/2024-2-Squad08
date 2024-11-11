@@ -6,17 +6,17 @@ O objetivo da sprint 2, é aprimorar a estrutura e documentação do projeto. A 
 
 **Datas da Sprint:**
 
-- **Início:** 04/11/2024
-- **Término:** 11/11/2024
+- **Início:** 06/11/2024
+- **Término:** 13/11/2024
 
 **Backlog da Sprint:**
 
 | Tarefa | Responsável | Status |
 |--------|-------------|-----------------------|
-| Protótipo do projeto no figma e atualização da documentação na gitpage | Beatriz Lins | Concluído |
-|  | Daniel Ferreira |  |
-|  | Daniel Nunes |  |
-|  | Erick |  |
-|  | Gustavo |  |
-|  | Paulo |  |
+| Primeira versão do protótipo no Figma e atualização da documentação na Gitpage | Beatriz Lins | Concluído |
+| Dockerização do projeto | Beatriz Lins e Daniel Ferreira | Em andamento |
+| Criação da ata da reunião da semana | Daniel Ferreira | Concluído |
+| Segunda versão do protótipo do Figma  | Daniel Ferreira e Paulo | Em andamento |
+| Revisar a API do Querido Diário | Daniel Nunes | Em andamento |
+| Criação do Épico e do Backlog do projeto | Erick e Gustavo | Em andamento |
 
