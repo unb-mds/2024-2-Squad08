@@ -12,7 +12,6 @@ def create_user():
             username = request.form['username']
             password = request.form['password']
             email = request.form['email']
-            # Convert string 'false'/'true' to boolean
             admin = request.form.get('admin', 'false').lower() == 'true'
             
             hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
