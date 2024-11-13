@@ -1,4 +1,3 @@
-# **Elicitação de Requisitos**
 <hr style="border: 0; height: 1px; background-color: #000000;">
 
 ## **Metodologia**
@@ -14,14 +13,15 @@
 <p align="justify">A tabela abaixo representa os Requisitos Elicitados:
 </p>
 
-| Identificador | Requisito | Categoria | 
-| ------------- | -------------------- | --------- | 
-|R01| Listagem de Obras no Mapa Interativo | RF |
-|R02| Filtro de Região | RF |
-|R03| Página de Detalhes da Obra | RF |
-|R04| Filtro de Obras por Região no Mapa | RF |
-|R05| Login para Dados Personalizados | RNF |
-|R06| Marcação de Local para Necessidade de Obra | RNF |
+| **Identificador** | **Requisito** | **Categoria** | 
+|-------------------|---------------|---------------|
+| R01 | Listagem de Obras no Mapa Interativo com pop-up ao clicar no marcador. | RF |
+| R02 | Filtro de Região e filtragem direta no mapa interativo. | RF |
+| R03 | Página de Detalhes da Obra com informações completas (endereço, orçamento, responsável, etc.). | RF |
+| R04 | Login para acessar funcionalidades personalizadas, como salvar regiões de interesse e monitorar progresso de obras. | RNF |
+| R05 | Marcação de Local para Necessidade de Obra, com seleção de localização, upload de imagem e tipo de obra necessária. | RNF |
+| R06 | Busca e Filtros Avançados por tipo, status, região e valores. | RF |
+| R07 | Categorização e Atualização Automática de Status de Obras (Planejamento, Execução, Concluída). | RF |
 
 ### Requisitos Funcionais (Refinados)
 
@@ -65,3 +65,4 @@
 <p align="justify">Os requisitos refinados acima foram elaborados para garantir que o sistema atenda às necessidades dos usuários de forma eficiente e eficaz. Os requisitos funcionais detalham as funcionalidades essenciais que o sistema deve oferecer, enquanto os requisitos não funcionais especificam as qualidades e características que o sistema deve possuir para proporcionar uma boa experiência ao usuário. A combinação desses requisitos assegura que o sistema seja completo, funcional e de alta qualidade.</p>
 
 <center>Autor: Daniel Ferreira Nunes </center>
+

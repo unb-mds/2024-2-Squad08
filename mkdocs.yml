@@ -27,10 +27,12 @@ nav:
   - Atas: 
     - Reunião 30/10: atas/30-10-24.md 
     - Reunião 07/11: atas/07-11-24.md
-  - Sprint Backlog: 
-    - Sprint 1: sprints/sprint1.md
-    - Sprint 2: sprints/sprint2.md
-  - Protótipo: prototipo/figma.md
-  - Requisitos: requisitos/requisitos.md
+  - Arquitetura do Projeto: arquitetura/arquitetura.md
+  - Elicitação dos Requisitos: requisitos/requisitos.md
+  - Product Backlog: backlog/backlog.md
+  - Protótipo no Figma: prototipo/figma.md
   - Roadmap: roadmap/roadmap.md
-  - Arquitetura: arquitetura/arquitetura.md
+  - Sprint Backlog: 
+    - Sprint 01: sprints/sprint1.md
+    - Sprint 02: sprints/sprint2.md
+    - Sprint 03: sprints/sprint3.md

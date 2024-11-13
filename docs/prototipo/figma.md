@@ -1,4 +1,3 @@
-# **Protótipo no Figma**
 <hr style="border: 0; height: 1px; background-color: #000000;">
 
 ## **Objetivo**
