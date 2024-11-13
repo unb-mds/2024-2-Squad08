@@ -1,4 +1,3 @@
-# **Sprint 02**
 <hr style="border: 0; height: 1px; background-color: #000000;">
 
 **Objetivo da Sprint:**
@@ -14,9 +13,11 @@ O objetivo da sprint 2, é aprimorar a estrutura e documentação do projeto. A 
 | Tarefa | Responsável | Status |
 |--------|-------------|-----------------------|
 | Primeira versão do protótipo no Figma e atualização da documentação na Gitpage | Beatriz Lins | Concluído |
-| Dockerização do projeto | Beatriz Lins e Daniel Ferreira | Em andamento |
+| Dockerização do projeto | Beatriz Lins e Daniel Ferreira | Concluído |
 | Criação da ata da reunião da semana | Daniel Ferreira | Concluído |
 | Segunda versão do protótipo do Figma  | Daniel Ferreira e Paulo | Em andamento |
 | Revisar a API do Querido Diário | Daniel Nunes | Em andamento |
-| Criação do Épico e do Backlog do projeto | Erick e Gustavo | Em andamento |
+| Criação do Épico do projeto | Gustavo | Inconcluído |
+| Criação do Backlog do projeto | Erick | Concluído |
+
 
