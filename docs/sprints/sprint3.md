@@ -14,7 +14,7 @@ O objetivo da Sprint 03 é realizar a correção e o refinamento do backlog do p
 |--------|-------------|-----------------------|
 | Correção do backlog do projeto e criação do épico| Beatriz Lins | Em andamento |
 | Criação do diagrama da arquitetura do projeto | Daniel Ferreira | Em andamento |
-| Criação da ata da reunião da semana |  Daniel Ferreira | Em andamento |
+| Criação da ata da reunião da semana |  Daniel Ferreira | Concluida |
 | Segunda versão do protótipo do Figma | Daniel Ferreira e Paulo | Em andamento|
 | Refatoração dos Requisitos |  Daniel Ferreira | Em andamento |
 |  |  |  |
