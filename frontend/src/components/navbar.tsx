@@ -22,17 +22,17 @@ export default function NavBar() {
           </div>
 
         </div>
-        <a className="btn btn-ghost text-xl">Monitora BSB</a>
+        <a href='/' className="btn btn-ghost text-xl">Monitora BSB</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
-          <li><a>Obras</a></li>
-          <li><a>Mapa</a></li>
-          <li><a>Noticias</a></li>
+          <li><a href='/obras'>Obras</a></li>
+          <li><a href='/mapa'>Mapa</a></li>
+          <li><a href='/noticias'>Noticias</a></li>
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        <a className="btn">Login</a>
       </div>
     </div>
   )
