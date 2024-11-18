@@ -27,8 +27,17 @@ nav:
   - Atas: 
     - Reunião 30/10: atas/30-10-24.md 
     - Reunião 07/11: atas/07-11-24.md
+    - Reunião 14/11: atas/14-11-24.md
+
   - Arquitetura do Projeto: arquitetura/arquitetura.md
   - Elicitação dos Requisitos: requisitos/requisitos.md
+  - Épicos: 
+    - E01 - Visualização Interativa das Obras: epicos/epico1.md
+    - E02 - Processamento e Filtragem de Dados: epicos/epico2.md
+    - E03 - Responsividade e Performance: epicos/epico3.md
+    - E04 - Login e Personalização: epicos/epico4.md
+    - E05 - Categorização e Atualização de Status de Obras: epicos/epico5.md
+    - E06 - Funcionalidade de Upload de Imagens: epicos/epico6.md
   - Product Backlog: backlog/backlog.md
   - Protótipo no Figma: prototipo/figma.md
   - Roadmap: roadmap/roadmap.md
@@ -36,3 +45,11 @@ nav:
     - Sprint 01: sprints/sprint1.md
     - Sprint 02: sprints/sprint2.md
     - Sprint 03: sprints/sprint3.md
+    - Sprint 04: sprints/sprint4.md
+    - Sprint 05: sprints/sprint5.md
+    - Sprint 06: sprints/sprint6.md
+    - Sprint 07: sprints/sprint7.md
+    - Sprint 08: sprints/sprint8.md
+    - Sprint 09: sprints/sprint9.md
+    - Sprint 10: sprints/sprint10.md
+
