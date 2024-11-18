@@ -1,9 +1,8 @@
-// src/components/NavBar.tsx
 import React from 'react'
 
 export default function NavBar() {
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar" style={{ backgroundColor: '#1D232A' }}>
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -20,12 +19,11 @@ export default function NavBar() {
                 d="M4 6h16M4 12h8m-8 6h16" />
             </svg>
           </div>
-
         </div>
-        <a href='/' className="btn btn-ghost text-xl">Monitora BSB</a>
+        <a href='/' className="btn btn-ghost text-xl text-white">Monitora BSB</a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
+        <ul className="menu menu-horizontal px-1 text-white">
           <li><a href='/obras'>Obras</a></li>
           <li><a href='/mapa'>Mapa</a></li>
           <li><a href='/noticias'>Noticias</a></li>
