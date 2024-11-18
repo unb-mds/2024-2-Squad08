@@ -1,4 +1,3 @@
-// src/pages/Noticias.tsx
 import React from 'react';
 
 const Noticias = () => {

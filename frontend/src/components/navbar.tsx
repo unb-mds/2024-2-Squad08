@@ -32,7 +32,7 @@ export default function NavBar() {
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Login</a>
+        <a href='/login' className="btn">Login</a>
       </div>
     </div>
   )

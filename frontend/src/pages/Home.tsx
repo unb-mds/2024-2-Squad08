@@ -13,6 +13,21 @@ const LatestWorks = () => {
       alt: "Investimentos"
     },
     {
+      image: "/INTERNA-2-Foto-Geovana-Albuquerque-3-2.jpg",
+      title: "Ceilândia tem mais de R$ 151 milhões em investimentos para melhorar vida de seus 350 mil moradores",
+      alt: "Investimentos"
+    },
+    {
+      image: "/INTERNA-2-Foto-Geovana-Albuquerque-3-2.jpg",
+      title: "Ceilândia tem mais de R$ 151 milhões em investimentos para melhorar vida de seus 350 mil moradores",
+      alt: "Investimentos"
+    },
+    {
+      image: "/INTERNA-2-Foto-Geovana-Albuquerque-3-2.jpg",
+      title: "Ceilândia tem mais de R$ 151 milhões em investimentos para melhorar vida de seus 350 mil moradores",
+      alt: "Investimentos"
+    },
+    {
       image: "/pista.jpeg",
       title: "Novas obras em Ceilândia",
       alt: "Obras"
@@ -23,7 +38,6 @@ const LatestWorks = () => {
     <div className="min-h-screen bg-gray-100">
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-8 text-gray-800">Últimas Obras</h1>
-        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {works.map((work, index) => (
             <div 
