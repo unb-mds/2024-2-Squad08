@@ -1,3 +1,9 @@
+### **O que é o Backlog do Produto?**
+
+<p align="justify">O backlog de um produto é uma lista priorizada de funcionalidades, melhorias, correções e requisitos necessários para o desenvolvimento de um produto. Ele é composto por itens conhecidos como "itens do backlog", que podem incluir histórias de usuário, tarefas técnicas, bugs e outros elementos essenciais para o avanço do projeto. O backlog é constantemente revisado e ajustado pela equipe de desenvolvimento e pelo Product Owner, garantindo que o trabalho seja realizado com foco nas necessidades mais urgentes e no valor para o negócio.</p>
+
+---
+
 | **ID**  | **Descrição**                                                                 | **Tipo**               | **Prioridade** |
 |---------|-------------------------------------------------------------------------------|------------------------|----------------|
 | PBI-01  | Desenvolver a exibição de obras no mapa interativo, com ícones clicáveis.    | Requisito Funcional    | Alta           |
