@@ -1,4 +1,3 @@
-"use client";
 import React, { useState } from "react";
 
 export default function Register() {
@@ -68,9 +67,12 @@ export default function Register() {
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </div>
-            <button className="bg-[#4BEC6B] text-grey-500 py-2 rounded-lg mt-10 shadow-md hover:shadow-lg transition-shadow duration-300">
+            <button className="bg-[#4BEC6B] text-grey-500 py-2 rounded-lg mt-[20px] shadow-md hover:shadow-lg transition-shadow duration-300">
               CADASTRE-SE 
             </button>
+            <small className="flex items-center justify-center gap-2"> {/* Added justify-center and gap-2 */}
+              Já tem uma conta? <a href="/login" className="ml-1">Entrar</a> {/* Added ml-1 for margin-left */}
+            </small>
           </form>
         </div>
       </div>
