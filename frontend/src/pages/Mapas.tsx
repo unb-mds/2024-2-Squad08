@@ -5,8 +5,9 @@ import 'leaflet/dist/leaflet.css';
 import { GrUserWorker } from "react-icons/gr";
 import { renderToStaticMarkup } from 'react-dom/server';
 import Logo from "../components/logo";  
+import "/home/beatriz/Documentos/Github/MOSP-G8/frontend/src/styles/mapa.css"
 
-const iconMarkup = renderToStaticMarkup(<GrUserWorker size={40} className="text-gray-950	" />);
+const iconMarkup = renderToStaticMarkup(<GrUserWorker size={40} className="text-gray-950" />);
 
 const customIcon = new L.DivIcon({
   html: iconMarkup,
@@ -33,6 +34,30 @@ export default function Mapas() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
+
+        <div className="map-container">
+          <h1>ESCOLHA UM FILTRO</h1>
+
+        <div className="btn-container-map">
+          <div className="btn-container-first">
+            <button>REGIÃO</button>
+            <button>VALOR</button>
+          </div>
+          
+          <div className="btn-container-second">
+            <button>TIPO</button>
+            <button>STATUS</button>
+          </div>
+
+          <div className="btn-container-third">
+            <button>LOGIN</button>
+            <button>CADASTRO</button>
+          </div>
+
+        </div>
+      </div>
+
+
         <Marker position={position} icon={customIcon}>
           <Popup>
             Obra de Revitalização
@@ -49,7 +74,9 @@ export default function Mapas() {
           </Popup>
         </Marker>
       </MapContainer>
-      <Logo /> 
+      
+      <Logo />
+    
     </div>
   );
 }
