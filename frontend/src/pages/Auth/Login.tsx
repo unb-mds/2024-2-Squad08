@@ -2,6 +2,11 @@ import React from 'react'
 
 export default function Login() {
   return (
-    <div>Login</div>
+    <div className=''>
+      <div className=''>
+
+      </div>
+
+    </div>
   )
 }
