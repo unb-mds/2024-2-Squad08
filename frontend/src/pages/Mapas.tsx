@@ -1,4 +1,9 @@
 import React from 'react';
+import { IoLocationSharp } from "react-icons/io5";
+import { TbMoneybag } from "react-icons/tb";
+import { BiLogIn } from "react-icons/bi";
+import { MdConstruction } from "react-icons/md";
+import { FaListCheck } from "react-icons/fa6";
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -35,27 +40,43 @@ export default function Mapas() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
 
-        <div className="map-container">
-          <h1>ESCOLHA UM FILTRO</h1>
+    <div className="map-container">
+      <h1>ESCOLHA UM FILTRO</h1>
 
-        <div className="btn-container-map">
-          <div className="btn-container-first">
-            <button>REGIÃO</button>
-            <button>VALOR</button>
-          </div>
-          
-          <div className="btn-container-second">
-            <button>TIPO</button>
-            <button>STATUS</button>
-          </div>
-
-          <div className="btn-container-third">
-            <button>LOGIN</button>
-            <button>CADASTRO</button>
-          </div>
-
+      <div className="btn-container-map">
+        <div className="btn-container-left">
+          <button className="green-btn-map">
+            <IoLocationSharp className="icon" />
+            REGIÃO
+          </button>
+          <button className="yellow-btn-map">
+            <TbMoneybag className="icon" />
+            VALOR
+          </button>
+        </div>
+        <div className="btn-container-right">
+          <button className="red-btn-map">
+            <MdConstruction className="icon" />
+            TIPO
+          </button>
+          <button className="orange-btn-map">
+            <FaListCheck className="icon" />
+            STATUS
+          </button>
         </div>
       </div>
+
+      <div className="login-container">
+        <h1>JÁ POSSUI UMA CONTA?</h1>
+        <button className="gray-btn-map">
+          <BiLogIn className="icon" />
+          LOGIN
+        </button>
+      </div>
+    </div>
+
+
+
 
 
         <Marker position={position} icon={customIcon}>
