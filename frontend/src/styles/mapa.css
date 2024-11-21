@@ -3,7 +3,7 @@
   bottom: 0;          
   left: 0;
   width: 100%; 
-  height: 30vh;       
+  height: 40vh;       
   background-color: #243F4D;
   z-index: 1000;      
   padding: 10px;      
@@ -23,7 +23,7 @@ h1 {
   justify-content: space-between;  
   align-items: center;  
   z-index: 1000;
-  margin-top: 1.5em; 
+  margin-top: 1em; 
 }
 
 .btn-container-left,
@@ -31,18 +31,53 @@ h1 {
   display: flex;
   flex-direction: column; 
   align-items: center; 
-  width: 50%; /* Define a largura das colunas */
+  width: 30em;
 }
 
 .map-container button {
-  margin: 5px 0; 
+  display: flex;      
+  align-items: center;
+  justify-content: flex-start; 
+  margin: 8px 0;
   padding: 8px 10px; 
-  background-color: #4CAF50; 
   border-radius: 5px; 
-  color: white; 
+  color: black; 
   font-size: 15px;
   cursor: pointer; 
-  width: 30vw;
+  width: 40vw;
+  font-weight: bold;
+  gap: 10px; 
 }
 
+.map-container .icon {
+  font-size: 18px;
+}
+
+.green-btn-map {
+  background-color: #8FCB9B;
+}
+
+.red-btn-map {
+  background-color: #FF6F61;
+}
+
+.yellow-btn-map {
+  background-color: #FFD700;
+}
+
+.orange-btn-map {
+  background-color: #EFA65E;
+}
+
+.gray-btn-map {
+  background-color: gray;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center;  
+  gap: 1em;  
+}
 
