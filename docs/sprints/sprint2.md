@@ -17,7 +17,7 @@ O objetivo da sprint 2, é aprimorar a estrutura e documentação do projeto. A 
 | Dockerização do projeto | Beatriz Lins e Daniel Ferreira | Concluído |
 | Criação da ata da reunião da semana | Daniel Ferreira | Concluído |
 | Segunda versão do protótipo do Figma  | Paulo Cirqueira | Concluído |
-| Revisar a API do Querido Diário | Daniel Nunes | Em andamento |
+| Revisar a API do Querido Diário | Daniel Nunes | Inconcluído |
 | Criação do Épico do projeto | Gustavo | Inconcluído |
 | Criação do Backlog do projeto | Erick ALves | Concluído |
 
