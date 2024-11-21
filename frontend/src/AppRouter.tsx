@@ -1,7 +1,7 @@
 // src/AppRouter.tsx
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import NavBar from './components/navbar';
+// import NavBar from './components/navbar';
 import Home from './pages/Home';
 import Obras from './pages/Obras';
 import Mapas from './pages/Mapas';
@@ -12,7 +12,7 @@ import Register from './pages/Auth/Register';
 const AppRouter = () => {
   return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/obras" element={<Obras />} />
