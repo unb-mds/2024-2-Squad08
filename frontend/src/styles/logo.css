@@ -1,0 +1,23 @@
+.logo-background {
+    position: absolute;
+    top: 5%; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    z-index: 1000; 
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    width: 100%; 
+  }
+  
+  .logo-button {
+    padding: 10px 35px;
+    background-color: #243F4D; 
+    color: white; 
+    font-size: 16px; 
+    border-radius: 3vw;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  
