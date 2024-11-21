@@ -4,6 +4,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { GrUserWorker } from "react-icons/gr";
 import { renderToStaticMarkup } from 'react-dom/server';
+import Logo from "../components/logo";  
 
 const iconMarkup = renderToStaticMarkup(<GrUserWorker size={40} className="text-gray-950	" />);
 
@@ -22,10 +23,10 @@ export default function Mapas() {
   const position2 = [-15.900, -47.800]; 
 
   return (
-    <div className='h-screen w-full'>
+    <div className="relative h-screen w-full">
       <MapContainer 
         center={position} 
-        zoom={13} 
+        zoom={14} 
         style={{ height: '100%', width: '100%' }}
       >
         <TileLayer
@@ -39,15 +40,16 @@ export default function Mapas() {
         </Marker>
         <Marker position={position1} icon={customIcon}>
           <Popup>
-          Obra de Revitalização    
+            Obra de Revitalização    
           </Popup>
         </Marker>
         <Marker position={position2} icon={customIcon}>
           <Popup>
-          Obra de Revitalização
+            Obra de Revitalização
           </Popup>
         </Marker>
       </MapContainer>
+      <Logo /> 
     </div>
   );
 }
