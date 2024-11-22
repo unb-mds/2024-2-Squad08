@@ -1,31 +1,24 @@
-from flask import Blueprint, render_template, request, redirect, url_for, jsonify
+from flask import Blueprint, jsonify, request
 from werkzeug.security import generate_password_hash, check_password_hash
-from .models.user import User 
-from .models import db
-from .models.enums import GenderEnum
+from app.models.user import User
+from app.models import db
+from app.models.enums import GenderEnum
 
-main = Blueprint('main', __name__)
+user_bp = Blueprint('user', __name__)
 
-@main.route("/users/create", methods=['GET', 'POST'])
+@user_bp.route("/users/create", methods=['GET', 'POST'])
 def create_user():
     if request.method == 'POST':
         try:
-            if request.is_json:
-                data = request.get_json()
-                username = data.get('username')
-                password = data.get('password')
-                email = data.get('email')
-                admin = str(data.get('admin', False)).lower() == 'true'
-                gender_str = data.get('gender', 'male').upper()
-            else:
-                username = request.form['username']
-                password = request.form['password']
-                email = request.form['email']
-                admin = request.form.get('admin', 'false').lower() == 'true'
-                gender_str = request.form.get('gender', 'male').upper()
+            data = request.get_json() if request.is_json else request.form
+            username = data.get('username')
+            password = data.get('password')
+            email = data.get('email')
+            admin = str(data.get('admin', False)).lower() == 'true'
+            gender_str = data.get('gender', 'male').upper()
 
             if not all([username, password, email]):
-                return jsonify({'error': 'Missing required fields'}), 400
+             ,   return jsonify({'error': 'Missing required fields'}), 400
 
             gender = GenderEnum[gender_str]
             hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
@@ -54,21 +47,17 @@ def create_user():
             db.session.rollback()
             return jsonify({'error': str(e)}), 400
 
-@main.route("/users/login", methods=['GET', 'POST'])
-def login(): 
+@user_bp.route("/users/login", methods=['GET', 'POST'])
+def login():
     if request.method == 'POST':
         try:
-            if request.is_json:
-                data = request.get_json()
-                username = data.get('username')
-                password = data.get('password')
-            else:
-                username = request.form.get('username')
-                password = request.form.get('password')
-            
+            data = request.get_json() if request.is_json else request.form
+            username = data.get('username')
+            password = data.get('password')
+
             if not username or not password:
                 return jsonify({'error': 'Username and password are required'}), 400
-                
+
             user = User.query.filter_by(username=username).first()
             if user and check_password_hash(user.password, password): 
                 return jsonify({'message': 'Login successful'}), 200

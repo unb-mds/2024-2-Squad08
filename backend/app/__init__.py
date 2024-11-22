@@ -1,7 +1,8 @@
-# app/__init__.py
 from flask import Flask
-from .models import db 
-from .views import main
+from .models import db
+from .views.main import main_bp
+from .views.view_user import user_bp 
+from .views.view_obra import obra_bp  
 from dotenv import load_dotenv
 import os
 from sqlalchemy.exc import SQLAlchemyError
@@ -11,10 +12,7 @@ def create_app():
     load_dotenv() 
     
     app = Flask(__name__)
-    app.debug = True 
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 
-        'postgresql://postgres:admin@postgres_db:5432/admin')
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config.from_object('app.config.Config')  
     
     db.init_app(app)
     
@@ -26,5 +24,8 @@ def create_app():
     except SQLAlchemyError as e:
         print(f"Error recreating tables: {str(e)}")
     
-    app.register_blueprint(main)
+    app.register_blueprint(main_bp) 
+    app.register_blueprint(user_bp, url_prefix='/users')  
+    app.register_blueprint(obra_bp, url_prefix='/obras')  
+    
     return app
