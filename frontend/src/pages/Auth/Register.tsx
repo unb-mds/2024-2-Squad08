@@ -1,23 +1,32 @@
 import React, { useState } from "react";
+import { useAuth } from '../../Context/AuthContext'
+import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
+  const [ signUp ] = useAuth();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState(''); 
   const [password, setPassword] = useState('');
   const [error, setError] = useState(''); 
   const [confirmpassword, setConfirmPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleSignIn = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); 
+    setError(''); 
 
-    if (password !== confirmpassword){
-      setError('As senhas não são iguais');
+    if ( password !== confirmpassword) {
+      setError('As senhas não coincidem'); 
       return;
     }
 
     try {
+      const response = await signUp(username, email, password);
+      if (response.ok) {
+        navigate('/login');
+      }
     } catch (error) {
-      setError('Error ao cadastrar usuario');
+      setError('Erro ao cadastrar');
     }
   };
 
@@ -70,8 +79,8 @@ export default function Register() {
             <button className="bg-[#4BEC6B] text-grey-500 py-2 rounded-lg mt-[20px] shadow-md hover:shadow-lg transition-shadow duration-300">
               CADASTRE-SE 
             </button>
-            <small className="flex items-center justify-center gap-2"> {/* Added justify-center and gap-2 */}
-              Já tem uma conta? <a href="/login" className="ml-1">Entrar</a> {/* Added ml-1 for margin-left */}
+            <small className="flex items-center justify-center gap-2">
+              Já tem uma conta? <a href="/login" className="ml-1">Entrar</a>
             </small>
           </form>
         </div>

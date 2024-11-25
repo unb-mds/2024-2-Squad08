@@ -18,7 +18,7 @@ def create_user():
             gender_str = data.get('gender', 'male').upper()
 
             if not all([username, password, email]):
-             ,   return jsonify({'error': 'Missing required fields'}), 400
+               return jsonify({'error': 'Missing required fields'}), 400
 
             gender = GenderEnum[gender_str]
             hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
