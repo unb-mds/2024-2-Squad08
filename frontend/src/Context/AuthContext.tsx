@@ -22,7 +22,6 @@ interface AuthProviderProps{
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-    console.log("AuthProvider rendered");
     const [user, setUser] = useState<User | null>(null); 
 
     const SignUp = async (username: string, email: string, password: string) => {

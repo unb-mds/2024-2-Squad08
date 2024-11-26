@@ -4,5 +4,6 @@ flask-sqlalchemy==3.1.1
 psycopg2-binary==2.9.9
 python-dotenv==1.0.0
 marshmallow-sqlalchemy==1.1.0
-flask-jwt-extended==4.4.4
+flask-jwt-extended==4.4.4 
+flask-cors==4.0.0
 requests==2.31.0
