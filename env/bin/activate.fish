@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/home/beatriz/Documentos/Github/MOSP-G8/env"
+set -gx VIRTUAL_ENV "/home/beatriz/Documentos/UnB - FGA/MDS/MDS-MonitoraBSB/env"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

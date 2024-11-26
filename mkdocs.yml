@@ -1,6 +1,6 @@
 site_name: Monitoramento de Obras e Serviços Públicos 
-repo_name: "MOSP-G8"
-repo_url: "https://github.com/unb-mds/MOSP-G8"
+repo_name: "MonitoraBSB"
+repo_url: "https://github.com/unb-mds/MDS-MonitoraBSB"
 
 theme:
   name: material
@@ -24,11 +24,12 @@ theme:
 
 nav: 
   - Início: index.md
+  - API Querido Diário: api_querido_diario/api.md
   - Atas: 
     - Reunião 30/10: atas/30-10-24.md 
     - Reunião 07/11: atas/07-11-24.md
     - Reunião 14/11: atas/14-11-24.md
-
+    - Reunião 21/11: atas/21-11-24.md
   - Arquitetura do Projeto: arquitetura/arquitetura.md
   - Elicitação dos Requisitos: requisitos/requisitos.md
   - Épicos: 
@@ -39,7 +40,10 @@ nav:
     - E05 - Categorização e Atualização de Status de Obras: epicos/epico5.md
     - E06 - Funcionalidade de Upload de Imagens: epicos/epico6.md
   - Product Backlog: backlog/backlog.md
-  - Protótipo no Figma: prototipo/figma.md
+  - Protótipo no Figma: 
+    - Versão 01: prototipo/versao1.md
+    - Versão 02: prototipo/versao2.md
+    - Versão 03: prototipo/versao3.md
   - Roadmap: roadmap/roadmap.md
   - Sprint Backlog: 
     - Sprint 01: sprints/sprint1.md

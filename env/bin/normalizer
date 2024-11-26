@@ -1,4 +1,6 @@
-#!/home/beatriz/Documentos/Github/MOSP-G8/env/bin/python3
+#!/bin/sh
+'''exec' "/home/beatriz/Documentos/UnB - FGA/MDS/MDS-MonitoraBSB/env/bin/python3" "$0" "$@"
+' '''
 # -*- coding: utf-8 -*-
 import re
 import sys

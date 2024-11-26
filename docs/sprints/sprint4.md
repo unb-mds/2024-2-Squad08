@@ -11,8 +11,11 @@ O objetivo principal da Sprint 04 é avançar significativamente no desenvolvime
 
 | Tarefa | Responsável | Status |
 |--------|-------------|-----------------------|
-| Criação do Roadmap | Beatriz Lins | Em andamento |
 | Frontend da página principal do mapa | Beatriz Lins | Concluído |
+| Correção da versão 3 do Figma | Beatriz Lins | Concluído |
+| Ajuste do Backlog do produto de acordo com novo Figma | Beatriz Lins | Concluído |
+| Ajuste dos requisitos de acordo com novo Figma | Beatriz Lins | Concluído |
+| Atualização da documentação do projeto | Beatriz Lins | Concluído |
 | | Daniel Ferreira |  |
 | | Paulo Cirqueira |  |
 | | Daniel Nunes |  |

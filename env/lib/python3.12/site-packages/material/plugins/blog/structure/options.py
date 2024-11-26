@@ -18,7 +18,7 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 
-from datetime import date, datetime, time
+from datetime import date, datetime, time, timezone
 from mkdocs.config.base import BaseConfigOption, Config, ValidationError
 from typing import Dict
 
@@ -66,12 +66,16 @@ class PostDate(BaseConfigOption[DateDict]):
             # Handle datetime - since datetime is a subclass of date, we need
             # to check it first, or we lose the time - see https://t.ly/-KG9N
             if isinstance(value, datetime):
-                continue
+                # Set timezone to UTC if not set
+                if value.tzinfo is None:
+                    config[key_name][key] = value.replace(tzinfo=timezone.utc)
+                continue;
+
 
             # Handle date - we set 00:00:00 as the default time, if the author
-            # only supplied a date, and convert it to datetime
+            # only supplied a date, and convert it to datetime in UTC
             if isinstance(value, date):
-                config[key_name][key] = datetime.combine(value, time())
+                config[key_name][key] = datetime.combine(value, time()).replace(tzinfo=timezone.utc)
 
         # Initialize date dictionary
         config[key_name] = DateDict(config[key_name])
