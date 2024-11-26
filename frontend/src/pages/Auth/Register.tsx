@@ -3,7 +3,7 @@ import { useAuth } from '../../Context/AuthContext'
 import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
-  const [ signUp ] = useAuth();
+  const [signUp, user] = useAuth();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState(''); 
   const [password, setPassword] = useState('');
@@ -14,6 +14,11 @@ export default function Register() {
   const handleSignIn = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); 
     setError(''); 
+
+    if (!username || !email || !password || !confirmpassword) {
+      setError('Preencha todos os campos'); 
+      return;
+    }
 
     if ( password !== confirmpassword) {
       setError('As senhas não coincidem'); 
@@ -76,7 +81,7 @@ export default function Register() {
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </div>
-            <button className="bg-[#4BEC6B] text-grey-500 py-2 rounded-lg mt-[20px] shadow-md hover:shadow-lg transition-shadow duration-300">
+            <button type="submit" className="bg-[#4BEC6B] text-grey-500 py-2 rounded-lg mt-[20px] shadow-md hover:shadow-lg transition-shadow duration-300">
               CADASTRE-SE 
             </button>
             <small className="flex items-center justify-center gap-2">
