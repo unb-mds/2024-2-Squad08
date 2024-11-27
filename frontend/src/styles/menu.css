@@ -1,0 +1,103 @@
+.map-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%; 
+    height: 70vh;       
+    background-color: #243F4D;
+    z-index: 1000;      
+    padding: 10px;      
+    text-align: center; 
+    border-radius: 15px;
+  }
+  
+h1 {
+    color: white;
+    font-weight: bold;
+    font-size: 18px;    
+    }
+
+.btn-container-map {
+    display: flex;
+    justify-content: space-between;  
+    align-items: center;  
+    z-index: 1000;
+    margin-top: 1em; 
+    }
+
+.btn-container-left,
+.btn-container-right {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    width: 30em;
+    }
+
+.map-container button {
+    display: flex;      
+    align-items: center;
+    justify-content: flex-start; 
+    margin: 8px 0;
+    padding: 8px 10px; 
+    border-radius: 15px; 
+    color: black; 
+    font-size: 13px;
+    cursor: pointer; 
+    width: 32vw;
+    font-weight: bold;
+    gap: 10px; 
+    }
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em; 
+    margin-top: 3em;
+    }
+
+.button-group {
+    display: flex;
+    justify-content: center; 
+    gap: 1em; 
+    }
+
+.inter-text {
+    margin-bottom: 0.5em; 
+    margin-top: 2em;
+    }
+
+/* Cores dos botões e ícones */
+
+.map-container .icon {
+    font-size: 18px;
+    }
+
+.green-btn-map {
+    background-color: #8FCB9B;
+    }
+
+.red-btn-map {
+    background-color: #FF6F61;
+    }
+
+.yellow-btn-map {
+    background-color: #FFD700;
+    }
+
+.orange-btn-map {
+    background-color: #EFA65E;
+    }
+
+.gray-btn-map {
+    background-color: gray;
+    }
+
+.purple-btn-map {
+    background-color: #715F82;
+    }
+
+.blue-btn-map {
+    background-color: #9DBFC9;
+    }
