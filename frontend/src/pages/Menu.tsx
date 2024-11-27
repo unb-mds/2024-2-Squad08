@@ -60,7 +60,7 @@ export default function Mapas() {
 
         <h1 className="inter-text">OU</h1>
         <h1>FILTRAR MAPA:</h1>
-        <div className="btn-container-map">
+        <div className="btn-container-buttom">
           <div className="btn-container-left">
             <button className="green-btn-map">
               <IoLocationSharp className="icon" />
