@@ -9,7 +9,7 @@ import 'leaflet/dist/leaflet.css';
 import { GrUserWorker } from "react-icons/gr";
 import { renderToStaticMarkup } from 'react-dom/server';
 import Logo from "../components/logo";  
-import "../styles/mapa.css";
+import "../styles/menu.css";
 
 const iconMarkup = renderToStaticMarkup(<GrUserWorker size={40} className="text-gray-950" />);
 
