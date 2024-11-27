@@ -1,4 +1,4 @@
-import "/home/beatriz/Documentos/Github/MOSP-G8/frontend/src/styles/logo.css";
+import "../styles/logo.css";
 
 const Logo = () => {
   return (

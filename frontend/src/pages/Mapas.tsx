@@ -10,7 +10,7 @@ import 'leaflet/dist/leaflet.css';
 import { GrUserWorker } from "react-icons/gr";
 import { renderToStaticMarkup } from 'react-dom/server';
 import Logo from "../components/logo";  
-import "/home/beatriz/Documentos/Github/MOSP-G8/frontend/src/styles/mapa.css"
+import "../styles/mapa.css"
 
 const iconMarkup = renderToStaticMarkup(<GrUserWorker size={40} className="text-gray-950" />);
 
@@ -41,18 +41,36 @@ export default function Mapas() {
         />
 
     <div className="map-container">
-      <h1>ESCOLHA UM FILTRO</h1>
+      <div className="login-container">
+        <h1>O QUE VOCÊ QUER FAZER?</h1>
+        <div className="button-group">
+          <button className="purple-btn-map">
+            <BiLogIn className="icon" />
+            LOGIN
+          </button>
+          <button className="gray-btn-map">
+            <BiLogIn className="icon" />
+            NOTÍCIAS
+          </button>
+        </div>
+          <button className="blue-btn-map">
+            <BiLogIn className="icon" />
+            VER MAPA
+          </button>
+        </div>
 
-      <div className="btn-container-map">
-        <div className="btn-container-left">
-          <button className="green-btn-map">
-            <IoLocationSharp className="icon" />
-            REGIÃO
-          </button>
-          <button className="yellow-btn-map">
-            <TbMoneybag className="icon" />
-            VALOR
-          </button>
+        <h1 className="inter-text">OU</h1>
+        <h1>ESCOLHA UM FILTRO</h1>
+        <div className="btn-container-map">
+          <div className="btn-container-left">
+            <button className="green-btn-map">
+              <IoLocationSharp className="icon" />
+              REGIÃO
+            </button>
+            <button className="yellow-btn-map">
+              <TbMoneybag className="icon" />
+              VALOR
+            </button>
         </div>
         <div className="btn-container-right">
           <button className="red-btn-map">
@@ -65,19 +83,7 @@ export default function Mapas() {
           </button>
         </div>
       </div>
-
-      <div className="login-container">
-        <h1>JÁ POSSUI UMA CONTA?</h1>
-        <button className="gray-btn-map">
-          <BiLogIn className="icon" />
-          LOGIN
-        </button>
-      </div>
     </div>
-
-
-
-
 
         <Marker position={position} icon={customIcon}>
           <Popup>
