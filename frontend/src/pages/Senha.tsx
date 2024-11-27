@@ -1,6 +1,6 @@
 import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import "../styles/login.css"; 
+import "../styles/registros.css"; 
 import Logo from "../components/logo";
 
 export default function MapaPage() {
