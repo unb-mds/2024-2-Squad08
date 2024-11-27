@@ -2,9 +2,11 @@
 import { Routes, Route } from 'react-router-dom';
 // import NavBar from './components/navbar';
 import Noticias from './pages/Noticias';
+import Endereco from './pages/Endereco';
+import Senha from './pages/Senha';
 import Menu from './pages/Menu';
 import Login from './pages/Login';
-import Register from './pages/Register';
+import Cadastro from './pages/Cadastro';
 import Footer from './components/footer';
 
 const AppRouter = () => {
@@ -15,7 +17,9 @@ const AppRouter = () => {
         <Route path="/" element={<Menu />} />
         <Route path="/noticias" element={<Noticias />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/cadastro" element={<Cadastro />} />
+        <Route path="/endereco" element={<Endereco />} />
+        <Route path="/senha" element={<Senha />} />
       </Routes>
       <Footer />
     </>
