@@ -1,10 +1,10 @@
 .map-container {
     position: absolute;
-    top: 50%;
+    top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 80%; 
-    height: 70vh;       
+    height: 80vh;       
     background-color: #243F4D;
     z-index: 1000;      
     padding: 10px;      
@@ -14,11 +14,11 @@
   
 h1 {
     color: white;
-    font-weight: bold;
+    font-weight: bolder;
     font-size: 18px;    
     }
 
-.btn-container-map {
+.btn-container-buttom {
     display: flex;
     justify-content: space-between;  
     align-items: center;  
@@ -65,7 +65,7 @@ h1 {
 
 .inter-text {
     margin-bottom: 0.5em; 
-    margin-top: 2em;
+    margin-top: 8em;
     }
 
 /* Cores dos botões e ícones */
