@@ -1,11 +1,14 @@
+import { Link } from "react-router-dom";
 import "../styles/logo.css";
 
 const Logo = () => {
   return (
     <div className="logo-background">
-      <button className="logo-button">
-        MONITORA BSB
-      </button>
+      <Link to="/menu">
+        <button className="logo-button">
+          MONITORA BSB
+        </button>
+      </Link>
     </div>
   );
 };
