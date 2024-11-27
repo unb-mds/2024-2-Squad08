@@ -16,6 +16,7 @@ O objetivo principal da Sprint 04 é avançar significativamente no desenvolvime
 | Ajuste do Backlog do produto de acordo com novo Figma | Beatriz Lins | Concluído |
 | Ajuste dos requisitos de acordo com novo Figma | Beatriz Lins | Concluído |
 | Atualização da documentação do projeto | Beatriz Lins | Concluído |
+| Correção do frontend da página inicial de mapa de acordo com  versão 3 do Figma | Beatriz Lins | Concluído |
 | | Daniel Ferreira |  |
 | | Paulo Cirqueira |  |
 | | Daniel Nunes |  |
