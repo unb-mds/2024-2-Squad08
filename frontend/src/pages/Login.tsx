@@ -10,7 +10,7 @@ export default function MapaPage() {
     <div className="relative h-screen w-full">
       <MapContainer 
         center={position} 
-        zoom={14} 
+        zoom={10} 
         style={{ height: '100%', width: '100%' }}
       >
         <TileLayer
@@ -21,7 +21,7 @@ export default function MapaPage() {
       
       <Logo /> 
 
-      <div className="login-container">
+      <div className="login">
         <h1>FAÇA O LOGIN</h1>
         <p>E veja todas as obras que estão acontecendo em sua cidade</p>
 
