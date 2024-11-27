@@ -3,7 +3,7 @@ import { useAuth } from '../../Context/AuthContext'
 import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
-  const [signUp, user] = useAuth();
+  const { signup } = useAuth();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState(''); 
   const [password, setPassword] = useState('');
@@ -26,9 +26,11 @@ export default function Register() {
     }
 
     try {
-      const response = await signUp(username, email, password);
+      const response = await signup(username, email, password);
       if (response.ok) {
         navigate('/login');
+      } else {
+        setError(response.error || 'Erro ao cadastrar');
       }
     } catch (error) {
       setError('Erro ao cadastrar');

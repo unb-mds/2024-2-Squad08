@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useAuth } from '../Context/AuthContext';
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
+  const auth = useAuth();
 
   return (
     <div className="navbar relative" style={{ backgroundColor: '#1D232A' }}>
@@ -44,7 +46,15 @@ export default function NavBar() {
         </ul>
       </div>
       <div className="navbar-end">
-        <a href='/login' className="btn bg-blue-500 hover:bg-blue-600 text-white border-none">Login</a>
+        {auth.user ? (
+          <a onClick={auth.logout} href='/login' className="btn bg-red-500 hover:bg-red-600 text-white border-none">
+            Logout
+          </a>
+        ) : (
+          <a href='/login' className="btn bg-blue-500 hover:bg-blue-600 text-white border-none">
+            Login
+          </a>
+        )}
       </div>
     </div>
   );
