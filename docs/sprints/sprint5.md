@@ -11,14 +11,16 @@ O objetivo da Sprint 05
 
 | Tarefa | Responsável | Status |
 |--------|-------------|-----------------------|
-| Criação do Roadmap | Beatriz Lins | Em andamento |
-| Criação do Storymap | Beatriz Lins | Em andamento |
-| Correção dos Épicos de acordo com Storymap | Beatriz Lins | Em andamento |
+| Criação do Roadmap | Beatriz Lins | Concluído |
+| Criação do Storymap | Beatriz Lins | Concluído |
+| Correção dos Épicos de acordo com Storymap | Beatriz Lins | Concluído |
 | Junção das branches frontend-pages e develop-v1 | Beatriz Lins | Concluído |
 | Frontend da tela de Cadastro | Beatriz Lins | Concluído |
 | Frontend da tela de Login | Beatriz Lins | Concluído |
 | Frontend da tela de Senha | Beatriz Lins | Concluído |
 | Frontend da tela de Endereço | Beatriz Lins | Concluído |
+| Criação das features | Beatriz Lins | Concluído |
+| Criação dos user stories | Beatriz Lins | Concluído |
 | | Daniel Ferreira |  |
 | | Paulo Cirqueira |  |
 | | Daniel Nunes |  |
