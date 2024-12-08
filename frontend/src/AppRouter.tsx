@@ -8,6 +8,7 @@ import Mapas from './pages/Mapas';
 import Noticias from './pages/Noticias';
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
+import Status from './pages/Status';
 import Footer from './components/footer';
 
 const AppRouter = () => {
@@ -21,6 +22,7 @@ const AppRouter = () => {
         <Route path="/noticias" element={<Noticias />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/status" element={<Status />} />
       </Routes>
       <Footer />
     </>
