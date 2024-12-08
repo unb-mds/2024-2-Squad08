@@ -4,14 +4,14 @@ O objetivo da Sprint 06
 
 **Datas da Sprint:**
 
-- **Início:** //2024
-- **Término:** //2024
+- **Início:** 04/12/2024
+- **Término:** 11/12/2024
 
 **Backlog da Sprint:**
 
 | Tarefa | Responsável | Status |
 |--------|-------------|-----------------------|
-| Criação do Roadmap | Beatriz Lins | Em andamento |
+| | Beatriz Lins | |
 | | Daniel Ferreira |  |
 | | Paulo Cirqueira |  |
 | | Daniel Nunes |  |
