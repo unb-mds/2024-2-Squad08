@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Cadastro from './pages/Cadastro';
 import Footer from './components/footer';
 import FiltroStatus from './pages/FiltroStatus';
+import FiltroDeRegiao from './pages/FiltroRegiao';
 
 const AppRouter = () => {
   return (
@@ -23,6 +24,7 @@ const AppRouter = () => {
         <Route path="/endereco" element={<Endereco />} />
         <Route path="/senha" element={<Senha />} />
         <Route path="/status" element={<FiltroStatus />} />
+        <Route path="/regiao" element={<FiltroDeRegiao />} />
       </Routes>
       <Footer />
     </>
