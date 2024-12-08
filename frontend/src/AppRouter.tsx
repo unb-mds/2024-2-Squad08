@@ -9,7 +9,6 @@ import Noticias from './pages/Noticias';
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
 import Footer from './components/footer';
-import UserProfileForm from './pages/Auth/UserProfileForm';
 
 const AppRouter = () => {
   return (
@@ -22,7 +21,6 @@ const AppRouter = () => {
         <Route path="/noticias" element={<Noticias />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/UserProfileForm" element={<UserProfileForm />} />
       </Routes>
       <Footer />
     </>
