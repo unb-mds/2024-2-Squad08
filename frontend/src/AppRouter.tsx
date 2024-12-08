@@ -8,6 +8,7 @@ import Menu from './pages/Menu';
 import Login from './pages/Login';
 import Cadastro from './pages/Cadastro';
 import Footer from './components/footer';
+import FiltroStatus from './pages/FiltroStatus';
 
 const AppRouter = () => {
   return (
@@ -21,6 +22,7 @@ const AppRouter = () => {
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/endereco" element={<Endereco />} />
         <Route path="/senha" element={<Senha />} />
+        <Route path="/status" element={<FiltroStatus />} />
       </Routes>
       <Footer />
     </>

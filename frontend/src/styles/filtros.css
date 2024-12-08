@@ -1,0 +1,91 @@
+.filter-container {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80vh;
+    background-color: white;
+    z-index: 1000;
+    padding: 10px;
+    text-align: center; 
+    border-radius: 15px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .filter-container h1 {
+    color: black;
+    margin: 1.5em 0;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  
+  .checkbox-filter {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    gap: 1.3em;
+    color: black;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-top: 3em;
+    padding: 0 2em; 
+  }
+  
+  .checkbox-filter label {
+    display: flex;
+    align-items: center; 
+    gap: 1em; 
+  }
+  
+  .checkbox-filter input[type="checkbox"] {
+    appearance: none; 
+    -webkit-appearance: none; 
+    background-color: white; 
+    border: 2px solid black; 
+    width: 20px; 
+    height: 20px; 
+    border-radius: 2px; 
+    cursor: pointer; 
+  }
+  
+  .checkbox-filter input[type="checkbox"]:checked {
+    background-color: #EFA65E; 
+    border-color: black; 
+  }
+
+  .filter-btn {
+    display: flex;
+    justify-content: space-between; 
+    position: absolute; 
+    bottom: 20px; 
+    width: 90%; 
+    left: 50%; 
+    transform: translateX(-50%);
+    padding: 0 10px; 
+  }
+  
+  .filter-btn button {
+    font-size: 1rem; 
+    padding: 10px;
+    cursor: pointer; 
+    font-weight: bold; 
+  }
+  
+.clean-btn {
+    color: black;
+}
+
+.check-btn {
+    color: #243F4D;
+}
+  
+.filter-container .close-icon {
+    font-size: 2em; 
+    color: gray; 
+    cursor: pointer; 
+    position: absolute;
+    top: 10px; 
+    right: 10px; 
+  }
+  
