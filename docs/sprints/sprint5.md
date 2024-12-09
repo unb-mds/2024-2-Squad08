@@ -1,6 +1,6 @@
 
 **Objetivo da Sprint:**
-O objetivo da Sprint 05
+O objetivo da Sprint 05 foi estruturar o planejamento estratégico do projeto por meio da criação e refinamento do Roadmap e Storymap, além de corrigir e alinhar os épicos conforme o novo Storymap. Foi também priorizada a implementação de funcionalidades essenciais no frontend, abrangendo as telas de Cadastro, Login, Senha e Endereço. Adicionalmente, foram criadas features e histórias de usuários que sustentam o desenvolvimento do produto. A Sprint incluiu ainda a junção de branches no repositório para consolidar os avanços realizados no frontend.
 
 **Datas da Sprint:**
 

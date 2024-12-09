@@ -11,7 +11,9 @@ O objetivo da Sprint 06
 
 | Tarefa | Responsável | Status |
 |--------|-------------|-----------------------|
-| | Beatriz Lins | |
+| Página de filtro por status | Beatriz Lins | Concluído |
+| Padrornização dos nomes das funções e das páginas | Beatriz Lins | Concluído |
+| Adicionar o useNavigate para todos os botões de todas as páginas | Beatriz Lins | Em andamento |
 | | Daniel Ferreira |  |
 | | Paulo Cirqueira |  |
 | | Daniel Nunes |  |
