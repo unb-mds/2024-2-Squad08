@@ -3,9 +3,23 @@ import 'leaflet/dist/leaflet.css';
 import "../styles/filtros.css"; 
 import Logo from "../components/logo";
 import { IoIosClose } from "react-icons/io";
+import { useState } from "react";
 
-export default function MapaPage() {
-  const position = [-15.7801, -47.9292]; 
+export default function StatusFilter() {
+  const position = [-15.7801, -47.9292];
+  const [statusFiltro, setStatusFiltro] = useState<string[]>([]); 
+  
+  const handleCheckboxChange = (value: string) => {
+    setStatusFiltro((prev) =>
+      prev.includes(value)
+        ? prev.filter((item) => item !== value) 
+        : [...prev, value] 
+    );
+  };
+
+  const limparFiltros = () => {
+    setStatusFiltro([]); 
+  };
 
   return (
     <div className="relative h-screen w-full">
@@ -25,28 +39,55 @@ export default function MapaPage() {
             <IoIosClose className="close-icon"/>
             <h1>ESCOLHA O STATUS</h1>
 
-            <div className="checkbox-filter">
+            <div className="checkbox-filter status">
                 <label>
-                <input type="checkbox" value="status1" />
-                Iniciada
+                  <input 
+                    type="checkbox" 
+                    value="iniciada" 
+                    checked={statusFiltro.includes("iniciada")}
+                    onChange={() => handleCheckboxChange("iniciada")}
+                  />
+                  Iniciada
                 </label>
+
                 <label>
-                <input type="checkbox" value="status2" />
-                Em andamento
+                  <input 
+                    type="checkbox" 
+                    value="andamento" 
+                    checked={statusFiltro.includes("andamento")}
+                    onChange={() => handleCheckboxChange("andamento")}
+                  />
+                  Em andamento
                 </label>
+
                 <label>
-                <input type="checkbox" value="status3" />
+                  <input 
+                    type="checkbox" 
+                    value="atrasada" 
+                    checked={statusFiltro.includes("atrasada")}
+                    onChange={() => handleCheckboxChange("atrasada")}
+                  />
                 Atrasada
                 </label>
+
                 <label>
-                <input type="checkbox" value="status4" />
-                Concluída
+                  <input 
+                    type="checkbox" 
+                    value="concluida" 
+                    checked={statusFiltro.includes("concluida")}
+                    onChange={() => handleCheckboxChange("concluida")}
+                  />
+                  Concluída
                 </label>
             </div>
 
             <div className="filter-btn">
-                <button className="clean-btn">LIMPAR</button>
-                <button className="check-btn">CONCLUIR</button>
+                <button className="clean-btn" onClick={limparFiltros}>
+                  LIMPAR
+                </button>
+                <button className="check-btn">
+                  CONCLUIR
+                </button>
             </div>
         </div>
     </div>
