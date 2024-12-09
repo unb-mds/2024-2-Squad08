@@ -2,9 +2,11 @@ import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import "../styles/Registros.css"; 
 import Logo from "../components/Logo";
+import { useNavigate } from "react-router-dom";
 
 export default function Cadastro() {
   const position = [-15.7801, -47.9292]; 
+  const navigate = useNavigate();
 
   return (
     <div className="relative h-screen w-full">
@@ -26,10 +28,23 @@ export default function Cadastro() {
         <p>Para obter informações personalizadas</p>
 
         <div className="input-container-login">
-          <input type="text" placeholder='Usuário' />
-          <input type="text" placeholder='Email' />
-          <input type="text" placeholder='Senha' />
-          <button className="btn-login">Salvar</button>
+          <input 
+            type="text" 
+            placeholder='Usuário' 
+          />
+          <input 
+            type="text" 
+            placeholder='Email' 
+            />
+          <input 
+            type="text" 
+            placeholder='Senha' 
+            />
+          <button 
+            className="btn-login"
+            onClick={() => navigate("/endereco")} >
+            Salvar
+          </button>
         </div>
       </div>
     </div>
