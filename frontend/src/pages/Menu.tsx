@@ -37,6 +37,7 @@ export default function Menu() {
               <BiLogIn className="icon" />
               LOGIN
             </button>
+
             <button
               className="gray-btn-map"
               onClick={() => navigate("/noticias")}
@@ -65,6 +66,7 @@ export default function Menu() {
               <IoLocationSharp className="icon" />
               REGIÃO
             </button>
+
             <button
               className="yellow-btn-map"
               onClick={() => navigate("/valor")}
@@ -81,6 +83,7 @@ export default function Menu() {
               <MdConstruction className="icon" />
               TIPO
             </button>
+            
             <button
               className="orange-btn-map"
               onClick={() => navigate("/status")}

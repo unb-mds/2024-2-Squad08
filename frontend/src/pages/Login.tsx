@@ -2,9 +2,11 @@ import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import "../styles/Registros.css"; 
 import Logo from "../components/Logo";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const position = [-15.7801, -47.9292]; 
+  const navigate = useNavigate();
 
   return (
     <div className="relative h-screen w-full">
@@ -32,8 +34,17 @@ export default function Login() {
         </div>
 
         <div className="link-login">
-          <a href="#">Esqueci a senha</a>
-          <a href="#">Não tenho conta</a>
+          <a 
+            href="#"
+            onClick={() => navigate("/senha")} >
+            Esqueci a senha
+          </a>
+
+          <a 
+            href="#"
+            onClick={() => navigate("/cadastro")} >
+            Não tenho conta
+          </a>
         </div>
         
       </div>
