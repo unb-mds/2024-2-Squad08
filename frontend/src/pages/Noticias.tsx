@@ -1,7 +1,7 @@
 import React from 'react';
-import Logo from "../components/logo";  
+import Logo from "../components/Logo";  
 
-const LatestWorks = () => {
+const Noticias = () => {
   const works = [
     {
       image: "/unnamed.jpg",
@@ -67,4 +67,4 @@ const LatestWorks = () => {
   );
 };
 
-export default LatestWorks;
+export default Noticias;

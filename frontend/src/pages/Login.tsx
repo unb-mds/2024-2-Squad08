@@ -1,9 +1,9 @@
 import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import "../styles/registros.css"; 
-import Logo from "../components/logo";
+import "../styles/Registros.css"; 
+import Logo from "../components/Logo";
 
-export default function MapaPage() {
+export default function Login() {
   const position = [-15.7801, -47.9292]; 
 
   return (

@@ -1,11 +1,11 @@
 import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import "../styles/filtros.css"; 
-import Logo from "../components/logo";
+import "../styles/Filtros.css"; 
+import Logo from "../components/Logo";
 import { IoIosClose } from "react-icons/io";
 import { useState } from "react";
 
-export default function StatusFilter() {
+export default function FiltroStatus() {
   const position = [-15.7801, -47.9292];
   const [statusFiltro, setStatusFiltro] = useState<string[]>([]); 
   

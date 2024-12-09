@@ -7,7 +7,7 @@ import Senha from './pages/Senha';
 import Menu from './pages/Menu';
 import Login from './pages/Login';
 import Cadastro from './pages/Cadastro';
-import Footer from './components/footer';
+import Footer from './components/Footer';
 import FiltroStatus from './pages/FiltroStatus';
 import FiltroDeRegiao from './pages/FiltroRegiao';
 

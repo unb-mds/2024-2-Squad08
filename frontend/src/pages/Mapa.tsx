@@ -9,8 +9,8 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { GrUserWorker } from "react-icons/gr";
 import { renderToStaticMarkup } from 'react-dom/server';
-import Logo from "../components/logo";  
-import "../styles/mapa.css"
+import Logo from "../components/Logo";  
+import "../styles/Mapa.css";
 
 const iconMarkup = renderToStaticMarkup(<GrUserWorker size={40} className="text-gray-950" />);
 
@@ -23,7 +23,7 @@ const customIcon = new L.DivIcon({
   shadowSize: [41, 41]
 });
 
-export default function Mapas() {
+export default function Mapa() {
   const position = [-15.7801, -47.9292];
   const position1 = [-16.000, -48.000];
   const position2 = [-15.900, -47.800]; 
