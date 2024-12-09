@@ -15,7 +15,6 @@ const AppRouter = () => {
   return (
     <>
       {/* <NavBar /> */}
-      {/* <NavBar /> */}
       <Routes>
         <Route path="/" element={<Menu />} />
         <Route path="/noticias" element={<Noticias />} />
