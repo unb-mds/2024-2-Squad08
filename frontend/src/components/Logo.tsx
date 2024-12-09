@@ -1,14 +1,18 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../styles/Logo.css";
 
 const Logo = () => {
+  const navigate = useNavigate();
+
+  const handleLogoClick = () => {
+    navigate("/");
+  };
+
   return (
     <div className="logo-background">
-      <Link to="/menu">
-        <button className="logo-button">
-          MONITORA BSB
-        </button>
-      </Link>
+      <button className="logo-button" onClick={handleLogoClick}>
+        MONITORA BSB
+      </button>
     </div>
   );
 };
