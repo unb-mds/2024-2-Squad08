@@ -5,20 +5,20 @@ import Logo from "../components/logo";
 import { IoIosClose } from "react-icons/io";
 import { useState } from "react";
 
-export default function FiltroDeRegiao() {
+export default function RegionFilter() {
   const position = [-15.7801, -47.9292];
-  const [statusFiltro, setStatusFiltro] = useState<string[]>([]); // aqui vai armazener as regioes selecionadas
+  const [statusFiltro, setStatusFiltro] = useState<string[]>([]); 
 
   const handleCheckboxChange = (value: string) => {
     setStatusFiltro((prev) =>
       prev.includes(value)
-        ? prev.filter((item) => item !== value) // desmarca se já estiver marcado
+        ? prev.filter((item) => item !== value) 
         : [...prev, value] 
     );
   };
 
   const limparFiltros = () => {
-    setStatusFiltro([]); // desmarca as opções selecionadas
+    setStatusFiltro([]); 
   };
 
   return (
@@ -39,7 +39,7 @@ export default function FiltroDeRegiao() {
         <IoIosClose className="close-icon" />
         <h1>ESCOLHA A REGIÃO</h1>
 
-        <div className="checkbox-filter">
+        <div className="checkbox-filter region">
           <label>
             <input
               type="checkbox"
@@ -49,6 +49,7 @@ export default function FiltroDeRegiao() {
             />
             Região Norte
           </label>
+
           <label>
             <input
               type="checkbox"
@@ -58,6 +59,7 @@ export default function FiltroDeRegiao() {
             />
             Região Sul
           </label>
+
           <label>
             <input
               type="checkbox"
@@ -67,6 +69,7 @@ export default function FiltroDeRegiao() {
             />
             Região Leste
           </label>
+
           <label>
             <input
               type="checkbox"
@@ -76,6 +79,7 @@ export default function FiltroDeRegiao() {
             />
             Região Oeste
           </label>
+
           <label>
             <input
               type="checkbox"
@@ -91,7 +95,9 @@ export default function FiltroDeRegiao() {
           <button className="clean-btn" onClick={limparFiltros}>
             LIMPAR
           </button>
-          <button className="check-btn">CONCLUIR</button>
+          <button className="check-btn">
+            CONCLUIR
+          </button>
         </div>
       </div>
     </div>
