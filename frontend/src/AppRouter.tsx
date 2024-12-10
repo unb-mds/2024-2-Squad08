@@ -8,6 +8,7 @@ import Menu from './pages/Menu';
 import Login from './pages/Login';
 import Cadastro from './pages/Cadastro';
 import Footer from './components/Footer';
+import MapaGeral from './pages/MapaGeral';
 import FiltroStatus from './pages/FiltroStatus';
 import FiltroDeRegiao from './pages/FiltroRegiao';
 
@@ -22,6 +23,7 @@ const AppRouter = () => {
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/endereco" element={<Endereco />} />
         <Route path="/senha" element={<Senha />} />
+        <Route path="/mapa" element={<MapaGeral />} />
         <Route path="/status" element={<FiltroStatus />} />
         <Route path="/regiao" element={<FiltroDeRegiao />} />
       </Routes>
