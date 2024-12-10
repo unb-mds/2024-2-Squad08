@@ -1,0 +1,16 @@
+  .btn-map {
+    position: absolute;
+    bottom: 8%; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    z-index: 1000; 
+    background-color: #243F4D; 
+    font-size: 16px;
+    border-radius: 15px;
+    width: 25vw; 
+    padding: 3px;
+    font-weight: bold;
+    color: white;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
