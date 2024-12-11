@@ -24,7 +24,7 @@ O objetivo da Sprint 05 foi estruturar o planejamento estratégico do projeto po
 | Criação da logica do login no backend | Daniel Ferreira | Concluído |
 | Criação da logica do cadastro no backend | Daniel Ferreira | Concluído |
 | Criação da logica do consumo da api do querido diario | Daniel Ferreira | Em andamento |
-| | Paulo Cirqueira |  |
+| Protótipo da tela de lista de obras(Desktop) | Paulo Cirqueira | Concluído |
 | | Daniel Nunes |  |
 | | Erick Alves |  |
 
