@@ -24,7 +24,7 @@ theme:
 
 nav: 
   - Início: index.md
-  - API Querido Diário: api_querido_diario/api.md
+  - API Obras: obras_gov/api.md
   - Atas: 
     - Reunião 30/10: atas/30-10-24.md 
     - Reunião 07/11: atas/07-11-24.md

@@ -22,8 +22,7 @@ O objetivo principal da Sprint 04 é avançar significativamente no desenvolvime
 | Prototipo do figma desktop | Daniel Ferreira | Concluído  |
 | Criação de uma estrutura basica para o backend | Daniel Ferreira | Concluído  |
 | Prototipo da tela de cadastro de endereço| Paulo Cerqueira | Concluído |
-| | Daniel Nunes |  |
-| | Erick Alves |  |
+
 
 
 

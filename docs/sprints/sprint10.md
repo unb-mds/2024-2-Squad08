@@ -11,7 +11,7 @@ O objetivo da Sprint 10
 
 | Tarefa | Responsável | Status |
 |--------|-------------|-----------------------|
-| Criação do Roadmap | Beatriz Lins | Em andamento |
+| | Beatriz Lins | |
 | | Daniel Ferreira |  |
 | | Paulo Cirqueira |  |
 | | Daniel Nunes |  |
