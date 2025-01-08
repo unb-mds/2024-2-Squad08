@@ -24,7 +24,7 @@ export default function PaginaComMapa() {
       {/* Botão fixo */}
       <button
         className="btn-map"
-        onClick={() => navigate("/menu")}
+        onClick={() => navigate("/")}
       >
         MENU
       </button>
