@@ -37,14 +37,6 @@ export default function Menu() {
               <BiLogIn className="icon" />
               LOGIN
             </button>
-
-            <button
-              className="gray-btn-map"
-              onClick={() => navigate("/noticias")}
-            >
-              <BiLogIn className="icon" />
-              NOTÍCIAS
-            </button>
           </div>
           <button
             className="blue-btn-map"
@@ -78,7 +70,7 @@ export default function Menu() {
           <div className="btn-container-right">
             <button
               className="red-btn-map"
-              onClick={() => navigate("/tipe")}
+              onClick={() => navigate("/tipo")}
             >
               <MdConstruction className="icon" />
               TIPO
@@ -86,10 +78,10 @@ export default function Menu() {
             
             <button
               className="orange-btn-map"
-              onClick={() => navigate("/status")}
+              onClick={() => navigate("/executor")}
             >
               <FaListCheck className="icon" />
-              STATUS
+              EXECUTOR
             </button>
           </div>
         </div>
