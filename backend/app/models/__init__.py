@@ -4,4 +4,11 @@ db = SQLAlchemy()
 
 from .user import User
 from .obra import Obra
-from .enums import GenderEnum
+from .endereco import Endereco
+
+__all__ = [
+    'db',
+    'User',
+    'Obra',
+    'Endereco',
+]

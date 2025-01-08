@@ -3,7 +3,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import create_access_token
 from app.models.user import User
 from app.models import db
-from app.models.enums import GenderEnum
 from flask_cors import CORS
 from datetime import timedelta
 
@@ -29,7 +28,6 @@ def create_user():
             password = data.get('password')
             email = data.get('email')
             admin = str(data.get('admin', False)).lower() == 'true'
-            gender_str = data.get('gender', 'male').upper()
 
             if not all([username, password, email]):
                return jsonify({'error': 'Missing required fields'}), 400
@@ -42,7 +40,6 @@ def create_user():
                 password=hashed_password, 
                 email=email, 
                 admin=admin,
-                gender=gender
             )
             db.session.add(user)
             db.session.commit()
@@ -53,7 +50,6 @@ def create_user():
                     'username': user.username,
                     'email': user.email,
                     'admin': user.admin,
-                    'gender': user.gender.value
                 }
             }), 201
             
