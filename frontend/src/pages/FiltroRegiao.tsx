@@ -2,7 +2,6 @@ import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import "../styles/Filtros.css";
 import Logo from "../components/Logo";
-import { IoIosClose } from "react-icons/io";
 import { useState } from "react";
 
 export default function FiltroRegiao() {
@@ -36,7 +35,6 @@ export default function FiltroRegiao() {
 
       <Logo />
       <div className="filter-container">
-        <IoIosClose className="close-icon" />
         <h1>ESCOLHA A REGIÃO</h1>
 
         <div className="checkbox-filter region">
@@ -83,11 +81,41 @@ export default function FiltroRegiao() {
           <label>
             <input
               type="checkbox"
-              value="central"
-              checked={statusFiltro.includes("central")}
-              onChange={() => handleCheckboxChange("central")}
+              value="nordeste"
+              checked={statusFiltro.includes("nordeste")}
+              onChange={() => handleCheckboxChange("nordeste")}
             />
-            Região Central
+            Região Nordeste
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              value="noroeste"
+              checked={statusFiltro.includes("noroeste")}
+              onChange={() => handleCheckboxChange("noroeste")}
+            />
+            Região Noroeste
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              value="sudeste"
+              checked={statusFiltro.includes("sudeste")}
+              onChange={() => handleCheckboxChange("sudeste")}
+            />
+            Região Sudeste
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              value="sudoeste"
+              checked={statusFiltro.includes("sudoeste")}
+              onChange={() => handleCheckboxChange("sudoeste")}
+            />
+            Região Sudoeste
           </label>
         </div>
 
