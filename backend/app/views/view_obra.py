@@ -1,27 +1,50 @@
-from flask import Blueprint, jsonify, request
-from app.models.obra import Obra
-from app.models import db
-from app.Serializers.obra_serializer import ObraSchema
+from flask import jsonify, Blueprint
+from ..services.obra_service import ObraAPIConsumer
+from ..models.obra import Obra
 
 obra_bp = Blueprint('obra', __name__)
 
-obra_schema = ObraSchema()
-obras_schema = ObraSchema(many=True)
+@obra_bp.route('/sync-obras/<uf>', methods=['POST'])
+def sync_obras(uf):
+    consumer = ObraAPIConsumer()
+    obras_data = consumer.fetch_obras(uf)
+    
+    if obras_data is None:
+        return jsonify({
+            'status': 'error',
+            'message': 'Failed to fetch data from API'
+        }), 500
+    
+    result = consumer.save_to_database(obras_data)
+    
+    return jsonify({
+        'status': 'success',
+        'data': result
+    })
 
-@obra_bp.route("/obras", methods=['GET'])
-def get_obras():
-    obras = Obra.query.all()
-    return jsonify(obras_schema.dump(obras))
-
-@obra_bp.route("/obra/<int:id>", methods=['GET'])
-def get_obra(id):
-    obra = Obra.query.get_or_404(id)
-    return jsonify(obra_schema.dump(obra))
-
-@obra_bp.route("/obra", methods=['POST'])
-def create_obra():
-    data = request.get_json()
-    obra = obra_schema.load(data, session=db.session)
-    db.session.add(obra)
-    db.session.commit()
-    return jsonify(obra_schema.dump(obra)), 201
+@obra_bp.route('/<uf>', methods=['GET'])
+def get_obras(uf):
+    try:
+        obras = Obra.query.filter_by(uf=uf).all()
+        return jsonify([{
+            'nome': obra.nome,
+            'uf': obra.uf,
+            'situacao': obra.situacao,
+            'tipo': obra.tipo,
+            'executores': obra.executores,
+            'natureza': obra.natureza,
+            'endereco': obra.endereco,
+            'funcaoSocial': obra.funcaoSocial,
+            'dataInicialPrevista': obra.dataInicialPrevista.isoformat() if obra.dataInicialPrevista else None,
+            'dataFinalPrevista': obra.dataFinalPrevista.isoformat() if obra.dataFinalPrevista else None,
+            'fontesDeRecurso': obra.fontesDeRecurso,
+            'valorInvestimentoPrevisto': float(obra.valorInvestimentoPrevisto),
+            'origemRecurso': obra.origemRecurso,
+            'qdtEmpregosGerados': obra.qdtEmpregosGerados,
+            'geometria': obra.geometria
+        } for obra in obras])
+    except Exception as e:
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
