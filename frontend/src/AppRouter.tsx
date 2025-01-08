@@ -11,11 +11,11 @@ import FiltroValor from './pages/FiltroValor';
 import FiltroExecutor from './pages/FiltroExecutor';
 import FiltroRegiao from './pages/FiltroRegiao';
 import FiltroTipo from './pages/FiltroTipo';
+import InformacoesGerais from './pages/InformacoesGerais';
 
 const AppRouter = () => {
   return (
     <>
-      {/* <NavBar /> */}
       <Routes>
         <Route path="/" element={<Menu />} />
         <Route path="/login" element={<Login />} />
@@ -27,6 +27,7 @@ const AppRouter = () => {
         <Route path="/regiao" element={<FiltroRegiao />} />
         <Route path="/valor" element={<FiltroValor />} />
         <Route path="/tipo" element={<FiltroTipo />} />
+        <Route path="/info" element={<InformacoesGerais />} />
       </Routes>
       <Footer />
     </>
