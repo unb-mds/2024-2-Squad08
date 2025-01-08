@@ -1,0 +1,39 @@
+.general-info {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%; 
+    height: 80vh;       
+    background-color: white;
+    z-index: 1000;      
+    padding: 10px;      
+    text-align: center; 
+    border-radius: 15px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
+}
+  
+.general-info h1 {
+    color: #243F4D;
+    margin: 1.5em 0;
+    font-weight: bold;
+    font-size: 20px;
+}
+  
+.general-info p {
+    font-size: 16px;
+    color: black;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    text-align: left;
+    padding: 0 1.5em;
+}
+  
+.info-btn button {
+    font-size: 1em;
+    cursor: pointer;
+    font-weight: bold;
+    color: #243F4D;
+}
+  

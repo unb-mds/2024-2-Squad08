@@ -4,7 +4,7 @@ import "../styles/Filtros.css";
 import Logo from "../components/Logo";
 import { useState } from "react";
 
-export default function FiltroStatus() {
+export default function FiltroTipo() {
   const position = [-15.7801, -47.9292];
   const [statusFiltro, setStatusFiltro] = useState<string[]>([]); 
   

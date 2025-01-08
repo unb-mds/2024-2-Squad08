@@ -4,7 +4,7 @@ import "../styles/MapaGeral.css";
 import Logo from "../components/Logo";
 import { useNavigate } from "react-router-dom";
 
-export default function PaginaComMapa() {
+export default function MapaGeral() {
   const position = [-15.7801, -47.9292]; 
   const navigate = useNavigate();
 
