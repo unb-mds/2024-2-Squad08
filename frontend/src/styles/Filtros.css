@@ -110,16 +110,3 @@
   background-color: #1b2e3a;
 }
 
-.filter-container .close-icon {
-  font-size: 1.8em;
-  color: #999;
-  cursor: pointer;
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  transition: color 0.3s;
-}
-
-.filter-container .close-icon:hover {
-  color: #555;
-}
