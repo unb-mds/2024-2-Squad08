@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import "../styles/Registros.css"; 
@@ -7,6 +8,27 @@ import { useNavigate } from "react-router-dom";
 export default function Login() {
   const position = [-15.7801, -47.9292]; 
   const navigate = useNavigate();
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const handleLogin = () => {
+    if (!email || !password) {
+      setError('Preencha todos os campos!');
+      return;
+    }
+    if (!email.endsWith('@gmail.com')) {
+      setError('Insira um email válido.');
+      return;
+    }
+    if (password.length < 8) {
+      setError('A senha deve ter no mínimo 8 caracteres.');
+      return;
+    }
+    setError('');
+    navigate('/'); 
+  };
 
   return (
     <div className="relative h-screen w-full">
@@ -28,10 +50,28 @@ export default function Login() {
         <p>E veja todas as obras que estão acontecendo em sua cidade</p>
 
         <div className="input-container-login">
-          <input type="text" placeholder='Usuário' />
-          <input type="text" placeholder='Senha' />
-          <button className="btn-login">Entrar</button>
+          <input 
+            type="text" 
+            placeholder="Email" 
+            value={email}
+            onChange={(e) => setEmail(e.target.value)} 
+          />
+          <input 
+            type="password" 
+            placeholder="Senha" 
+            value={password}
+            onChange={(e) => setPassword(e.target.value)} 
+          />
+          <button 
+            className="btn-login"
+            onClick={handleLogin}
+          >
+            Entrar
+          </button>
         </div>
+
+        {/* Mensagem de erro com className */}
+        {error && <p className="error-message">{error}</p>}
 
         <div className="link-login">
           <a 
@@ -46,7 +86,6 @@ export default function Login() {
             Não tenho conta
           </a>
         </div>
-        
       </div>
     </div>
   );
