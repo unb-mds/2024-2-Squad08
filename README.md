@@ -84,6 +84,8 @@ A documentação do projeto pode ser encontrada clicando [aqui](https://unb-mds.
     <td align="center"><a href="https://github.com/CerqPaulo"><img style="border-radius: 50%;" src="https://github.com/CerqPaulo.png" width="100px;" alt=""/><br/><sub><b>Paulo Cerqueira</b></sub></a><br/>
     <td align="center"><a href="https://github.com/Mach1r0"><img style="border-radius: 50%;" src="https://github.com/Mach1r0.png" width="100px;" alt=""/><br/><sub><b>Danie Ferreira Nunes</b></sub></a><br/>
     <td align="center"><a href="https://github.com/DanNunes777"><img style="border-radius: 50%;" src="https://github.com/DanNunes777.png" width="100px;" alt=""/><br/><sub><b>Daniel Nunes Duarte</b></sub></a><br/>
+      <td align="center"><a href="https://github.com/gustavolima973"><img style="border-radius: 50%;" src="https://github.com/gustavolima973.png" width="100px;" alt=""/><br/><sub><b>Gustavo Lima Menezes</b></sub></a><br/>
+  </tr>
   </tr>
 </table>
 
