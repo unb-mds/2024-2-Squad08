@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import "../styles/Registros.css"; 
@@ -7,6 +8,20 @@ import { useNavigate } from "react-router-dom";
 export default function Cadastro() {
   const position = [-15.7801, -47.9292]; 
   const navigate = useNavigate();
+
+  const [usuario, setUsuario] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const handleRegister = () => {
+    if (!usuario || !email || !password) {
+      setError('Preencha todos os campos!');
+      return;
+    }
+    setError('');
+    navigate('/endereco'); 
+  };
 
   return (
     <div className="relative h-screen w-full">
@@ -31,20 +46,31 @@ export default function Cadastro() {
           <input 
             type="text" 
             placeholder='Usuário' 
+            value={usuario}
+            onChange={(e) => setUsuario(e.target.value)}
           />
           <input 
             type="text" 
             placeholder='Email' 
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             />
           <input 
             type="text" 
             placeholder='Senha' 
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             />
           <button 
             className="btn-login"
-            onClick={() => navigate("/endereco")} >
+            onClick={handleRegister} 
+          >
             Salvar
           </button>
+
+          {/* Mensagem de erro com className */}
+          {error && <p className="error-message">{error}</p>}
+
         </div>
       </div>
     </div>
