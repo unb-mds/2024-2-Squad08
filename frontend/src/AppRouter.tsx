@@ -12,6 +12,7 @@ import FiltroExecutor from './pages/FiltroExecutor';
 import FiltroRegiao from './pages/FiltroRegiao';
 import FiltroTipo from './pages/FiltroTipo';
 import InformacoesGerais from './pages/InformacoesGerais';
+import Email from './pages/Email';
 
 const AppRouter = () => {
   return (
@@ -28,6 +29,7 @@ const AppRouter = () => {
         <Route path="/valor" element={<FiltroValor />} />
         <Route path="/tipo" element={<FiltroTipo />} />
         <Route path="/info" element={<InformacoesGerais />} />
+        <Route path="/email" element={<Email />} />
       </Routes>
       <Footer />
     </>

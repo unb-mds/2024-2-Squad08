@@ -26,8 +26,16 @@ export default function Login() {
       setError('A senha deve ter no mínimo 8 caracteres.');
       return;
     }
-    setError('');
-    navigate('/'); 
+    try {
+      // const response = await axios.post('http://localhost:5000/login', { username: email, password });
+      // const { token } = response.data;
+
+      // localStorage.setItem('token', token);
+
+      navigate('/'); 
+    } catch (err) {
+      setError('Credenciais inválidas');
+    }
   };
 
   return (
@@ -70,13 +78,12 @@ export default function Login() {
           </button>
         </div>
 
-        {/* Mensagem de erro com className */}
         {error && <p className="error-message">{error}</p>}
 
         <div className="link-login">
           <a 
             href="#"
-            onClick={() => navigate("/senha")} >
+            onClick={() => navigate("/email")} >
             Esqueci a senha
           </a>
 
