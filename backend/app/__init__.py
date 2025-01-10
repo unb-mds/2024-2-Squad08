@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS  
+from flask_migrate import Migrate
 from .models import db
 from .views.main import main_bp
 from .views.view_user import user_bp 
@@ -32,14 +33,7 @@ def create_app():
     app.config.from_object('app.config.Config')  
     
     db.init_app(app)
-    
-    try:
-        with app.app_context():
-            db.drop_all()
-            db.create_all()
-            print("Tables recreated successfully")
-    except SQLAlchemyError as e:
-        print(f"Error recreating tables: {str(e)}")
+    migrate = Migrate(app, db)
     
     app.register_blueprint(main_bp) 
     app.register_blueprint(user_bp, url_prefix='/users')  

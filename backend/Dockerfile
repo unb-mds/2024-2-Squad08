@@ -7,7 +7,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-ENV FLASK_APP=run.py
+ENV FLASK_APP=migrate.py
 ENV FLASK_ENV=development
 ENV FLASK_DEBUG=1
 
