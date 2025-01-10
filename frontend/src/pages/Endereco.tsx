@@ -65,8 +65,26 @@ export default function Endereco() {
       setError('Preencha todos os campos!');
       return;
     }
-    setError('');
-    navigate('/'); 
+    try {
+      // const response = await fetch('/add_address', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({
+      //     user_id: 1, 
+      //     cep, cidade, estado, rua, bairro, numero
+      //   }),
+      // });
+      // const data = await response.json();
+      
+      if (response.ok) {
+        setError('');
+        navigate('/'); 
+      } else {
+        setError(data.error);
+      }
+    } catch (err) {
+      setError('Erro ao tentar cadastrar o endereço.');
+    }
   };
 
   return (

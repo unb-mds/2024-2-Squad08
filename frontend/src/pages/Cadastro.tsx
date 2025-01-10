@@ -19,8 +19,13 @@ export default function Cadastro() {
       setError('Preencha todos os campos!');
       return;
     }
-    setError('');
-    navigate('/endereco'); 
+    try {
+      // const response = await axios.post('http://localhost:5000/cadastro', { username: usuario, email, password });
+
+      navigate('/endereco'); 
+    } catch (err) {
+      setError(err.response?.data?.error || 'Erro inesperado');
+    }
   };
 
   return (
@@ -56,7 +61,7 @@ export default function Cadastro() {
             onChange={(e) => setEmail(e.target.value)}
             />
           <input 
-            type="text" 
+            type="password" 
             placeholder='Senha' 
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -68,7 +73,6 @@ export default function Cadastro() {
             Salvar
           </button>
 
-          {/* Mensagem de erro com className */}
           {error && <p className="error-message">{error}</p>}
 
         </div>
