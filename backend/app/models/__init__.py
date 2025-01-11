@@ -2,6 +2,6 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-from .user import User
+from .usuario import Usuario
 from .obra import Obra
 from .enums import GenderEnum
