@@ -13,7 +13,7 @@
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@mui/material": "^6.1.6",
-    "axios": "^1.7.7",
+    "axios": "^1.7.9",
     "icons": "^1.0.0",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.460.0",
@@ -47,4 +47,3 @@
     "vite": "^5.4.11"
   }
 }
-

@@ -1,2 +1,2 @@
-from .user_serializer import UserSchema
+from .usuario_serializer import UsuarioSchema
 from .obra_serializer import ObraSchema

@@ -3,7 +3,8 @@ from flask_jwt_extended import JWTManager
 from flask_cors import CORS  
 from .models import db
 from .views.main import main_bp
-from .views.view_user import user_bp 
+# from .views.view_user import user_bp 
+from .views.view_usuario import usuario_bp
 from .views.view_obra import obra_bp  
 from dotenv import load_dotenv
 import os
@@ -42,7 +43,8 @@ def create_app():
         print(f"Error recreating tables: {str(e)}")
     
     app.register_blueprint(main_bp) 
-    app.register_blueprint(user_bp, url_prefix='/users')  
+    # app.register_blueprint(user_bp, url_prefix='/users')  
     app.register_blueprint(obra_bp, url_prefix='/obras')  
+    app.register_blueprint(usuario_bp, url_prefix='/usuario')
     
     return app

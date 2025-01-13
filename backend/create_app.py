@@ -1,6 +1,7 @@
 from flask import Flask
 from app.db_models import db
 from app.views import main
+from app.services.envia_email import envia_email
 from dotenv import load_dotenv
 import os
 
