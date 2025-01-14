@@ -11,7 +11,6 @@ class Usuario(UserMixin, db.Model):
     password: Mapped[str] = mapped_column(nullable=False)
     admin: Mapped[bool] = mapped_column(default=False)
 
-    # Campos para redefinição de senha
     reset_token: Mapped[str | None] = mapped_column(db.String(255), nullable=True)
     token_created_at: Mapped[datetime | None] = mapped_column(db.DateTime, nullable=True)
     token_expired_at: Mapped[datetime | None] = mapped_column(db.DateTime, nullable=True)
