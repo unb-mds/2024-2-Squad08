@@ -1,17 +1,27 @@
 from datetime import date
+from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import Enum
 from . import db
-from .enums import WorkType
 
 class Obra(db.Model):
-    __tablename__ = "adresses"
-    id: Mapped[int] = mapped_column(primary_key=True)
-    street: Mapped[str] = mapped_column()
-    city: Mapped[str] = mapped_column()
-    state: Mapped[str] = mapped_column()
-    zip_code: Mapped[int] = mapped_column()
-    value: Mapped[int] = mapped_column()
-    begin: Mapped[date] = mapped_column()
-    end: Mapped[date] = mapped_column()
-    type_work: Mapped[WorkType] = mapped_column(Enum(WorkType), default=WorkType.INFRA)
+    __tablename__ = "obras"
+    
+    id: Mapped[int] = mapped_column(db.Integer, primary_key=True)
+    nome: Mapped[str] = mapped_column(db.String)
+    uf: Mapped[str] = mapped_column(db.String)
+    situacao: Mapped[str] = mapped_column(db.String)
+    tipo: Mapped[str] = mapped_column(db.String)
+    executores: Mapped[dict] = mapped_column(JSONB)  
+    natureza: Mapped[str] = mapped_column(db.String)
+    endereco: Mapped[str] = mapped_column(db.String)
+    funcaoSocial: Mapped[str] = mapped_column(db.Text)
+    dataInicialPrevista: Mapped[date] = mapped_column(db.Date)
+    dataFinalPrevista: Mapped[date] = mapped_column(db.Date)
+    fontesDeRecurso: Mapped[dict] = mapped_column(JSONB)  
+    valorInvestimentoPrevisto: Mapped[float] = mapped_column(db.Float)
+    origemRecurso: Mapped[str] = mapped_column(db.String)
+    qdtEmpregosGerados: Mapped[int] = mapped_column(db.Integer)
+    geometria: Mapped[dict] = mapped_column(JSONB)   
+
+    def __str__(self) -> str:
+        return f"{self.nome} - {self.uf} - {self.situacao} - {self.tipo} - {self.executores} - {self.natureza} - {self.endereco} - {self.funcaoSocial} - {self.dataInicialPrevista} - {self.dataFinalPrevista} - {self.fontesDeRecurso} - {self.valorInvestimentoPrevisto} - {self.origemRecurso} - {self.qdtEmpregosGerados} - {self.geometria}"
