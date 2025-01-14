@@ -8,7 +8,7 @@ from ..models.obra import Obra
 class ObraAPIConsumer:
     BASE_URL = 'https://api.obrasgov.gestao.gov.br/obrasgov/api/projeto-investimento'
     
-    def fetch_obras(self, uf: str, page: int = 0, page_size: int = 10) -> Optional[List[Dict[str, Any]]]:
+    def fetch_obras(self, uf: str, page: int = 0, page_size: int = 100) -> Optional[List[Dict[str, Any]]]:
         """
         Fetch obras data from the API
         """
@@ -130,6 +130,9 @@ class ObraAPIConsumer:
                 # Determine origem do recurso
                 origem_recurso = self._determine_origem_recurso(fontes_recurso)
                 
+                # Extract geometries
+                geometrias = obra_data.get('geometrias', [])
+                
                 obra_dict = {
                     'nome': obra_data.get('nome'),
                     'uf': obra_data.get('uf'),
@@ -145,7 +148,7 @@ class ObraAPIConsumer:
                     'valorInvestimentoPrevisto': valor_investimento,
                     'origemRecurso': origem_recurso,
                     'qdtEmpregosGerados': self._sanitize_empregos_gerados(obra_data.get('qdtEmpregosGerados')),
-                    'geometria': obra_data.get('geometria', {})
+                    'geometria': geometrias  # Updated to include geometries
                 }
 
                 # Check if obra already exists
