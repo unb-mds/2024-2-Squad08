@@ -8,10 +8,8 @@ from ..models.obra import Obra
 class ObraAPIConsumer:
     BASE_URL = 'https://api.obrasgov.gestao.gov.br/obrasgov/api/projeto-investimento'
     
-    def fetch_obras(self, uf: str, page: int = 0, page_size: int = 100) -> Optional[List[Dict[str, Any]]]:
-        """
-        Fetch obras data from the API
-        """
+    def fetch_obras(self, uf: str, page: int = 0, page_size: int = 1500) -> Optional[List[Dict[str, Any]]]:
+
         params = {
             'uf': uf.upper(),
             'pagina': page,
@@ -33,9 +31,7 @@ class ObraAPIConsumer:
             return None
 
     def _determine_tipo(self, obra_data: Dict[str, Any]) -> str:
-        """
-        Determine the type of obra based on available data
-        """
+
         natureza = obra_data.get('natureza', '').lower()
         
         if 'obra' in natureza:
@@ -54,9 +50,7 @@ class ObraAPIConsumer:
         return 'Outros'
 
     def _extract_valor_investimento(self, fontes_recurso: List[Dict[str, Any]]) -> float:
-        """
-        Extract and sum up valorInvestimentoPrevisto from fontesDeRecurso
-        """
+
         if not fontes_recurso:
             return 0.0
             
@@ -68,9 +62,7 @@ class ObraAPIConsumer:
         return total
 
     def _determine_origem_recurso(self, fontes_recurso: List[Dict[str, Any]]) -> str:
-        """
-        Determine origem do recurso based on fontesDeRecurso
-        """
+
         if not fontes_recurso:
             return "Não informada"
             
@@ -86,17 +78,13 @@ class ObraAPIConsumer:
             return 'Não informada'
 
     def _sanitize_endereco(self, endereco: Optional[str]) -> str:
-        """
-        Sanitize and provide default value for endereco
-        """
+  
         if not endereco:
             return "Endereço não informado"
         return endereco
 
     def _sanitize_empregos_gerados(self, value: Any) -> int:
-        """
-        Sanitize and provide default value for qdtEmpregosGerados
-        """
+
         if value is None:
             return 0
         try:
@@ -105,32 +93,25 @@ class ObraAPIConsumer:
             return 0
 
     def save_to_database(self, obras_data: List[Dict[str, Any]]) -> Dict[str, Any]:
-        """
-        Save obras data to database with proper validation and transformation
-        """
+
         success_count = 0
         error_count = 0
         errors = []
 
         for obra_data in obras_data:
             try:
-                # Extract and validate dates
                 data_inicial = obra_data.get('dataInicialPrevista')
                 data_final = obra_data.get('dataFinalPrevista')
                 
-                # Process fontes de recurso
                 fontes_recurso = obra_data.get('fontesDeRecurso', [])
                 if isinstance(fontes_recurso, str):
                     import json
                     fontes_recurso = json.loads(fontes_recurso)
                 
-                # Calculate valor investimento from fontes de recurso
                 valor_investimento = self._extract_valor_investimento(fontes_recurso)
                 
-                # Determine origem do recurso
                 origem_recurso = self._determine_origem_recurso(fontes_recurso)
                 
-                # Extract geometries
                 geometrias = obra_data.get('geometrias', [])
                 
                 obra_dict = {
@@ -148,10 +129,9 @@ class ObraAPIConsumer:
                     'valorInvestimentoPrevisto': valor_investimento,
                     'origemRecurso': origem_recurso,
                     'qdtEmpregosGerados': self._sanitize_empregos_gerados(obra_data.get('qdtEmpregosGerados')),
-                    'geometria': geometrias  # Updated to include geometries
+                    'geometria': geometrias  
                 }
 
-                # Check if obra already exists
                 existing_obra = Obra.query.filter_by(nome=obra_dict['nome']).first()
                 
                 if existing_obra:
