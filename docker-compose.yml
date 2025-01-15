@@ -31,6 +31,8 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./backend/init-scripts:/docker-entrypoint-initdb.d
+      - ./monitorabsb_backup.sql:/docker-entrypoint-initdb.d/monitorabsb_backup.sql
     ports:
       - "${POSTGRES_PORT}:5432"
     networks:
