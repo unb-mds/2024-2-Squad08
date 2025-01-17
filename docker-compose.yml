@@ -34,7 +34,7 @@ services:
       - ./backend/init-scripts:/docker-entrypoint-initdb.d
       - ./monitorabsb_backup.sql:/docker-entrypoint-initdb.d/monitorabsb_backup.sql
     ports:
-      - "${POSTGRES_PORT}:5432"
+      - "5433:5432"
     networks:
       - app-network
 
