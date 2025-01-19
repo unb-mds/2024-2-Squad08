@@ -113,6 +113,7 @@ class ObraAPIConsumer:
                 origem_recurso = self._determine_origem_recurso(fontes_recurso)
                 
                 geometrias = obra_data.get('geometrias', [])
+                geometria = geometrias[0]['geometria'] if geometrias else None
                 
                 obra_dict = {
                     'nome': obra_data.get('nome'),
@@ -129,7 +130,7 @@ class ObraAPIConsumer:
                     'valorInvestimentoPrevisto': valor_investimento,
                     'origemRecurso': origem_recurso,
                     'qdtEmpregosGerados': self._sanitize_empregos_gerados(obra_data.get('qdtEmpregosGerados')),
-                    'geometria': geometrias  
+                    'geometria': geometria
                 }
 
                 existing_obra = Obra.query.filter_by(nome=obra_dict['nome']).first()
