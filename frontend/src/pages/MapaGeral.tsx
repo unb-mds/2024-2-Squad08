@@ -1,19 +1,83 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import '../styles/MapaGeral.css';
+import '../styles/MapaGeral.css'; 
 import { useNavigate } from "react-router-dom";
 import Logo from "../components/Logo";
 import tipoIcon from '../assets/Geral.png';
 import { useObrasCoordinates } from '../hooks/useObras';
 
-const customIcon = new L.Icon({
-  iconUrl: tipoIcon,
-  iconSize: [30, 30],
+
+const iconeEducacao = new L.Icon({
+  iconUrl: education, 
+  iconSize: [40, 40],
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
   shadowSize: [41, 41],
-  className: 'custom-marker'
+  className: 'custom-marker' 
+});
+
+const iconeConst = new L.Icon({
+  iconUrl: construction, 
+  iconSize: [40, 40],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+  className: 'custom-marker' 
+});
+
+const iconeSport = new L.Icon({
+  iconUrl: sport, 
+  iconSize: [40, 40],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+  className: 'custom-marker' 
+});
+
+const iconeSecurity = new L.Icon({
+  iconUrl: security, 
+  iconSize: [40, 40],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+  className: 'custom-marker' 
+});
+
+const iconeEnergy = new L.Icon({
+  iconUrl: energy, 
+  iconSize: [40, 40],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+  className: 'custom-marker' 
+});
+
+const iconeAdm = new L.Icon({
+  iconUrl: adm, 
+  iconSize: [40, 40],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+  className: 'custom-marker' 
+});
+
+const iconeDev = new L.Icon({
+  iconUrl: development, 
+  iconSize: [40, 40],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+  className: 'custom-marker' 
+});
+
+const iconeRoad = new L.Icon({
+  iconUrl: road, 
+  iconSize: [40, 40],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+  className: 'custom-marker' 
 });
 
 export default function MapInterface() {
@@ -78,6 +142,7 @@ export default function MapInterface() {
           ))}
         </MapContainer>
 
+        {/* Botão fixo */}
         <button
           className="btn-map"
           onClick={() => navigate("/")}
@@ -85,6 +150,7 @@ export default function MapInterface() {
           MENU
         </button>
 
+        {/* Logo fixa sobre o mapa */}
         <div className="logo-container">
           <Logo />
         </div>
