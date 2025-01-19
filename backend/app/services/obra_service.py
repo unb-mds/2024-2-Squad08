@@ -11,7 +11,7 @@ class ObraService:
         """
         obras_data = self.api_consumer.fetch_obras(uf)
         if not obras_data:
-            return {
+            return { 
                 'success_count': 0,
                 'error_count': 1,
                 'errors': ['Failed to fetch data from API']

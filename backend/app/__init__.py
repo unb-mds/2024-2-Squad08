@@ -1,9 +1,9 @@
+# __init__.py 
 from flask import Flask
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS  
 from .models import db
 from .views.main import main_bp
-# from .views.view_user import user_bp 
 from .views.view_usuario import usuario_bp
 from .views.view_obra import obra_bp  
 from dotenv import load_dotenv
@@ -27,6 +27,9 @@ def create_app():
     
     app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'your-secret-key') 
     app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(days=7) 
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL',
+        'postgresql://postgres:admin@localhost:5432/monitorabsb')
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     
     jwt = JWTManager(app)
 
@@ -34,16 +37,19 @@ def create_app():
     
     db.init_app(app)
     
-    try:
-        with app.app_context():
-            db.drop_all()
-            db.create_all()
-            print("Tables recreated successfully")
-    except SQLAlchemyError as e:
-        print(f"Error recreating tables: {str(e)}")
+    # Only create tables if they don't exist
+    with app.app_context():
+        try:
+            # Check if tables need to be created
+            if not db.engine.dialect.has_table(db.engine, 'obras'):
+                db.create_all()
+                print("Tables created successfully")
+            else:
+                print("Tables already exist")
+        except SQLAlchemyError as e:
+            print(f"Error checking/creating tables: {str(e)}")
     
     app.register_blueprint(main_bp) 
-    # app.register_blueprint(user_bp, url_prefix='/users')  
     app.register_blueprint(obra_bp, url_prefix='/obras')  
     app.register_blueprint(usuario_bp, url_prefix='/usuario')
     

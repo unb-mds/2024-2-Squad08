@@ -1,52 +1,44 @@
-// hooks/useObras.ts
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-
-export interface Obra {
+export interface ObraCoordinates {
   id: number;
   nome: string;
-  uf: string;
-  situacao: string;
+  latitude: number;
+  longitude: number;
   tipo: string;
-  executores: any;
-  natureza: string;
-  endereco: string;
-  funcaoSocial: string;
-  dataInicialPrevista: string | null;
-  dataFinalPrevista: string | null;
-  fontesDeRecurso: any;
+  situacao: string;
   valorInvestimentoPrevisto: number;
-  origemRecurso: string;
-  qdtEmpregosGerados: number;
-  geometria: any;
+  original_wkt: string;
 }
 
-interface UseObrasReturn {
-  obras: Obra[];
+interface UseObrasCoordinatesReturn {
+  obras: ObraCoordinates[];
   loading: boolean;
   error: string | null;
   refetch: () => Promise<void>;
 }
 
-const API_URL = 'http://localhost:5000';
+const API_URL = 'http://localhost:5000/obras';
 
-
-export const useObras = () => {
-  const [obras, setObras] = useState<Obra[]>([]);
+export const useObrasCoordinates = (): UseObrasCoordinatesReturn => {
+  const [obras, setObras] = useState<ObraCoordinates[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const fetchObras = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${API_URL}/obras`);
-      console.log('API Response:', response.data);
-      setObras(response.data);
-      setError(null);
+      const response = await axios.get(`${API_URL}/coordinates`);
+      if (response.data.success) {
+        setObras(response.data.data);
+        setError(null);
+      } else {
+        setError('Erro ao carregar coordenadas das obras');
+      }
     } catch (err) {
-      console.error('Full error object:', err);
-      setError('Erro ao carregar obras');
+      console.error('Error fetching coordinates:', err);
+      setError('Erro ao carregar coordenadas das obras');
     } finally {
       setLoading(false);
     }

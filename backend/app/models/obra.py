@@ -21,7 +21,7 @@ class Obra(db.Model):
     valorInvestimentoPrevisto: Mapped[float] = mapped_column(db.Float)
     origemRecurso: Mapped[str] = mapped_column(db.String)
     qdtEmpregosGerados: Mapped[int] = mapped_column(db.Integer)
-    geometria: Mapped[dict] = mapped_column(JSONB)   
+    geometria: Mapped[str | None] = mapped_column(db.String, nullable=True)
 
     def __str__(self) -> str:
         return f"{self.nome} - {self.uf} - {self.situacao} - {self.tipo} - {self.executores} - {self.natureza} - {self.endereco} - {self.funcaoSocial} - {self.dataInicialPrevista} - {self.dataFinalPrevista} - {self.fontesDeRecurso} - {self.valorInvestimentoPrevisto} - {self.origemRecurso} - {self.qdtEmpregosGerados} - {self.geometria}"
