@@ -6,7 +6,14 @@ import { useNavigate } from "react-router-dom";
 import Logo from "../components/Logo";
 import tipoIcon from '../assets/Geral.png';
 import { useObrasCoordinates } from '../hooks/useObras';
-
+import education from '../assets/education.png';
+import construction from '../assets/contruction.png';
+import sport from '../assets/sport.png';
+import security from '../assets/security.png';
+import energy from '../assets/energia.png';
+import adm from '../assets/adm.png';
+import development from '../assets/development.png';
+import road from '../assets/road.png';
 
 const iconeEducacao = new L.Icon({
   iconUrl: education, 
