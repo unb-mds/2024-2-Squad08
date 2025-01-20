@@ -1,6 +1,6 @@
 
 **Objetivo da Sprint:**
-O objetivo da Sprint 08
+O objetivo da Sprint 08 foi avançar no desenvolvimento das funcionalidades e integração entre o frontend e backend, com foco em melhorar a experiência do usuário nas páginas de filtro e informações gerais, além de garantir o funcionamento correto do sistema de cadastro, login e redefinição de senha.
 
 **Datas da Sprint:**
 
@@ -20,14 +20,7 @@ O objetivo da Sprint 08
 | Implementar API de preenchimento automático de CEP | Beatriz Lins | Concluído |
 | Criar e testar pins personalizados para cada filtro | Beatriz Lins | Concluído |
 | Backend das páginas de filtro | Beatriz Lins | Concluído |
-|  | Beatriz Lins | Concluído |
-|  | Beatriz Lins | Concluído |
-|  | Beatriz Lins | Concluído |
 
-| | Daniel Ferreira |  |
-| | Paulo Cirqueira |  |
-| | Daniel Nunes |  |
-| | Erick Alves |  |
 
 
 

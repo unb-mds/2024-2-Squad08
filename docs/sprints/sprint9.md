@@ -4,14 +4,14 @@ O objetivo da Sprint 09
 
 **Datas da Sprint:**
 
-- **Início:** //2024
-- **Término:** //2024
+- **Início:** 15/01/2025
+- **Término:** 22/01/2025
 
 **Backlog da Sprint:**
 
 | Tarefa | Responsável | Status |
 |--------|-------------|-----------------------|
-| | Beatriz Lins | |
+| Atualização da documentação | Beatriz Lins | Concluído |
 | | Daniel Ferreira |  |
 | | Paulo Cirqueira |  |
 | | Daniel Nunes |  |
