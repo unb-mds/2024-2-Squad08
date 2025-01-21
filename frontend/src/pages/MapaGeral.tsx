@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import '../styles/MapaGeral.css'; 
 import { useNavigate } from "react-router-dom";
 import Logo from "../components/Logo";
-import tipoIcon from '../assets/Geral.png';
+// import tipoIcon from '../assets/Geral.png';
 import { useObrasCoordinates } from '../hooks/useObras';
 import education from '../assets/education.png';
 import construction from '../assets/contruction.png';
@@ -130,7 +130,7 @@ export default function MapInterface() {
             <Marker
               key={obra.id}
               position={[obra.latitude, obra.longitude]} 
-              icon={customIcon}
+              icon={iconeEducacao}
               eventHandlers={{
                 click: () => {
                   navigate(`/info/${obra.id}`);
