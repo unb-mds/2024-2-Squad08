@@ -4,7 +4,7 @@
 
 ## **Introdução**
     
-O **MonitoraBSB** é um sistema de monitoramento e análise voltado para acompanhar diversos indicadores da cidade de Brasília. O objetivo é fornecer uma plataforma web onde os usuários possam visualizar, analisar e reportar dados relacionados a diferentes aspectos da cidade. Este documento descreve a arquitetura do sistema, abordando os principais componentes e a interação entre eles.
+O **MonitoraBSB** é um sistema de monitoramento e análise voltado para acompanhar indicadores de diversas obras situadas no Distrito Federal. O objetivo é fornecer uma plataforma web onde os usuários possam filtrar, visualizar e analisar dados relacionados a diferentes aspectos da cidade. Este documento descreve a arquitetura do sistema, abordando os principais componentes e a interação entre eles. A arquitetura adotada segue o padrão MVC (Model-View-Controller) garantindo uma melhor experiência do usuário e alinhamento com os requisitos do projeto, conforme detalhado a seguir.
 </p>
 
 ---
