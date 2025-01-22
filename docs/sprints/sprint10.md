@@ -4,14 +4,17 @@ O objetivo da Sprint 10
 
 **Datas da Sprint:**
 
-- **Início:** //2024
-- **Término:** //2024
+- **Início:** 22/01/2025
+- **Término:** 29/01/2025
 
 **Backlog da Sprint:**
 
 | Tarefa | Responsável | Status |
 |--------|-------------|-----------------------|
-| | Beatriz Lins | |
+| Backend do filtro por executor| Beatriz Lins | Concluído |
+| Backend do filtro por valor| Beatriz Lins | Concluído |
+| Conexão com backend da página de filtro por valor | Beatriz Lins | Concluído |
+| Conexão com backend da página de filtro por executor | Beatriz Lins | Concluído |
 | | Daniel Ferreira |  |
 | | Paulo Cirqueira |  |
 | | Daniel Nunes |  |

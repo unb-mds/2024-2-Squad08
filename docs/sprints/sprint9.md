@@ -1,6 +1,6 @@
 
 **Objetivo da Sprint:**
-O objetivo da Sprint 09
+O objetivo da Sprint 09 foi atualizar a documentação.
 
 **Datas da Sprint:**
 
@@ -12,10 +12,7 @@ O objetivo da Sprint 09
 | Tarefa | Responsável | Status |
 |--------|-------------|-----------------------|
 | Atualização da documentação | Beatriz Lins | Concluído |
-| | Daniel Ferreira |  |
-| | Paulo Cirqueira |  |
-| | Daniel Nunes |  |
-| | Erick Alves |  |
+
 
 
 
