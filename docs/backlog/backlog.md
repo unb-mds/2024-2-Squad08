@@ -42,7 +42,6 @@ Aqui está a tabela corrigida na ordem de prioridade:
 | PBI-10  | Integrar funcionalidade de cadastrar endereço do usuário.                   | Requisito Não Funcional| 🟡 Média       |
 | PBI-11  | Integrar funcionalidade de redefinição de senha pelo usuário.               | Requisito Não Funcional| 🟡 Média       |
 | PBI-13  | Acessar a localização em tempo real do usuário para notícias personalizadas. | Funcionalidade         | 🟡 Média       |
-| PBI-18  | Exibição de notícias de obras.                                              | Funcionalidade         | 🟡 Média       |
 | PBI-25  | Criar sistema de cache para otimizar a exibição das obras no mapa interativo. | Funcionalidade         | 🟡 Média       |
 | PBI-28  | Criar página de histórico de ações do usuário (como login, registros de obras). | Funcionalidade         | 🟡 Média       |
 | PBI-29  | Desenvolver sistema de notificações por push ou e-mail para alertar sobre novas obras ou mudanças. | Funcionalidade | 🟡 Média       |

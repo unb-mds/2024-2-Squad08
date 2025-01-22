@@ -21,10 +21,11 @@ O objetivo da Sprint 05 foi estruturar o planejamento estratégico do projeto po
 | Frontend da tela de Endereço | Beatriz Lins | Concluído |
 | Criação das features | Beatriz Lins | Concluído |
 | Criação dos user stories | Beatriz Lins | Concluído |
-| | Daniel Ferreira |  |
-| | Paulo Cirqueira |  |
-| | Daniel Nunes |  |
-| | Erick Alves |  |
+| Criação da logica do login no backend | Daniel Ferreira | Concluído |
+| Criação da logica do cadastro no backend | Daniel Ferreira | Concluído |
+| Criação da logica do consumo da api do querido diario | Daniel Ferreira | Concluído |
+| Protótipo da tela de lista de obras( Desktop) | Paulo Cirqueira | Concluído |
+
 
 
 

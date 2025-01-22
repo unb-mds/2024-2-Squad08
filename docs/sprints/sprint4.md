@@ -17,10 +17,12 @@ O objetivo principal da Sprint 04 é avançar significativamente no desenvolvime
 | Ajuste dos requisitos de acordo com novo Figma | Beatriz Lins | Concluído |
 | Atualização da documentação do projeto | Beatriz Lins | Concluído |
 | Correção do frontend da página inicial de mapa de acordo com  versão 3 do Figma | Beatriz Lins | Concluído |
-| | Daniel Ferreira |  |
-| | Paulo Cirqueira |  |
-| | Daniel Nunes |  |
-| | Erick Alves |  |
+| Criação das primeiras telas em react | Daniel Ferreira | Concluído  |
+| Criação do docker | Daniel Ferreira | Concluído  |
+| Prototipo do figma desktop | Daniel Ferreira | Concluído  |
+| Criação de uma estrutura basica para o backend | Daniel Ferreira | Concluído  |
+| Prototipo da tela de cadastro de endereço| Paulo Cerqueira | Concluído |
+
 
 
 
