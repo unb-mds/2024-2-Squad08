@@ -11,7 +11,7 @@ O **MonitoraBSB** é um sistema de monitoramento e análise voltado para acompan
 
 ## **Diagrama de Arquitetura**
 
-![Arquitetura de software](New_architeture.png)
+![Arquitetura de software](New_Architecture.png)
 
 ---
 
