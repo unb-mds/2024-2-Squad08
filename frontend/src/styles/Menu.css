@@ -1,3 +1,4 @@
+/* Estilos gerais */
 .map-container {
     position: absolute;
     top: 55%;
@@ -10,13 +11,13 @@
     padding: 10px;      
     text-align: center; 
     border-radius: 15px;
-  }
-  
+}
+
 .map-container h1 {
     color: white;
     font-weight: bolder;
     font-size: 16px;    
-    }
+}
 
 .btn-container-buttom {
     display: flex;
@@ -24,7 +25,7 @@
     align-items: center;  
     z-index: 1000;
     margin-top: 1em; 
-    }
+}
 
 .btn-container-left,
 .btn-container-right {
@@ -32,7 +33,7 @@
     flex-direction: column; 
     align-items: center; 
     width: 30em;
-    }
+}
 
 .map-container button {
     display: flex;      
@@ -47,7 +48,7 @@
     width: 32vw;
     font-weight: bold;
     gap: 10px; 
-    }
+}
 
 .login-container {
     display: flex;
@@ -55,49 +56,74 @@
     align-items: center;
     gap: 1em; 
     margin-top: 4em;
-    }
+}
 
 .button-group {
     display: flex;
     justify-content: center; 
     gap: 1em; 
-    }
+}
 
 .inter-text {
     margin-bottom: 0.5em; 
     margin-top: 2em;
-    }
+}
 
 /* Cores dos botões e ícones */
-
 .map-container .icon {
     font-size: 18px;
-    }
+}
 
 .green-btn-map {
     background-color: #8FCB9B;
-    }
+}
 
 .red-btn-map {
     background-color: #FF6F61;
-    }
+}
 
 .yellow-btn-map {
     background-color: #FFD700;
-    }
+}
 
 .orange-btn-map {
     background-color: #EFA65E;
-    }
+}
 
 .gray-btn-map {
     background-color: gray;
-    }
+}
 
 .purple-btn-map {
     background-color: #715F82;
-    }
+}
 
 .blue-btn-map {
     background-color: #9DBFC9;
+}
+
+/* Media queries para responsividade */
+@media (max-width: 768px) {
+    .map-container {
+        width: 95%;
+        height: 70vh;
+        top: 50%;
     }
+
+    .btn-container-left,
+    .btn-container-right {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .map-container button {
+        width: 100%;
+        margin: 5px 0;
+        font-size: 12px;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+}
