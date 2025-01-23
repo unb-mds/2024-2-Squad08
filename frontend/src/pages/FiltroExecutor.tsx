@@ -2,22 +2,32 @@ import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import "../styles/Filtros.css"; 
 import Logo from "../components/Logo";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function FiltroExecutor() {
   const position = [-15.7801, -47.9292];
-  const [statusFiltro, setStatusFiltro] = useState<string[]>([]); 
+  const [statusFiltroExecutores, setStatusFiltroExecutores] = useState<string[]>([]); 
   
   const handleCheckboxChange = (value: string) => {
-    setStatusFiltro((prev) =>
+    setStatusFiltroExecutores((prev) =>
       prev.includes(value)
         ? prev.filter((item) => item !== value) 
         : [...prev, value] 
     );
   };
 
-  const limparFiltros = () => {
-    setStatusFiltro([]); 
+  const handleLimpar = () => {
+    setStatusFiltroExecutores([]); 
+  };
+
+  const handleConcluir = async () => {
+    try {
+      const response = await fetch(`/api/filtrar?executores=${statusFiltroExecutores.join(',')}`);
+      const obras = await response.json();
+      console.log('Obras filtradas:', obras);
+    } catch (error) {
+      console.error('Erro ao buscar obras:', error);
+    }
   };
 
   return (
@@ -41,8 +51,8 @@ export default function FiltroExecutor() {
                 <label>
                   <input 
                     type="checkbox" 
-                    value="iniciada" 
-                    checked={statusFiltro.includes("iniciada")}
+                    value="DNIT" 
+                    checked={statusFiltroExecutores.includes("iniciada")}
                     onChange={() => handleCheckboxChange("iniciada")}
                   />
                   Departamento Nacional de Infraestrutura de Transportes
@@ -52,7 +62,7 @@ export default function FiltroExecutor() {
                   <input 
                     type="checkbox" 
                     value="CBMDF" 
-                    checked={statusFiltro.includes("CBMDF")}
+                    checked={statusFiltroExecutores.includes("CBMDF")}
                     onChange={() => handleCheckboxChange("CBMDF")}
                   />
                   Corpo de Bombeiros Militar do Distrito Federal
@@ -62,7 +72,7 @@ export default function FiltroExecutor() {
                   <input 
                     type="checkbox" 
                     value="SEA" 
-                    checked={statusFiltro.includes("SEA")}
+                    checked={statusFiltroExecutores.includes("SEA")}
                     onChange={() => handleCheckboxChange("SEA")}
                   />
                   Secretaria de Estado da Agricultura
@@ -72,7 +82,7 @@ export default function FiltroExecutor() {
                   <input 
                     type="checkbox" 
                     value="ADR" 
-                    checked={statusFiltro.includes("ADR")}
+                    checked={statusFiltroExecutores.includes("ADR")}
                     onChange={() => handleCheckboxChange("ADR")}
                   />
                   Abastecimento e Desenvolvimento Rural 
@@ -82,7 +92,7 @@ export default function FiltroExecutor() {
                   <input 
                     type="checkbox" 
                     value="DER" 
-                    checked={statusFiltro.includes("DER")}
+                    checked={statusFiltroExecutores.includes("DER")}
                     onChange={() => handleCheckboxChange("DER")}
                   />
                   Departamento de Estradas de Rodagem 
@@ -92,7 +102,7 @@ export default function FiltroExecutor() {
                   <input 
                     type="checkbox" 
                     value="FUB" 
-                    checked={statusFiltro.includes("FUB")}
+                    checked={statusFiltroExecutores.includes("FUB")}
                     onChange={() => handleCheckboxChange("FUB")}
                   />
                   Fundação Univesidade de Brasília
@@ -102,7 +112,7 @@ export default function FiltroExecutor() {
                   <input 
                     type="checkbox" 
                     value="MIDR" 
-                    checked={statusFiltro.includes("MIDR")}
+                    checked={statusFiltroExecutores.includes("MIDR")}
                     onChange={() => handleCheckboxChange("MIDR")}
                   />
                   Ministério  da Integração e do Desenvolvimento Regional
@@ -112,7 +122,7 @@ export default function FiltroExecutor() {
                   <input 
                     type="checkbox" 
                     value="CE" 
-                    checked={statusFiltro.includes("CE")}
+                    checked={statusFiltroExecutores.includes("CE")}
                     onChange={() => handleCheckboxChange("CE")}
                   />
                   Comando do Exército
@@ -122,7 +132,7 @@ export default function FiltroExecutor() {
                   <input 
                     type="checkbox" 
                     value="IFECTB" 
-                    checked={statusFiltro.includes("IFECTB")}
+                    checked={statusFiltroExecutores.includes("IFECTB")}
                     onChange={() => handleCheckboxChange("IFECTB")}
                   />
                   Instituto Federal Educação, Ciência e Tecnologia de Brasília
@@ -130,10 +140,10 @@ export default function FiltroExecutor() {
             </div>
 
             <div className="filter-btn">
-                <button className="clean-btn" onClick={limparFiltros}>
+                <button className="clean-btn" onClick={handleLimpar}>
                   LIMPAR
                 </button>
-                <button className="check-btn">
+                <button className="check-btn" onClick={handleConcluir}>
                   CONCLUIR
                 </button>
             </div>
