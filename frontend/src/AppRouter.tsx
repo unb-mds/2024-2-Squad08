@@ -28,7 +28,7 @@ const AppRouter = () => {
         <Route path="/regiao" element={<FiltroRegiao />} />
         <Route path="/valor" element={<FiltroValor />} />
         <Route path="/tipo" element={<FiltroTipo />} />
-        <Route path="/info" element={<InformacoesGerais />} />
+        <Route path="/info/:obraId" element={<InformacoesGerais />} />
         <Route path="/email" element={<Email />} />
       </Routes>
       <Footer />

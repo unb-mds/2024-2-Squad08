@@ -130,12 +130,13 @@ export default function MapInterface() {
             <Marker
               key={obra.id}
               position={[obra.latitude, obra.longitude]} 
-              icon={iconeEducacao}
+              icon={iconeConst}
               eventHandlers={{
                 click: () => {
                   navigate(`/info/${obra.id}`);
-                }
+                },
               }}
+              
             >
               <Popup>
                 <div>
