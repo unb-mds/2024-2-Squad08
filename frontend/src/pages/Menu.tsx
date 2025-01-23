@@ -1,13 +1,13 @@
-import { IoLocationSharp } from "react-icons/io5";
-import { TbMoneybag } from "react-icons/tb";
-import { BiLogIn } from "react-icons/bi";
-import { MdConstruction } from "react-icons/md";
-import { FaListCheck } from "react-icons/fa6";
-import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import Logo from "../components/Logo";  
-import "../styles/Menu.css";
+import { BiLogIn } from "react-icons/bi";
+import { FaListCheck } from "react-icons/fa6";
+import { IoLocationSharp } from "react-icons/io5";
+import { MdConstruction } from "react-icons/md";
+import { TbMoneybag } from "react-icons/tb";
+import { MapContainer, TileLayer } from 'react-leaflet';
 import { useNavigate } from "react-router-dom";
+import Logo from "../components/Logo";
+import "../styles/Menu.css";
 
 export default function Menu() {
   const position = [-15.7801, -47.9292];
