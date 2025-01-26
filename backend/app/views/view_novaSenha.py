@@ -5,17 +5,9 @@ from app import db, mail
 from flask_mail import Message
 import secrets
 from datetime import datetime, timedelta
-from flask_cors import CORS
 
 novaSenha_bp = Blueprint('novaSenha', __name__)
 
-CORS(novaSenha_bp, resources={
-    r"/*": {
-        "origins": ["http://localhost:5173"],
-        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-        "allow_headers": ["Content-Type", "Authorization"]
-    }
-})
 
 # Rota para enviar email de redefinição de senha
 @novaSenha_bp.route("/email", methods=["POST", "OPTIONS"])

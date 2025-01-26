@@ -16,7 +16,7 @@ interface UseObrasCoordinatesReturn {
   obras: ObraCoordinates[];
   loading: boolean;
   error: string | null;
-  refetch: () => Promise<void>;
+  fetchFilteredObrasValue: (tipo?: string, situacao?: string, valores?: string[]) => Promise<void>;
 }
 
 const API_URL = 'http://localhost:5000/obras';
@@ -29,7 +29,7 @@ export const useObrasCoordinates = (): UseObrasCoordinatesReturn => {
   const fetchObras = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${API_URL}/coordinates`);
+      const response = await axios.get(`${API_URL}/coordinates`); 
       if (response.data.success) {
         setObras(response.data.data);
         setError(null);
@@ -44,9 +44,29 @@ export const useObrasCoordinates = (): UseObrasCoordinatesReturn => {
     }
   };
 
+  const fetchFilteredObrasValue = async (tipo?: string, situacao?: string, valores?: string[]) => {
+    try {
+      setLoading(true);
+      const response = await axios.get(`${API_URL}/filter`, {
+        params: { tipo, situacao, valores }
+      });
+      if (response.data.success) {
+        setObras(response.data.data);
+        setError(null);
+      } else {
+        setError('Erro ao carregar obras filtradas');
+      }
+    } catch (err) {
+      console.error('Error fetching filtered obras:', err);
+      setError('Erro ao buscar obras filtradas');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    fetchObras();
+    fetchObras(); 
   }, []);
 
-  return { obras, loading, error, refetch: fetchObras };
+  return { obras, loading, error, fetchFilteredObrasValue }; 
 };

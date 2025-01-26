@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, current_app
+from flask import Blueprint, jsonify, current_app, request
 from ..services.api_consumer import ObraAPIConsumer
 from ..services.obra_service import ObraService
 from app.models.obra import Obra
@@ -9,6 +9,7 @@ from typing import Optional, Tuple
 from flask_cors import cross_origin
 from shapely import wkt, wkb
 from binascii import unhexlify
+from sqlalchemy.exc import SQLAlchemyError
 
 obra_bp = Blueprint('obras', __name__)
 
@@ -21,7 +22,6 @@ def parse_wkt_to_coordinates(geometry_string: str) -> Optional[Tuple[float, floa
             geometry_binary = unhexlify(geometry_string)
             geometry = wkb.loads(geometry_binary)
         except Exception:
-            # If WKB parsing fails, try WKT parsing as fallback
             geometry = wkt.loads(geometry_string)
         
         if geometry.geom_type == 'POINT':
@@ -82,15 +82,12 @@ def sync_obras(uf):
 @cross_origin()
 def get_obras_coordinates():
     try:
-        obras = Obra.query.all()
-        
         coordinates_list = []
+        obras = Obra.query.all()
         for obra in obras:
             if obra.geometria:
-                print(f"Raw geometry for {obra.nome}: {obra.geometria}")  # Debug print
                 coords = parse_wkt_to_coordinates(obra.geometria)
                 if coords:
-                    print(f"Parsed coordinates: {coords}")  # Debug print
                     coordinates_list.append({
                         'id': obra.id,
                         'nome': obra.nome,
@@ -150,3 +147,53 @@ def get_obra_coordinates(obra_id: int):
             'success': False,
             'error': str(e)
         }), 500
+
+@obra_bp.route('/filter', methods=['GET'])
+@cross_origin()
+def filter_obras():
+    try:
+        tipo = request.args.get('tipo')
+        situacao = request.args.get('situacao')
+        valores = request.args.getlist('valores[]')  
+        
+        query = Obra.query
+
+        if tipo:
+            query = query.filter(Obra.tipo == tipo)
+        if situacao:
+            query = query.filter(Obra.situacao == situacao)
+        
+        if valores:
+            filtered_obras = []
+            for obra in query.all():
+                valor = obra.valorInvestimentoPrevisto
+                if any(
+                    (value == 'cem' and valor <= 100000) or
+                    (value == 'duzentos' and valor <= 200000) or
+                    (value == 'trezentos' and valor <= 300000) or
+                    (value == 'quinhentos' and valor <= 500000) or
+                    (value == 'setecentos' and valor <= 700000) or
+                    (value == 'novecentos' and valor <= 900000) or
+                    (value == 'milhao' and valor > 1000000)
+                    for value in valores
+                ):
+                    filtered_obras.append(obra)
+        else:
+            filtered_obras = query.all()
+
+        obras_list = []
+        for obra in filtered_obras:
+            obra_dict = {
+                'id': obra.id,
+                'nome': obra.nome,
+                'valorInvestimentoPrevisto': obra.valorInvestimentoPrevisto,
+                'situacao': obra.situacao,
+                'tipo': obra.tipo
+            }
+            obras_list.append(obra_dict)
+
+        return jsonify({'success': True, 'data': obras_list})
+
+    except Exception as e:
+        print(f"Error in filter_obras: {str(e)}")
+        return jsonify({'success': False, 'error': str(e)}), 500

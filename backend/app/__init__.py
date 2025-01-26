@@ -17,13 +17,8 @@ def create_app():
     
     app = Flask(__name__)
     
-    CORS(app, resources={
-        r"/*": {
-            "origins": ["http://localhost:5173"],  
-            "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-            "allow_headers": ["Content-Type", "Authorization"]
-        }
-    })
+    CORS(app, resources={r"/*": {"origins": "*"}})
+
     
     app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'your-secret-key') 
     app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(days=7) 
