@@ -98,6 +98,7 @@ def get_obras_coordinates():
                         'longitude': coords[1],
                         'tipo': obra.tipo,
                         'situacao': obra.situacao,
+                        'executores': obra.executores,
                         'valorInvestimentoPrevisto': obra.valorInvestimentoPrevisto,
                         'original_wkt': obra.geometria
                     })
@@ -140,6 +141,7 @@ def get_obra_coordinates(obra_id: int):
                 'longitude': coords[1],
                 'tipo': obra.tipo,
                 'situacao': obra.situacao,
+                'executores': obra.executores,
                 'valorInvestimentoPrevisto': obra.valorInvestimentoPrevisto,
                 'original_wkt': obra.geometria
             }
