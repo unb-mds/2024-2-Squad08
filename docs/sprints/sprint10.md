@@ -1,6 +1,6 @@
 
 **Objetivo da Sprint:**
-O objetivo da Sprint 10
+O objetivo da Sprint 10 foi implementar e integrar funcionalidades de filtro avançado no sistema, permitindo que os usuários possam realizar buscas refinadas por executor e por valor. Além disso, garantir que as conexões entre o frontend e o backend funcionem corretamente para essas páginas de filtro, proporcionando uma experiência fluida e eficiente.
 
 **Datas da Sprint:**
 
@@ -15,10 +15,6 @@ O objetivo da Sprint 10
 | Backend do filtro por valor| Beatriz Lins | Concluído |
 | Conexão com backend da página de filtro por valor | Beatriz Lins | Concluído |
 | Conexão com backend da página de filtro por executor | Beatriz Lins | Concluído |
-| | Daniel Ferreira |  |
-| | Paulo Cirqueira |  |
-| | Daniel Nunes |  |
-| | Erick Alves |  |
 
 
 
