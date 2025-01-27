@@ -100,6 +100,15 @@ class ObraAPIConsumer:
 
         for obra_data in obras_data:
             try:
+                # Extração de "descricao" dentro de "tipos"
+                tipos = obra_data.get('tipos', [])
+                descricao_tipo = tipos[1]['descricao'] if tipos else "Não informado" 
+
+                # Extração de "nome" dentro de "executores"
+                executores = obra_data.get('executores', [])
+                nome_executor = executores[0]['nome'] if executores else "Não informado"
+
+
                 data_inicial = obra_data.get('dataInicialPrevista')
                 data_final = obra_data.get('dataFinalPrevista')
                 
@@ -119,8 +128,8 @@ class ObraAPIConsumer:
                     'nome': obra_data.get('nome'),
                     'uf': obra_data.get('uf'),
                     'situacao': obra_data.get('situacao', 'Não informada'),
-                    'tipo': self._determine_tipo(obra_data),
-                    'executores': obra_data.get('executores', []),
+                    'tipo': descricao_tipo,
+                    'executores': nome_executor,
                     'natureza': obra_data.get('natureza', 'Não informada'),
                     'endereco': self._sanitize_endereco(obra_data.get('endereco')),
                     'funcaoSocial': obra_data.get('funcaoSocial', 'Não informada'),
@@ -160,3 +169,4 @@ class ObraAPIConsumer:
             'error_count': error_count,
             'errors': errors
         }
+
