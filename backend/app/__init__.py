@@ -11,7 +11,7 @@ import os
 from sqlalchemy.exc import SQLAlchemyError
 import logging
 from datetime import timedelta
-from sqlalchemy import inspect
+
 
 def create_app():
     load_dotenv() 
@@ -40,7 +40,6 @@ def create_app():
     
     # Only create tables if they don't exist
 
-
     with app.app_context():
         try:
             inspector = inspect(db.engine)
@@ -56,6 +55,4 @@ def create_app():
     app.register_blueprint(obra_bp, url_prefix='/obras')  
     app.register_blueprint(usuario_bp, url_prefix='/usuario')
     
-    return app
 
-# curl -X POST http://localhost:5000/obras/sync/DF

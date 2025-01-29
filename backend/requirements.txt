@@ -1,6 +1,7 @@
 shapely==2.0.1
 GeoAlchemy2==0.13.1
 Flask==2.2.5
+flask_apscheduler==1.13.1
 Flask-Login==0.6.3
 flask-sqlalchemy==3.1.1
 psycopg2-binary==2.9.9
@@ -10,5 +11,6 @@ flask-jwt-extended==4.4.4
 flask-cors==4.0.0
 requests==2.31.0
 flask-mail==0.9.1
-numpy==1.24.3
+numpy
 shapely>=2.0.0
+numpy==1.26.4
