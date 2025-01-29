@@ -41,7 +41,6 @@ def create_app():
     
     db.init_app(app)
     
-<<<<<<< HEAD
     # Only create tables if they don't exist
     with app.app_context():
         try:
@@ -53,15 +52,6 @@ def create_app():
                 print("Tables already exist")
         except SQLAlchemyError as e:
             print(f"Error checking/creating tables: {str(e)}")
-=======
-    # try:
-    #     with app.app_context():
-    #         db.drop_all()
-    #         db.create_all()
-    #         print("Tables recreated successfully")
-    # except SQLAlchemyError as e:
-    #     print(f"Error recreating tables: {str(e)}")
->>>>>>> cf308fa2c13c2325143f100c9489c1d7c9260dae
     
     app.register_blueprint(main_bp) 
     app.register_blueprint(obra_bp, url_prefix='/obras')  
