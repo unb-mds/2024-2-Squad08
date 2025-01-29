@@ -54,3 +54,5 @@ def create_app():
     app.register_blueprint(usuario_bp, url_prefix='/usuario')
     
     return app
+
+# curl -X POST http://localhost:5000/obras/sync/DF

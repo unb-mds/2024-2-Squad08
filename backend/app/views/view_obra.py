@@ -152,3 +152,6 @@ def get_obra_coordinates(obra_id: int):
             'success': False,
             'error': str(e)
         }), 500
+    
+
+# docker exec -it 43fd758db80c  psql -U postgres -d monitorabsb -c "SELECT COUNT(*) FROM obras;"

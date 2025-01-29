@@ -143,7 +143,7 @@ export default function MapInterface() {
                   <h3 className="font-bold">{obra.nome}</h3>
                   <p>Tipo: {obra.tipo}</p>
                   <p>Situação: {obra.situacao}</p>
-                  <p>Executor: {obra.executor}</p>
+                  <p>Executor: {obra.executores}</p>
                   <p>Valor: R$ {obra.valorInvestimentoPrevisto.toLocaleString('pt-BR')}</p>
                 </div>
               </Popup>

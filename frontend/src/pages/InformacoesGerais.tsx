@@ -14,7 +14,7 @@ interface ObraDetails {
   longitude: number;
   tipo: string;
   situacao: string;
-  executor: string;
+  executores: string; 
   valorInvestimentoPrevisto: number;
   original_wkt: string;
 }
@@ -33,13 +33,7 @@ export default function InformacoesGerais() {
           `http://localhost:5000/obras/${obraId}/coordinates`
         );
         if (response.data.success) {
-          const obraData = response.data.data;
-          setObra({
-            ...obraData,
-            executor: obraData.executores
-              ? obraData.executores.map((e: any) => e.nome).join(', ')
-              : 'Não informado', 
-          });
+          setObra(response.data.data);
           setError(null);
         } else {
           setError("Erro ao carregar detalhes da obra.");
@@ -51,10 +45,9 @@ export default function InformacoesGerais() {
         setLoading(false);
       }
     };
-  
+
     fetchObraDetails();
   }, [obraId]);
-  
 
   if (loading) {
     return <div>Carregando...</div>;
@@ -91,7 +84,7 @@ export default function InformacoesGerais() {
         <p>Nome: {obra.nome}</p>
         <p>Tipo: {obra.tipo}</p>
         <p>Situação: {obra.situacao}</p>
-        <p>Executor: {obra.executor}</p>
+        <p>Executor: {obra.executores}</p>  
         <p>Valor Investido: R$ {obra.valorInvestimentoPrevisto.toLocaleString('pt-BR')}</p>
         <div className="info-btn">
           <button onClick={() => navigate("/mapa")}>SAIR</button>
@@ -100,4 +93,3 @@ export default function InformacoesGerais() {
     </div>
   );
 }
-
