@@ -12,22 +12,68 @@ obras_schema = ObraSchema(many=True)
 def get_obras():
     executor = request.args.get('executor')
     tipo = request.args.get('tipo')
-    regiao = request.args.get('regiao')
+    regiao = request.args.get('regiao') 
     valor = request.args.get('valor')
 
     query = Obra.query
 
     if executor:
         query = query.filter(Obra.executor == executor)
-    if tipo:
-        query = query.filter(Obra.type == tipo)
+
+##Filtro por tipo de obra 
+
+from flask import Blueprint, jsonify, request
+from app.models.obra import Obra
+from app.models import db
+from app.serializers.obra_serializer import ObraSchema
+
+obra_bp = Blueprint('obra', __name__)
+
+obra_schema = ObraSchema()
+obras_schema = ObraSchema(many=True)
+
+@obra_bp.route("/obras", methods=['GET'])
+def get_obras():
+    executor = request.args.get('executor')  # Filtro por executor
+    tipo = request.args.get('tipo')  # Filtro por tipo de obra
+    regiao = request.args.get('regiao')  # Filtro por região
+    valor = request.args.get('valor')  # Filtro por valor
+
+    query = Obra.query
+
+    # Aplicação dos filtros opcionais
+    if executor:
+        query = query.filter(Obra.executor == executor)  # Filtra pelo executor
+
     if regiao:
-        query = query.filter(Obra.region == regiao)
+        query = query.filter(Obra.region == regiao)  # Filtra pela região
+
     if valor:
-        query = query.filter(Obra.value == valor)
+        query = query.filter(Obra.value == valor)  # Filtra pelo valor
+
+    # Aplicação do filtro por tipo de obra
+    if tipo:
+        if tipo.lower() == "educacao":
+            
+        elif tipo.lower() == "desenvolvimento":
+            
+        elif tipo.lower() == "administrativo":
+            
+        elif tipo.lower() == "infraestrutura urbana":
+            
+        elif tipo.lower() == "energia":
+            
+        elif tipo.lower() == "segurança pública":
+            
+        elif tipo.lower() == "esporte":
+    
+        elif tipo.lower() == "rodovia":
+        
+        else:
+            return jsonify({"error": "Tipo de obra não encontrado"}), 404
 
     obras = query.all()
-
+    
     return jsonify(obras_schema.dump(obras))
 
 @obra_bp.route("/obra/<int:id>", methods=['GET'])
