@@ -52,7 +52,7 @@ def get_obras():
         query = query.filter(Obra.value == valor)  # Filtra pelo valor
 
     # Aplicação do filtro por tipo de obra
-    if tipo:
+   if tipo:
         if tipo.lower() == "educacao":
             
         elif tipo.lower() == "desenvolvimento":
