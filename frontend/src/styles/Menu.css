@@ -102,7 +102,7 @@
     background-color: #9DBFC9;
 }
 
-@media (min-width: 320px) and (max-width: 480px) {
+@media (min-width: 360px) and (max-width: 480px) {
     .map-container {
         width: 90%;
         height: 70vh;
