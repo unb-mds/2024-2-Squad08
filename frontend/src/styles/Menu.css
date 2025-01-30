@@ -99,7 +99,32 @@
 .blue-btn-map {
     background-color: #9DBFC9;
 }
+@media (min-width: 600px) {
+    .map-container {
+        width: 70%;
+        height: 70vh;
+        padding: 15px;
+    }
 
+    .map-container h1 {
+        font-size: 20px;
+    }
+
+    .btn-container-left,
+    .btn-container-right {
+        width: 35em;
+    }
+
+    .map-container button {
+        padding: 9px 11px;
+        font-size: 14px;
+        width: 30vw;
+    }
+
+    .map-container .icon {
+        font-size: 19px;
+    }
+}
 @media (min-width: 768px) {
     .map-container {
         width: 60%;
@@ -124,5 +149,27 @@
 
     .map-container .icon {
         font-size: 20px;
+    }
+}
+@media (min-width: 1024px) {
+    .map-container {
+        width: 50%;
+        height: 50vh;
+        padding: 25px;
+    }
+    .map-container h1 {
+        font-size: 28px;
+    }
+    .btn-container-left,
+    .btn-container-right {
+        width: 45em;
+    }
+    .map-container button {
+        padding: 12px 14px;
+        font-size: 18px;
+        width: 15vw;
+    }
+    .map-container .icon {
+        font-size: 22px;
     }
 }
