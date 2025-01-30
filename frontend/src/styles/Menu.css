@@ -102,9 +102,25 @@
     background-color: #9DBFC9;
 }
 
-@media (min-width: 600px) and (max-width: 1023px) {
+@media (min-width: 320px) and (max-width: 480px) {
     .map-container {
         width: 90%;
+        height: 70vh;
+        padding: 10px;
+    }
+
+    .map-container h1 {
+        font-size: 16px;
+    }
+
+    .map-container button {
+        width: 90%;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .map-container {
+        width: 85%;
         height: 70vh;
         padding: 15px;
     }
@@ -129,20 +145,20 @@
     }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 769px) and (max-width: 1024px) {
     .map-container {
-        width: 60%;
+        width: 70%;
         height: 60vh;
         padding: 20px;
     }
 
     .map-container h1 {
-        font-size: 24px;
+        font-size: 22px;
     }
 
     .btn-container-left,
     .btn-container-right {
-        max-width: 35em;
+        max-width: 30em;
     }
 
     .map-container button {
@@ -156,20 +172,20 @@
     }
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1025px) and (max-width: 1200px) {
     .map-container {
-        width: 50%;
-        height: 50vh;
+        width: 60%;
+        height: 60vh;
         padding: 25px;
     }
 
     .map-container h1 {
-        font-size: 28px;
+        font-size: 24px;
     }
 
     .btn-container-left,
     .btn-container-right {
-        max-width: 30em;
+        max-width: 35em;
     }
 
     .map-container button {
@@ -180,5 +196,32 @@
 
     .map-container .icon {
         font-size: 22px;
+    }
+}
+
+@media (min-width: 1201px) {
+    .map-container {
+        width: 50%;
+        height: 50vh;
+        padding: 30px;
+    }
+
+    .map-container h1 {
+        font-size: 28px;
+    }
+
+    .btn-container-left,
+    .btn-container-right {
+        max-width: 40em;
+    }
+
+    .map-container button {
+        padding: 14px 16px;
+        font-size: 20px;
+        max-width: 15vw;
+    }
+
+    .map-container .icon {
+        font-size: 24px;
     }
 }
