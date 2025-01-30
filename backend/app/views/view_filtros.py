@@ -52,23 +52,23 @@ def get_obras():
         query = query.filter(Obra.value == valor)  # Filtra pelo valor
 
     # Aplicação do filtro por tipo de obra
-   if tipo:
+    if tipo:
         if tipo.lower() == "educacao":
-            
+            query = query.filter(Obra.type == "Educação")
         elif tipo.lower() == "desenvolvimento":
-            
+            query = query.filter(Obra.type == "Desenvolvimento")
         elif tipo.lower() == "administrativo":
-            
+            query = query.filter(Obra.type == "Administrativo")
         elif tipo.lower() == "infraestrutura urbana":
-            
+            query = query.filter(Obra.type == "Infraestrutura Urbana e Mobilidade")
         elif tipo.lower() == "energia":
-            
+            query = query.filter(Obra.type == "Energia")
         elif tipo.lower() == "segurança pública":
-            
+            query = query.filter(Obra.type == "Segurança Pública")
         elif tipo.lower() == "esporte":
-    
+            query = query.filter(Obra.type == "Esporte")
         elif tipo.lower() == "rodovia":
-        
+            query = query.filter(Obra.type == "Rodovia")
         else:
             return jsonify({"error": "Tipo de obra não encontrado"}), 404
 
