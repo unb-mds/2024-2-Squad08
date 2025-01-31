@@ -110,3 +110,9 @@
   background-color: #1b2e3a;
 }
 
+
+@media (min-width: 900px) {
+  .filter-container {
+    width: 30%;
+  }
+}

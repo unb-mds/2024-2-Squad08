@@ -35,7 +35,7 @@
   padding: 7px 10px;
   font-size: 16px;
   border-radius: 20px;
-  margin: 0.5em;
+  margin: 0.3em;
   } 
 
 .btn-login {
@@ -71,4 +71,19 @@
   margin-top: 10px;
   font-size: 0.9rem;
   text-align: center;
+}
+
+
+@media (min-width: 900px) {
+  .login {
+    width: 30%;
+  }
+
+  .btn-login {
+    width: 10vw;
+  }
+
+  .link-login {
+    margin-top: 3.5em;
+  }
 }
