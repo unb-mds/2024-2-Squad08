@@ -38,6 +38,7 @@ export default function Menu() {
               LOGIN
             </button>
           </div>
+          
           <button
             className="blue-btn-map"
             onClick={() => navigate("/mapa")}
