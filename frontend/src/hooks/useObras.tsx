@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-
-
 export interface ObraCoordinates {
   id: number;
   nome: string;
@@ -10,7 +8,7 @@ export interface ObraCoordinates {
   longitude: number;
   tipo: string;
   situacao: string;
-  executor: string;
+  executores: string;  
   valorInvestimentoPrevisto: number;
   original_wkt: string;
 }
@@ -34,14 +32,7 @@ export const useObrasCoordinates = (): UseObrasCoordinatesReturn => {
       setLoading(true);
       const response = await axios.get(`${API_URL}/coordinates`);
       if (response.data.success) {
-  
-        const obrasData = response.data.data.map((obra: any) => ({
-          ...obra,
-          executor: obra.executores
-            ? obra.executores.map((e: any) => e.nome).join(', ')
-            : 'Não informado', 
-        }));
-        setObras(obrasData);
+        setObras(response.data.data);
         setError(null);
       } else {
         setError('Erro ao carregar coordenadas das obras');
@@ -53,7 +44,6 @@ export const useObrasCoordinates = (): UseObrasCoordinatesReturn => {
       setLoading(false);
     }
   };
-  
 
   useEffect(() => {
     fetchObras();
@@ -61,4 +51,3 @@ export const useObrasCoordinates = (): UseObrasCoordinatesReturn => {
 
   return { obras, loading, error, refetch: fetchObras };
 };
-

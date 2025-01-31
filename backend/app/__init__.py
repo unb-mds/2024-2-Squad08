@@ -11,10 +11,7 @@ import os
 from sqlalchemy.exc import SQLAlchemyError
 import logging
 from datetime import timedelta
-from flask_apscheduler import APScheduler
-from .cron import trigger, update_obras
 
-scheduler = APScheduler()
 
 def create_app():
     load_dotenv() 
@@ -42,23 +39,20 @@ def create_app():
     db.init_app(app)
     
     # Only create tables if they don't exist
+
     with app.app_context():
         try:
-            # Check if tables need to be created
-            if not db.engine.dialect.has_table(db.engine, 'obras'):
+            inspector = inspect(db.engine)
+            if not inspector.has_table('obras'):
                 db.create_all()
                 print("Tables created successfully")
             else:
                 print("Tables already exist")
         except SQLAlchemyError as e:
             print(f"Error checking/creating tables: {str(e)}")
-    
+
     app.register_blueprint(main_bp) 
     app.register_blueprint(obra_bp, url_prefix='/obras')  
     app.register_blueprint(usuario_bp, url_prefix='/usuario')
     
-    scheduler.init_app(app)
-    scheduler.add_job(id="Update Obras", func=update_obras, args=(app.app_context,"df"), trigger=trigger)
-    scheduler.start()
 
-    return app

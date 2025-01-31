@@ -93,7 +93,6 @@ class ObraAPIConsumer:
             return 0
 
     def save_to_database(self, obras_data: List[Dict[str, Any]]) -> Dict[str, Any]:
-
         success_count = 0
         error_count = 0
         errors = []
@@ -102,28 +101,31 @@ class ObraAPIConsumer:
             try:
                 # Extração de "descricao" dentro de "tipos"
                 tipos = obra_data.get('tipos', [])
-                descricao_tipo = tipos[1]['descricao'] if tipos else "Não informado" 
+                descricao_tipo = "Não informado"  # Valor padrão
+                if tipos and len(tipos) > 0:  # Verifica se a lista não está vazia
+                    descricao_tipo = tipos[0]['descricao']  # Acessa o primeiro elemento
 
                 # Extração de "nome" dentro de "executores"
                 executores = obra_data.get('executores', [])
-                nome_executor = executores[0]['nome'] if executores else "Não informado"
-
+                nome_executor = "Não informado"  # Valor padrão
+                if executores and len(executores) > 0:  # Verifica se a lista não está vazia
+                    nome_executor = executores[0]['nome']  # Acessa o primeiro elemento
 
                 data_inicial = obra_data.get('dataInicialPrevista')
+
                 data_final = obra_data.get('dataFinalPrevista')
-                
+
                 fontes_recurso = obra_data.get('fontesDeRecurso', [])
                 if isinstance(fontes_recurso, str):
                     import json
                     fontes_recurso = json.loads(fontes_recurso)
-                
+
                 valor_investimento = self._extract_valor_investimento(fontes_recurso)
-                
                 origem_recurso = self._determine_origem_recurso(fontes_recurso)
-                
+
                 geometrias = obra_data.get('geometrias', [])
                 geometria = geometrias[0]['geometria'] if geometrias else None
-                
+
                 obra_dict = {
                     'nome': obra_data.get('nome'),
                     'uf': obra_data.get('uf'),
@@ -143,22 +145,22 @@ class ObraAPIConsumer:
                 }
 
                 existing_obra = Obra.query.filter_by(nome=obra_dict['nome']).first()
-                
+
                 if existing_obra:
                     for key, value in obra_dict.items():
                         setattr(existing_obra, key, value)
                 else:
                     obra = Obra(**obra_dict)
                     db.session.add(obra)
-                
+
                 db.session.commit()
                 success_count += 1
-                
+
             except SQLAlchemyError as e:
                 db.session.rollback()
                 error_count += 1
                 errors.append(f"Database error for obra {obra_data.get('nome', 'unknown')}: {str(e)}")
-            
+
             except Exception as e:
                 db.session.rollback()
                 error_count += 1
