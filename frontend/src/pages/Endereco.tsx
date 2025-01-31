@@ -154,17 +154,6 @@ export default function Endereco() {
         {/* Mensagem de erro com className */}
         {error && <p className="error-message">{error}</p>}
 
-        <div className="link-login">
-          <a 
-            href="#">
-            Esqueci a senha
-          </a>
-          <a 
-            href="#">
-            Não tenho conta
-          </a>
-        </div>
-
       </div>
     </div>
   );
