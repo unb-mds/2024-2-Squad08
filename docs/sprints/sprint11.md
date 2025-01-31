@@ -11,6 +11,10 @@ O objetivo da Sprint 11 foi
 
 | Tarefa | Responsável | Status |
 |--------|-------------|-----------------------|
-
+| Responsividade da tela de menu | Beatriz Lins | Concluído | 
+| Responsividade da tela de login | Beatriz Lins | Concluído | 
+| Responsividade da tela de cadastro | Beatriz Lins | Concluído | 
+| Responsividade da tela de endereço | Beatriz Lins | Concluído | 
+| Responsividade da tela de redefinição de senha | Beatriz Lins | Concluído | 
 
 
