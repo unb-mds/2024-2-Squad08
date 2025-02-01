@@ -19,8 +19,27 @@ def get_obras():
 
     if executor:
         query = query.filter(Obra.executor == executor)
+    # Aplicação do filtro por tipo de obra
     if tipo:
-        query = query.filter(Obra.type == tipo)
+        if tipo.lower() == "educacao":
+            
+        elif tipo.lower() == "desenvolvimento":
+            
+        elif tipo.lower() == "administrativo":
+
+        elif tipo.lower() == "infraestrutura urbana":
+            
+        elif tipo.lower() == "energia":
+            
+        elif tipo.lower() == "segurança pública":
+           
+        elif tipo.lower() == "esporte":
+           
+        elif tipo.lower() == "rodovia":
+            
+        else:
+            return jsonify({"error": "Tipo de obra não encontrado"}), 404
+
     if regiao:
         query = query.filter(Obra.region == regiao)
     if valor:
