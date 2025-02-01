@@ -16,5 +16,5 @@ O objetivo da Sprint 11 foi
 | Responsividade da tela de cadastro | Beatriz Lins | Concluído | 
 | Responsividade da tela de endereço | Beatriz Lins | Concluído | 
 | Responsividade da tela de redefinição de senha | Beatriz Lins | Concluído | 
-
-
+| Criação de função de filtros por tipo | Erick Alves | Aguardando pull request | 
+| Criação da lógica da função de filtros por tipo | Erick Alves | Aguardando pull request | 
