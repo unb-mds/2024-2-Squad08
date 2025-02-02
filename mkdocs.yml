@@ -32,12 +32,16 @@ nav:
     - Reunião 21/11: atas/21-11-24.md
     - Reunião 06/12: atas/06-12-24.md
     - Reunião 16/01: atas/16-01-25.md
+    - Reunião 23/01: atas/23-01-25.md
   - Arquitetura do Projeto: arquitetura/arquitetura.md
   - Backlog e Requisitos: backlog/backlog.md
   - Protótipo no Figma: 
     - Versão 01: prototipo/versao1.md
     - Versão 02: prototipo/versao2.md
     - Versão 03: prototipo/versao3.md
+  - Release Notes:
+    - Release Note v1.0: release_notes/release1.md
+    - Release Note v2.0: release_notes/release2.md
   - Roadmap: roadmap/roadmap.md
   - Sprint Backlog: 
     - Sprint 01: sprints/sprint1.md
