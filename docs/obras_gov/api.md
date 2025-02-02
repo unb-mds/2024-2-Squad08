@@ -1,10 +1,10 @@
-<p align="justify"> No projeto **MonitoraBSB**, utilizaremos a **API Obras.gov** como uma ferramenta central para acessar dados abertos sobre os investimentos federais em infraestrutura. Essa API é essencial para o acompanhamento e monitoramento de projetos de infraestrutura, permitindo uma análise detalhada e transparente dos investimentos realizados.</p>
+<p align="justify"> No projeto MonitoraBSB, utilizaremos a API Obras.gov como uma ferramenta central para acessar dados abertos sobre os investimentos federais em infraestrutura. Essa API é essencial para o acompanhamento e monitoramento de projetos de infraestrutura, permitindo uma análise detalhada e transparente dos investimentos realizados.</p>
 
 ---
 
 ## **Sobre o ObrasGov.br**
 
-<p align="justify"> O **ObrasGov.br** é uma plataforma criada para melhorar a governança dos investimentos em infraestrutura do Governo Federal. Ela permite o acompanhamento da execução de projetos de infraestrutura, reunindo informações sobre geolocalização, execução física e financeira, além de viabilizar a integração com outros sistemas de fiscalização e controle.</p>
+<p align="justify"> O ObrasGov.br é uma plataforma criada para melhorar a governança dos investimentos em infraestrutura do Governo Federal. Ela permite o acompanhamento da execução de projetos de infraestrutura, reunindo informações sobre geolocalização, execução física e financeira, além de viabilizar a integração com outros sistemas de fiscalização e controle.</p>
 
 <p align="justify"> Outros entes federativos, como estados, municípios e o Distrito Federal, também podem optar por cadastrar seus investimentos na plataforma, fortalecendo a transparência e otimizando o acesso dos cidadãos às informações sobre o uso de recursos públicos.</p>
 
@@ -34,7 +34,7 @@ A API oferece acesso a informações essenciais, como:
 
 ## **Como Utilizar a API Obras.gov**
 
-<p align="justify"> A API é de acesso público e retorna informações no formato JSON. As consultas podem ser realizadas por meio de requisições **GET**, utilizando URLs específicas com parâmetros para filtragem e paginação.</p>
+<p align="justify"> A API é de acesso público e retorna informações no formato JSON. As consultas podem ser realizadas por meio de requisições GET, utilizando URLs específicas com parâmetros para filtragem e paginação.</p>
 
 **Exemplo de Endereço Base da API:**
 ```
