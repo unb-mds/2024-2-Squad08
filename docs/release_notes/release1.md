@@ -49,10 +49,18 @@
 - Após análise de viabilidade, foi decidido utilizar a API Obras.gov ao invés do Querido Diário.
 - Motivos da escolha: melhor adequação aos dados necessários, maior confiabilidade e suporte técnico adequado.
 
-###🖇️ **Definição dos papéis no Scrum**
+### 🖇️ **Definição dos papéis no Scrum**
 - **Scrum Master:** Daniel Nunes
 - **Product Owner:** Daniel Ferreira
 - **Dev Team:** Todos os outros membros
+
+---
+
+## **Melhorias**
+
+### 📋 **Trabalho em equipe**
+- O time não trabalhou de forma coletiva.
+- A maioria dos membros não contribuiu com as tarefas das sprints e não se comprometeu com os commits significativos semanais, assim sobrecarregando os desenvolvedores Beatriz Lins e Daniel Ferreira.
 
 ---
 

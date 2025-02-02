@@ -36,12 +36,21 @@
 - Criação de endpoints para salvar, editar e excluir dados das obras.
 - Implementação de testes automatizados para garantir a confiabilidade do sistema.
 
+### 📊 **Mudanças dos papéis no Scrum**
+- **Scrum Master:** Beatriz Lins
+- **Product Owner:** Daniel Ferreiro
+- **Dev Team:** Beatriz Lins e Daniel Ferreiro
+
 ---
 
 ## **Melhorias**
 
 ### 🔐 **Segurança**
 - Armazenamento seguro dos dados dos usuários com criptografia.
+
+### 📋 **Trabalho em equipe**
+- O time não trabalhou de forma coletiva.
+- A maioria dos membros não contribuiu com as tarefas das sprints e não se comprometeu com os commits significativos semanais, assim sobrecarregando a Scrum Master Beatriz Lins e o PO Daniel Ferreira.
 
 ---
 
