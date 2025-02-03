@@ -11,6 +11,7 @@ import os
 from sqlalchemy.exc import SQLAlchemyError
 import logging
 from datetime import timedelta
+from sqlalchemy import inspect
 
 
 def create_app():
