@@ -1,33 +1,39 @@
-name: Testes Unitários Front 
+name: Testes Unitários Front
 
 on:
   push:
     branches:
-      - main 
+      - main
   pull_request:
     branches:
-      - main 
+      - main
 
 jobs:
   test:
-    runs-on: ubuntu-latest  
+    runs-on: ubuntu-latest
 
     steps:
     - name: Verificar o repositório
       uses: actions/checkout@v3
- 
+
     - name: Limpar cache npm
-      run: npm cache clean --force  # Opcional, para evitar problemas com dependências antigas
- 
+      run: npm cache clean --force
+
     - name: Configurar Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '18.19.1'  
- 
+        node-version: '18.19.1'
+
     - name: Instalar dependências
       run: npm install
- 
-    - name: Verificar os scripts disponíveis
+
+    - name: Verificar diretório de trabalho
+      run: pwd
+
+    - name: Listar arquivos no diretório
+      run: ls -al
+
+    - name: Verificar scripts disponíveis
       run: npm run
 
     - name: Rodar testes
