@@ -11,21 +11,24 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest  
-    
+
     steps:
     - name: Verificar o repositório
-      uses: actions/checkout@v3  # Atualizando para a versão mais recente
-    
+      uses: actions/checkout@v3
+ 
     - name: Limpar cache npm
       run: npm cache clean --force  # Opcional, para evitar problemas com dependências antigas
-    
+ 
     - name: Configurar Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '18.19.1'  
-    
+ 
     - name: Instalar dependências
       run: npm install
-    
+ 
+    - name: Verificar os scripts disponíveis
+      run: npm run
+
     - name: Rodar testes
       run: npm test
