@@ -15,15 +15,15 @@ if [ ! -f /docker-entrypoint-initdb.d/backup_monitorabsb_20250118.sql ]; then
 fi
 
 echo "Dropping existing tables..."
-psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" --set=client_encoding=UTF8 <<-EOSQL
     DROP TABLE IF EXISTS obras CASCADE;
     DROP TABLE IF EXISTS usuario CASCADE;
 EOSQL
 
 echo "Restoring from backup..."
-psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" -f /docker-entrypoint-initdb.d/backup_monitorabsb_20250118.sql
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" --set=client_encoding=UTF8 -f /docker-entrypoint-initdb.d/backup_monitorabsb_20250118.sql
 
 echo "Verifying restoration..."
-psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" -c "SELECT COUNT(*) FROM obras;"
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" --set=client_encoding=UTF8 -c "SELECT COUNT(*) FROM obras;"
 
 echo "Restore complete!"

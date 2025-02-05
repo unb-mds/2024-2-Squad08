@@ -1,4 +1,3 @@
-# __init__.py 
 from flask import Flask
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS  
@@ -11,7 +10,7 @@ import os
 from sqlalchemy.exc import SQLAlchemyError
 import logging
 from datetime import timedelta
-
+from sqlalchemy import inspect
 
 def create_app():
     load_dotenv() 
@@ -29,7 +28,7 @@ def create_app():
     app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'your-secret-key') 
     app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(days=7) 
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL',
-        'postgresql://postgres:admin@localhost:5432/monitorabsb')
+        'postgresql://postgres:admin@localhost:5432/monitorabsb?client_encoding=utf8')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     
     jwt = JWTManager(app)
@@ -39,7 +38,6 @@ def create_app():
     db.init_app(app)
     
     # Only create tables if they don't exist
-
     with app.app_context():
         try:
             inspector = inspect(db.engine)
@@ -55,4 +53,4 @@ def create_app():
     app.register_blueprint(obra_bp, url_prefix='/obras')  
     app.register_blueprint(usuario_bp, url_prefix='/usuario')
     
-
+    return app 
