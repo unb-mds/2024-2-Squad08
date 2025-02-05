@@ -11,7 +11,7 @@ class Obra(db.Model):
     uf: Mapped[str] = mapped_column(db.String)
     situacao: Mapped[str] = mapped_column(db.String)
     tipo: Mapped[str] = mapped_column(db.String)
-    executores: Mapped[dict] = mapped_column(JSONB)  
+    executores: Mapped[str] = mapped_column(db.String)  
     natureza: Mapped[str] = mapped_column(db.String)
     endereco: Mapped[str] = mapped_column(db.String)
     funcaoSocial: Mapped[str] = mapped_column(db.Text)
