@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS  
+from sqlalchemy import inspect
 from .models import db
 from .views.main import main_bp
 from .views.view_usuario import usuario_bp
