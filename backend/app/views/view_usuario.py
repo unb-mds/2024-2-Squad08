@@ -3,19 +3,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import create_access_token
 from app.models.usuario import Usuario
 from app.models import db
-from flask_cors import CORS
 from datetime import timedelta
 from re import match
 
 usuario_bp = Blueprint('usuario', __name__)
-
-CORS(usuario_bp, resources={
-    r"/*": {
-        "origins": ["http://localhost:5173"],
-        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-        "allow_headers": ["Content-Type", "Authorization"]
-    }
-})
 
 @usuario_bp.route("/cadastro", methods=['POST', 'OPTIONS'])
 def create_user():

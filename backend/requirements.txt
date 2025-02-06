@@ -14,3 +14,6 @@ flask-mail==0.9.1
 numpy
 shapely>=2.0.0
 numpy==1.26.4
+Flask-Migrate==4.0.5
+Flask-Script==2.0.6
+alembic==1.13.1
