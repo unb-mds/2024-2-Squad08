@@ -2,12 +2,18 @@ import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import "../styles/Filtros.css"; 
 import Logo from "../components/Logo";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import { useObrasCoordinates } from '../hooks/useObras';
+
+const API_URL = 'http://localhost:5000/obras'; 
 
 export default function FiltroValor() {
+  const navigate = useNavigate();
   const position = [-15.7801, -47.9292];
   const [statusFiltroValores, setStatusFiltroValores] = useState<string[]>([]); 
-  
+  const { obras, loading, error, fetchFilteredObrasValue } = useObrasCoordinates();
+
   const handleCheckboxChange = (value: string) => {
     setStatusFiltroValores((prev) =>
       prev.includes(value)
@@ -22,14 +28,14 @@ export default function FiltroValor() {
 
   const handleConcluir = async () => {
     try {
-      const response = await fetch(`/api/filtrar?valores=${statusFiltroValores.join(',')}`);
-      const obras = await response.json();
-      console.log('Obras filtradas:', obras);
+      const filteredData = await fetchFilteredObrasValue(undefined, undefined, statusFiltroValores);
+      navigate('/mapa', { state: { filteredObras: filteredData } });
     } catch (error) {
-      console.error('Erro ao buscar obras:', error);
+      console.error('Error fetching filtered obras:', error);
     }
   };
-
+  
+  
   return (
     <div className="relative h-screen w-full">
       <MapContainer 
@@ -52,7 +58,7 @@ export default function FiltroValor() {
                   <input 
                     type="checkbox" 
                     value="cem" 
-                    checked={statusFiltroValores.includes("cem")}
+                    checked={statusFiltroValores .includes("cem")}
                     onChange={() => handleCheckboxChange("cem")}
                   />
                   Abaixo de R$ 100.000,00
@@ -62,7 +68,7 @@ export default function FiltroValor() {
                   <input 
                     type="checkbox" 
                     value="duzentos" 
-                    checked={statusFiltroValores.includes("duzentos")}
+                    checked={statusFiltroValores .includes("duzentos")}
                     onChange={() => handleCheckboxChange("duzentos")}
                   />
                   Abaixo de R$ 200.000,00
@@ -72,7 +78,7 @@ export default function FiltroValor() {
                   <input 
                     type="checkbox" 
                     value="trezentos" 
-                    checked={statusFiltroValores.includes("trezentos")}
+                    checked={statusFiltroValores .includes("trezentos")}
                     onChange={() => handleCheckboxChange("trezentos")}
                   />
                   Abaixo de R$ 300.000,00
@@ -82,7 +88,7 @@ export default function FiltroValor() {
                   <input 
                     type="checkbox" 
                     value="quinhentos" 
-                    checked={statusFiltroValores.includes("quinhentos")}
+                    checked={statusFiltroValores .includes("quinhentos")}
                     onChange={() => handleCheckboxChange("quinhentos")}
                   />
                   Abaixo de R$ 500.000,00
@@ -92,7 +98,7 @@ export default function FiltroValor() {
                   <input 
                     type="checkbox" 
                     value="setecentos" 
-                    checked={statusFiltroValores.includes("setecentos")}
+                    checked={statusFiltroValores .includes("setecentos")}
                     onChange={() => handleCheckboxChange("setecentos")}
                   />
                 Abaixo de R$ 700.000,00
@@ -102,7 +108,7 @@ export default function FiltroValor() {
                   <input 
                     type="checkbox" 
                     value="novecentos" 
-                    checked={statusFiltroValores.includes("novecentos")}
+                    checked={statusFiltroValores .includes("novecentos")}
                     onChange={() => handleCheckboxChange("novecentos")}
                   />
                   Abaixo de R$ 900.000,00
@@ -112,7 +118,7 @@ export default function FiltroValor() {
                   <input 
                     type="checkbox" 
                     value="milhao" 
-                    checked={statusFiltroValores.includes("milhao")}
+                    checked={statusFiltroValores .includes("milhao")}
                     onChange={() => handleCheckboxChange("milhao")}
                   />
                   Acima de R$ 1.000.000,00
@@ -123,10 +129,23 @@ export default function FiltroValor() {
                 <button className="clean-btn" onClick={handleLimpar}>
                   LIMPAR
                 </button>
-                <button className="check-btn" onClick={handleConcluir}>
+                <button className="check-btn" onClick={handleConcluir}  >
                   CONCLUIR
                 </button>
             </div>
+        </div>
+
+        {error && <p className="error-message">{error}</p>}
+
+        <div className="obras-container">
+            <h2>Obras Filtradas</h2>
+            <ul>
+                {obras.map((obra) => (
+                    <li key={obra.id}>
+                        {obra.nome} - {obra.situacao}
+                    </li>
+                ))}
+            </ul>
         </div>
     </div>
   );
