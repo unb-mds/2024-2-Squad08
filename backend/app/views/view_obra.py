@@ -25,7 +25,6 @@ def parse_wkt_to_coordinates(geometry_string: str) -> Optional[Tuple[float, floa
             geometry_binary = unhexlify(geometry_string)
             geometry = wkb.loads(geometry_binary)
         except Exception:
-            # If WKB parsing fails, try WKT parsing as fallback
             geometry = wkt.loads(geometry_string)
         
         if geometry.geom_type == 'POINT':
@@ -91,10 +90,8 @@ def get_obras_coordinates():
         coordinates_list = []
         for obra in obras:
             if obra.geometria:
-                # print(f"Raw geometry for {obra.nome}: {obra.geometria}")  # Debug print
                 coords = parse_wkt_to_coordinates(obra.geometria)
                 if coords:
-                    # print(f"Parsed coordinates: {coords}")  # Debug print
                     coordinates_list.append({
                         'id': obra.id,
                         'nome': obra.nome,
@@ -158,7 +155,6 @@ def get_obra_coordinates(obra_id: int):
         }), 500
     
 
-# docker exec -it 43fd758db80c  psql -U postgres -d monitorabsb -c "SELECT COUNT(*) FROM obras;"
 
 @obra_bp.route('/filterExec', methods=['GET'])
 @cross_origin()
