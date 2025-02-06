@@ -26,7 +26,8 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL',
         'postgresql://postgres:admin@localhost:5432/monitorabsb?client_encoding=utf8')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    
+    app.config['MIGRATIONS_DIR'] = 'migrations'
+
     jwt = JWTManager(app)
     
     app.config.from_object('app.config.Config')  
