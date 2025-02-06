@@ -99,17 +99,15 @@ class ObraAPIConsumer:
 
         for obra_data in obras_data:
             try:
-                # Extração de "descricao" dentro de "tipos"
                 tipos = obra_data.get('tipos', [])
-                descricao_tipo = "Não informado"  # Valor padrão
-                if tipos and len(tipos) > 0:  # Verifica se a lista não está vazia
-                    descricao_tipo = tipos[0]['descricao']  # Acessa o primeiro elemento
+                descricao_tipo = "Não informado"  
+                if tipos and len(tipos) > 0: 
+                    descricao_tipo = tipos[0]['descricao']  
 
-                # Extração de "nome" dentro de "executores"
                 executores = obra_data.get('executores', [])
-                nome_executor = "Não informado"  # Valor padrão
-                if executores and len(executores) > 0:  # Verifica se a lista não está vazia
-                    nome_executor = executores[0]['nome']  # Acessa o primeiro elemento
+                nome_executor = "Não informado" 
+                if executores and len(executores) > 0:
+                    nome_executor = executores[0]['nome']  
 
                 data_inicial = obra_data.get('dataInicialPrevista')
 

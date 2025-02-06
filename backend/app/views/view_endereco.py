@@ -1,17 +1,8 @@
 from flask import Blueprint, jsonify, request
 from app.models.endereco import Endereco
 from app.models import db
-from flask_cors import CORS
 
 endereco_bp = Blueprint('endereco', __name__)
-
-CORS(endereco_bp, resources={
-    r"/*": {
-        "origins": ["http://localhost:5173"],
-        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-        "allow_headers": ["Content-Type", "Authorization"]
-    }
-})
 
 @endereco_bp.route("/endereco", methods=['POST', 'OPTIONS'])
 def cadastrar_endereco():
