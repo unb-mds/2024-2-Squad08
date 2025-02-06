@@ -1,24 +1,24 @@
-import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import "../styles/Filtros.css"; 
+import { ChangeEvent, useState } from "react";
+import { MapContainer, TileLayer } from 'react-leaflet';
 import Logo from "../components/Logo";
-import { useState } from "react";
+import "../styles/Filtros.css";
 
 export default function FiltroData() {
-  const position = [-15.7801, -47.9292];
-  const [dataInicio, setDataInicio] = useState('');
-  const [dataFim, setDataFim] = useState('');
+  const position: [number, number] = [-15.7801, -47.9292];
+  const [dataInicio, setDataInicio] = useState<string>('');
+  const [dataFim, setDataFim] = useState<string>('');
 
   const limparFiltros = () => {
     setDataInicio('');
     setDataFim('');
   };
 
-  const handleDataInicioChange = (event) => {
+  const handleDataInicioChange = (event: ChangeEvent<HTMLInputElement>) => {
     setDataInicio(event.target.value);
   };
 
-  const handleDataFimChange = (event) => {
+  const handleDataFimChange = (event: ChangeEvent<HTMLInputElement>) => {
     setDataFim(event.target.value);
   };
 
@@ -57,6 +57,7 @@ export default function FiltroData() {
               onChange={handleDataFimChange}
             />
           </label>
+        </div>
         
         <div className="filter-btn">
           <button className="clean-btn" onClick={limparFiltros}>
