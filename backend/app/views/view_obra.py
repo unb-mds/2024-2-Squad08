@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, current_app
+from flask import Blueprint, jsonify, current_app, request
 from ..services.api_consumer import ObraAPIConsumer
 from ..services.obra_service import ObraService
 from app.models.obra import Obra
@@ -9,6 +9,10 @@ from typing import Optional, Tuple
 from flask_cors import cross_origin
 from shapely import wkt, wkb
 from binascii import unhexlify
+from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy import func
+from flask import jsonify, request
+
 
 obra_bp = Blueprint('obras', __name__)
 
@@ -87,10 +91,10 @@ def get_obras_coordinates():
         coordinates_list = []
         for obra in obras:
             if obra.geometria:
-                print(f"Raw geometry for {obra.nome}: {obra.geometria}")  # Debug print
+                # print(f"Raw geometry for {obra.nome}: {obra.geometria}")  # Debug print
                 coords = parse_wkt_to_coordinates(obra.geometria)
                 if coords:
-                    print(f"Parsed coordinates: {coords}")  # Debug print
+                    # print(f"Parsed coordinates: {coords}")  # Debug print
                     coordinates_list.append({
                         'id': obra.id,
                         'nome': obra.nome,
@@ -155,3 +159,84 @@ def get_obra_coordinates(obra_id: int):
     
 
 # docker exec -it 43fd758db80c  psql -U postgres -d monitorabsb -c "SELECT COUNT(*) FROM obras;"
+
+@obra_bp.route('/filterExec', methods=['GET'])
+@cross_origin()
+def filter_obras():
+    try:
+        tipo = request.args.get('tipo')
+        situacao = request.args.get('situacao')
+        valores = request.args.getlist('valores[]')
+        executores = request.args.get('executores')  
+
+        query = Obra.query
+
+        if tipo:
+            query = query.filter(Obra.tipo == tipo)
+        if situacao:
+            query = query.filter(Obra.situacao == situacao)
+        if executores:
+            executores = executores.strip().lower().replace('"', '')
+            query = query.filter(db.func.lower(Obra.executores).contains(executores))
+
+        if valores:
+            valor_filters = []
+            for value in valores:
+                if value == 'cem':
+                    valor_filters.append(Obra.valorInvestimentoPrevisto <= 100000)
+                elif value == 'duzentos':
+                    valor_filters.append(Obra.valorInvestimentoPrevisto <= 200000)
+                elif value == 'trezentos':
+                    valor_filters.append(Obra.valorInvestimentoPrevisto <= 300000)
+                elif value == 'quinhentos':
+                    valor_filters.append(Obra.valorInvestimentoPrevisto <= 500000)
+                elif value == 'setecentos':
+                    valor_filters.append(Obra.valorInvestimentoPrevisto <= 700000)
+                elif value == 'novecentos':
+                    valor_filters.append(Obra.valorInvestimentoPrevisto <= 900000)
+                elif value == 'milhao':
+                    valor_filters.append(Obra.valorInvestimentoPrevisto > 1000000)
+            
+            if valor_filters:
+                query = query.filter(db.or_(*valor_filters))
+
+        filtered_obras = query.all()
+
+        obras_list = []
+        for obra in filtered_obras:
+ 
+            coords = parse_wkt_to_coordinates(obra.geometria)
+            if not coords:
+                continue
+
+            obra_dict = {
+                'id': obra.id,
+                'nome': obra.nome,
+                'valorInvestimentoPrevisto': obra.valorInvestimentoPrevisto,
+                'situacao': obra.situacao,
+                'tipo': obra.tipo,
+                'executor': obra.executores, 
+                'latitude': coords[0],
+                'longitude': coords[1]
+            }
+            obras_list.append(obra_dict)
+
+        return jsonify({'success': True, 'data': obras_list})
+
+    except Exception as e:
+        print(f"Error in filter_obras: {str(e)}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
+@obra_bp.route('/executores', methods=['GET'])
+@cross_origin()
+def get_executores():
+    try:
+        # Vai buscar os executores que nao sejam iguais, se eu não me engano tem uns 60
+        executores = db.session.query(Obra.executores.distinct()).all()
+        # Remove aspas duplas e formata a lista, pois no banco os executores estão entre aspas duplas
+        executores = [e[0].replace('"', '') for e in executores]
+        return jsonify({'success': True, 'data': executores})
+    except Exception as e:
+        print(f"Error in get_executores: {str(e)}")
+        return jsonify({'success': False, 'error': str(e)}), 500
