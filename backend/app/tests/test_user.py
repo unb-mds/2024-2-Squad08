@@ -12,7 +12,7 @@ def test_create_user(client, session):
         "admin": False
     }
 
-    response = client.post("/usuario/cadastro", json=user_data)  # Note the leading slash
+    response = client.post("/usuario/cadastro", json=user_data)
 
     assert response.status_code == 201
     response_json = response.get_json()
@@ -24,7 +24,6 @@ def test_create_user(client, session):
     assert response_json["user"]["admin"] == user_data["admin"]
 
 def test_cadastrar_endereco(client, session):
-    # First, create a user
     user_data = {
         "username": "testuser",
         "email": "testuser@example.com",
@@ -32,15 +31,12 @@ def test_cadastrar_endereco(client, session):
         "admin": False
     }
     
-    # Create the user first
-    response_user = client.post("/usuario/cadastro", json=user_data)  # Note the leading slash
+    response_user = client.post("/usuario/cadastro", json=user_data)
     assert response_user.status_code == 201
     
-    # Get the created user's ID using db.session.query instead of Usuario.query
     usuario = db.session.query(Usuario).filter_by(email=user_data["email"]).first()
     assert usuario is not None
 
-    # Now create the address for this user
     endereco_data = {
         "user_id": usuario.id,
         "cep": "12345-678",
@@ -51,7 +47,7 @@ def test_cadastrar_endereco(client, session):
         "numero": "123"
     }
 
-    response = client.post("/endereco/cadastrar", json=endereco_data)  # Note the leading slash
+    response = client.post("/endereco/cadastrar", json=endereco_data)
     assert response.status_code == 201
     response_json = response.get_json()
 
@@ -59,7 +55,6 @@ def test_cadastrar_endereco(client, session):
     assert "endereco" in response_json
     assert response_json["endereco"]["cep"] == endereco_data["cep"]
 
-    # Verify the address was created in the database
     endereco = db.session.query(Endereco).filter_by(user_id=usuario.id).first()
     assert endereco is not None
     assert endereco.cep == endereco_data["cep"]
