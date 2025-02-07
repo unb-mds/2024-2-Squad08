@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, current_app
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import create_access_token
 from app.models.usuario import Usuario
@@ -26,9 +26,9 @@ def create_user():
         if not match(r"[^@]+@[^@]+\.[^@]+", email):
             return jsonify({'error': 'Formato de email inválido'}), 400
 
-        if Usuario.query.filter_by(username=username).first():
+        if db.session.query(Usuario).filter_by(username=username).first():
             return jsonify({'error': 'Esse usuário já existe'}), 400
-        if Usuario.query.filter_by(email=email).first():
+        if db.session.query(Usuario).filter_by(email=email).first():
             return jsonify({'error': 'Email já registrado'}), 400
 
         hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
@@ -53,6 +53,7 @@ def create_user():
 
     except Exception as e:
         db.session.rollback()
+        current_app.logger.error(f"Error creating user: {str(e)}")
         return jsonify({'error': 'Erro inesperado. Tente novamente.'}), 500
 
 

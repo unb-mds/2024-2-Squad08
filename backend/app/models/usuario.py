@@ -14,5 +14,13 @@ class Usuario(UserMixin, db.Model):
     token_created_at: Mapped[datetime | None] = mapped_column(db.DateTime, nullable=True)
     token_expired_at: Mapped[datetime | None] = mapped_column(db.DateTime, nullable=True)
 
+    @classmethod
+    def get_by_username(cls, username):
+        return db.session.query(cls).filter_by(username=username).first()
+
+    @classmethod
+    def get_by_email(cls, email):
+        return db.session.query(cls).filter_by(email=email).first()
+
     def __str__(self) -> str:
         return self.username
