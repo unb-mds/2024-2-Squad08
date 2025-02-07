@@ -17,13 +17,11 @@ def create_app(config_name="default"):
     
     app = Flask(__name__)
     
-    # Only enable CORS for non-testing environments
     if config_name != 'testing':
         CORS(app, resources={r"/*": {"origins": "*"}})
     
     app.config.from_object(config[config_name])
     
-    # Only set JWT config for non-testing environments
     if config_name != 'testing':
         app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', '123') 
         app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(days=7) 
@@ -31,13 +29,11 @@ def create_app(config_name="default"):
     
     db.init_app(app)
     
-    # Only run migrations for non-testing environments
     if config_name != 'testing':
         migrate = Migrate(app, db)
         with app.app_context():
             upgrade()
-    
-    # Register blueprints
+
     app.register_blueprint(main_bp) 
     app.register_blueprint(obra_bp, url_prefix='/obras')  
     app.register_blueprint(usuario_bp, url_prefix='/usuario')
