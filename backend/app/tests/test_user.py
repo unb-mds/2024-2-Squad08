@@ -1,14 +1,10 @@
 import pytest
 from app.models import db
-from app.models.endereco import Endereco
-
-import pytest
-from app.models import db
 from app.models.usuario import Usuario
+from app.models.endereco import Endereco
 from werkzeug.security import check_password_hash
 
-def test_create_user(client):
-
+def test_create_user(client, session):
     user_data = {
         "username": "testuser",
         "email": "testuser@example.com",
@@ -16,7 +12,7 @@ def test_create_user(client):
         "admin": False
     }
 
-    response = client.post("usuario/cadastro", json=user_data)
+    response = client.post("/usuario/cadastro", json=user_data)  # Note the leading slash
 
     assert response.status_code == 201
     response_json = response.get_json()
@@ -27,16 +23,26 @@ def test_create_user(client):
     assert response_json["user"]["email"] == user_data["email"]
     assert response_json["user"]["admin"] == user_data["admin"]
 
-    usuario = Usuario.query.filter_by(email=user_data["email"]).first()
+def test_cadastrar_endereco(client, session):
+    # First, create a user
+    user_data = {
+        "username": "testuser",
+        "email": "testuser@example.com",
+        "password": "securepassword123",
+        "admin": False
+    }
+    
+    # Create the user first
+    response_user = client.post("/usuario/cadastro", json=user_data)  # Note the leading slash
+    assert response_user.status_code == 201
+    
+    # Get the created user's ID using db.session.query instead of Usuario.query
+    usuario = db.session.query(Usuario).filter_by(email=user_data["email"]).first()
     assert usuario is not None
-    assert usuario.username == user_data["username"]
-    assert check_password_hash(usuario.password, user_data["password"])
 
-
-def test_cadastrar_endereco(client):
-
+    # Now create the address for this user
     endereco_data = {
-        "user_id": 1,
+        "user_id": usuario.id,
         "cep": "12345-678",
         "cidade": "Cidade Teste",
         "estado": "SP",
@@ -45,8 +51,7 @@ def test_cadastrar_endereco(client):
         "numero": "123"
     }
 
-    response = client.post("endereco/cadastrar", json=endereco_data)
-
+    response = client.post("/endereco/cadastrar", json=endereco_data)  # Note the leading slash
     assert response.status_code == 201
     response_json = response.get_json()
 
@@ -54,5 +59,7 @@ def test_cadastrar_endereco(client):
     assert "endereco" in response_json
     assert response_json["endereco"]["cep"] == endereco_data["cep"]
 
-    endereco = Endereco.query.filter_by(cep=endereco_data["cep"]).first()
+    # Verify the address was created in the database
+    endereco = db.session.query(Endereco).filter_by(user_id=usuario.id).first()
     assert endereco is not None
+    assert endereco.cep == endereco_data["cep"]

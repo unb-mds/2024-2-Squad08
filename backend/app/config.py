@@ -12,8 +12,9 @@ class DevelopmentConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'postgresql://postgres:admin@postgres_db:5432/admin')
 
 class TestingConfig(Config):
-    SQLALCHEMY_DATABASE_URI = os.getenv('TEST_DATABASE_URL', 'postgresql://postgres:password@postgres:5432/monitorabsb_test')
     TESTING = True
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:password@postgres_db:5432/monitorabsb'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 config = {
     "development": DevelopmentConfig,

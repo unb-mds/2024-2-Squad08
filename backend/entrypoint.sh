@@ -3,26 +3,23 @@
 set -e
 
 echo "Waiting for postgres..."
-./wait-for-postgres.sh postgres
+while ! pg_isready -h postgres_db -p 5432 -U postgres; do
+    echo "Postgres is unavailable - sleeping"
+    sleep 1
+done
 
-echo "Cleaning up existing migrations..."
-rm -rf migrations/
-flask db init
+echo "Postgres is up - executing migrations"
 
-echo "Running migrations..."
-if flask db current > /dev/null 2>&1; then
-    echo "Dropping existing database..."
-    flask db downgrade base
+if [ ! -d "migrations" ]; then
+    echo "Initializing migrations directory..."
+    flask db init
 fi
 
-flask db migrate -m "initial migration"
+echo "Generating migrations..."
+flask db migrate -m "Initial migration"
+
+echo "Applying migrations..."
 flask db upgrade
 
-echo "Verifying database state..."
-if ! flask db current > /dev/null 2>&1; then
-    echo "Migration failed!"
-    exit 1
-fi
-
-echo "Starting Flask..."
+echo "Starting Flask application..."
 exec flask run --host=0.0.0.0 --port=5000

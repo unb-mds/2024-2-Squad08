@@ -5,7 +5,7 @@ class Endereco(db.Model):
     __tablename__ = "endereco"
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True, nullable=False)
     user_id: Mapped[int] = mapped_column(db.Integer, db.ForeignKey('usuario.id'), nullable=False)  # Changed from 'cadastro' to 'usuario'
-    cep: Mapped[str] = mapped_column(db.String(8), nullable=False)
+    cep: Mapped[str] = mapped_column(db.String(10), nullable=False)
     cidade: Mapped[str] = mapped_column(db.String(100), nullable=False)
     estado: Mapped[str] = mapped_column(db.String(100), nullable=False)
     rua: Mapped[str] = mapped_column(db.String(255), nullable=False)
