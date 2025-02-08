@@ -8,7 +8,7 @@ from ..models.obra import Obra
 class ObraAPIConsumer:
     BASE_URL = 'https://api.obrasgov.gestao.gov.br/obrasgov/api/projeto-investimento'
     
-    def fetch_obras(self, uf: str, page: int = 0, page_size: int = 1500) -> Optional[List[Dict[str, Any]]]:
+    def fetch_obras(self, uf: str, page: int = 0, page_size: int = 200) -> Optional[List[Dict[str, Any]]]:
 
         params = {
             'uf': uf.upper(),

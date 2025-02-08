@@ -87,7 +87,7 @@ export default function InformacoesGerais() {
         <p>Executor: {obra.executores}</p>  
         <p>Valor Investido: R$ {obra.valorInvestimentoPrevisto.toLocaleString('pt-BR')}</p>
         <div className="info-btn">
-          <button onClick={() => navigate("/mapa")}>SAIR</button>
+          <button onClick={() => navigate(-1)}>SAIR</button>
         </div>
       </div>
     </div>

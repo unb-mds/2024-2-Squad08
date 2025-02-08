@@ -8,7 +8,7 @@ export interface ObraCoordinates {
   longitude: number;
   tipo: string;
   situacao: string;
-  executores: string;  
+  executores: string; 
   valorInvestimentoPrevisto: number;
   original_wkt: string;
 }
@@ -17,7 +17,12 @@ interface UseObrasCoordinatesReturn {
   obras: ObraCoordinates[];
   loading: boolean;
   error: string | null;
-  refetch: () => Promise<void>;
+  fetchFilteredObrasValue: (
+    tipo?: string,
+    situacao?: string,
+    valores?: string, 
+    executores?: string[]
+  ) => Promise<void>;
 }
 
 const API_URL = 'http://localhost:5000/obras';
@@ -32,7 +37,14 @@ export const useObrasCoordinates = (): UseObrasCoordinatesReturn => {
       setLoading(true);
       const response = await axios.get(`${API_URL}/coordinates`);
       if (response.data.success) {
-        setObras(response.data.data);
+        const obrasNormalizadas = response.data.data.map((obra: any) => {
+          const executorField = obra.executores || obra.executor || '';
+          return {
+            ...obra,
+            executores: executorField.replace(/"/g, ''),
+          };
+        });
+        setObras(obrasNormalizadas);
         setError(null);
       } else {
         setError('Erro ao carregar coordenadas das obras');
@@ -45,9 +57,44 @@ export const useObrasCoordinates = (): UseObrasCoordinatesReturn => {
     }
   };
 
+
+  const fetchFilteredObrasValue = async (
+    tipo?: string,
+    situacao?: string,
+    valores?: string[],
+    executores?: string[]
+  ) => {
+    try {
+      setLoading(true);
+      const response = await axios.get(`${API_URL}/filterExec`, {
+        params: { tipo, situacao, 'valores[]': valores, executores },
+      });
+      if (response.data.success) {
+        const obrasNormalizadas = response.data.data.map((obra: any) => {
+          const executorField = obra.executores || obra.executor || '';
+          return {
+            ...obra,
+            executores: executorField.replace(/"/g, ''),
+          };
+        });
+        setObras(obrasNormalizadas);
+        setError(null);
+        return obrasNormalizadas;
+      } else {
+        setError('Erro ao carregar obras filtradas');
+      }
+    } catch (err) {
+      console.error('Error fetching filtered obras:', err);
+      setError('Erro ao buscar obras filtradas');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+ 
   useEffect(() => {
     fetchObras();
   }, []);
 
-  return { obras, loading, error, refetch: fetchObras };
+  return { obras, loading, error, fetchFilteredObrasValue };
 };
