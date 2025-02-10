@@ -164,15 +164,15 @@ def get_obra_coordinates(obra_id: int):
 @cross_origin()
 def filter_obras():
     try:
-        tipo = request.args.get('tipo')
+        tipos = request.args.getlist('tipo')  
         situacao = request.args.get('situacao')
         valores = request.args.getlist('valores[]')
         executores = request.args.get('executores')  
 
         query = Obra.query
 
-        if tipo:
-            query = query.filter(Obra.tipo == tipo)
+        if tipos:  
+            query = query.filter(Obra.tipo.in_(tipos))
         if situacao:
             query = query.filter(Obra.situacao == situacao)
         if executores:
@@ -239,4 +239,19 @@ def get_executores():
         return jsonify({'success': True, 'data': executores})
     except Exception as e:
         print(f"Error in get_executores: {str(e)}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+# esse endpoint puxa todos os tipos(distintos) de obras que tem no banco
+@obra_bp.route('/tipos', methods=['GET'])
+@cross_origin()
+def get_tipos():
+    try:
+        tipos = db.session.query(Obra.tipo.distinct()).all()
+        
+        tipos = [t[0] for t in tipos] 
+        
+        return jsonify({'success': True, 'data': tipos})
+    
+    except Exception as e:
+        print(f"Error in get_tipos: {str(e)}")
         return jsonify({'success': False, 'error': str(e)}), 500
