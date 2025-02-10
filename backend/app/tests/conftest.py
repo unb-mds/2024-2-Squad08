@@ -1,49 +1,40 @@
 import pytest
 from app import create_app
 from app.models import db
-from sqlalchemy.orm import Session
+from app.models.usuario import Usuario
+from app.models.endereco import Endereco
+from app.models.obra import Obra
 
 @pytest.fixture(scope='session')
 def app():
     app = create_app('testing')
-    
     app.config.update({
         'TESTING': True,
-        'SQLALCHEMY_DATABASE_URI': 'postgresql://postgres:password@postgres_db:5432/monitorabsb'
+        'SQLALCHEMY_DATABASE_URI': 'postgresql://postgres:password@postgres_db:5432/monitorabsb',
+        'SQLALCHEMY_TRACK_MODIFICATIONS': False
     })
     
     with app.app_context():
+        # Only create tables if they don't exist
         db.create_all()
         yield app
-        db.session.close()
-        db.drop_all()
 
 @pytest.fixture
 def client(app):
     return app.test_client()
 
-@pytest.fixture(autouse=True)
+@pytest.fixture
 def session(app):
     with app.app_context():
+        # Start a transaction
         connection = db.engine.connect()
         transaction = connection.begin()
         
-        session = Session(bind=connection)
-        
-        nested = connection.begin_nested()
-        
-        @db.event.listens_for(session, 'after_transaction_end')
-        def end_savepoint(session, transaction):
-            nonlocal nested
-            if not nested.is_active:
-                nested = connection.begin_nested()
-        
-        old_session = db.session
-        db.session = session
+        # Create a session bound to the connection
+        session = db.session
         
         yield session
         
-        session.close()
+        # Rollback the transaction (preserves existing data)
         transaction.rollback()
         connection.close()
-        db.session = old_session

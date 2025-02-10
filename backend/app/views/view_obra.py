@@ -41,7 +41,7 @@ def parse_wkt_to_coordinates(geometry_string: str) -> Optional[Tuple[float, floa
 @cross_origin()
 def list_obras():
     try:
-        obras = Obra.query.all()
+        obras = db.session.query(Obra).all()  
         obras_list = []
         
         for obra in obras:
@@ -68,6 +68,7 @@ def list_obras():
         return jsonify(obras_list)
         
     except Exception as e:
+        import traceback
         return jsonify({'error': str(e)}), 500
 
 @obra_bp.route('/sync/<uf>', methods=['POST'])
@@ -85,7 +86,9 @@ def sync_obras(uf):
 @cross_origin()
 def get_obras_coordinates():
     try:
-        obras = Obra.query.all()
+        print("Starting get_obras_coordinates function")  # Debug print
+        obras = db.session.query(Obra).all()  # Changed from Obra.query.all()
+        print(f"Found {len(obras)} obras")  # Debug print
         
         coordinates_list = []
         for obra in obras:
@@ -111,8 +114,10 @@ def get_obras_coordinates():
         })
         
     except Exception as e:
+        import traceback
         print(f"Error in get_obras_coordinates: {str(e)}")
-        return jsonify({'success': False, 'error': str(e)}), 500
+        print("Traceback:")
+        print(traceback.format_exc())  # This will print the full stack trace
 
 @obra_bp.route('/<int:obra_id>/coordinates', methods=['GET'])
 @cross_origin()

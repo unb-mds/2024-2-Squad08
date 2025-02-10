@@ -15,36 +15,54 @@ def create_user():
 
     try:
         data = request.get_json() if request.is_json else request.form
+        print("Received data:", data)  # Debug print
+        
         username = data.get('username')
         email = data.get('email')
         password = data.get('password')
         admin = str(data.get('admin', False)).lower() == 'true'
 
+        # Validate required fields
         if not all([username, email, password]):
-            return jsonify({'error': 'Preencha todos os campos'}), 400
+            missing_fields = []
+            if not username: missing_fields.append('username')
+            if not email: missing_fields.append('email')
+            if not password: missing_fields.append('password')
+            return jsonify({
+                'error': 'Preencha todos os campos',
+                'missing_fields': missing_fields
+            }), 400
 
+        # Validate email format
         if not match(r"[^@]+@[^@]+\.[^@]+", email):
             return jsonify({'error': 'Formato de email inválido'}), 400
 
-        if db.session.query(Usuario).filter_by(username=username).first():
+        # Check for existing username
+        existing_user = db.session.query(Usuario).filter_by(username=username).first()
+        if existing_user:
             return jsonify({'error': 'Esse usuário já existe'}), 400
-        if db.session.query(Usuario).filter_by(email=email).first():
+
+        # Check for existing email
+        existing_email = db.session.query(Usuario).filter_by(email=email).first()
+        if existing_email:
             return jsonify({'error': 'Email já registrado'}), 400
 
+        # Create new user
         hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
-
         usuario = Usuario(
             username=username,
             email=email,
             password=hashed_password,
             admin=admin,
         )
+        
         db.session.add(usuario)
         db.session.commit()
 
         return jsonify({
             'message': 'Usuário criado com sucesso',
             'user': {
+                'id': usuario.id,
                 'username': usuario.username,
                 'email': usuario.email,
                 'admin': usuario.admin,
@@ -53,8 +71,14 @@ def create_user():
 
     except Exception as e:
         db.session.rollback()
-        current_app.logger.error(f"Error creating user: {str(e)}")
-        return jsonify({'error': 'Erro inesperado. Tente novamente.'}), 500
+        import traceback
+        print(f"Error creating user: {str(e)}")
+        print("Traceback:")
+        print(traceback.format_exc())
+        return jsonify({
+            'error': 'Erro inesperado. Tente novamente.',
+            'details': str(e)
+        }), 500
 
 
 @usuario_bp.route("/login", methods=['POST', 'OPTIONS'])
