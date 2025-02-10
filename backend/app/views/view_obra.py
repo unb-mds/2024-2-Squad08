@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, current_app
+from flask import Blueprint, jsonify, currant app, request
 from ..services.api_consumer import ObraAPIConsumer
 from ..services.obra_service import ObraService
 from app.models.obra import Obra
@@ -152,6 +152,49 @@ def get_obra_coordinates(obra_id: int):
             'success': False,
             'error': str(e)
         }), 500
+@obra_bp.route('', methods=['GET'])
+@cross_origin()
+def list_obras():
+    try:
+        data_inicio = request.args.get('dataInicio')
+        data_fim = request.args.get('dataFim')
+        
+        query = Obra.query
+        
+        if data_inicio:
+            query = query.filter(Obra.dataInicialPrevista >= data_inicio)
+        
+        if data_fim:
+            query = query.filter(Obra.dataFinalPrevista <= data_fim)
+        
+        obras = query.all()
+        obras_list = []
+        
+        for obra in obras:
+            obra_dict = {
+                'id': obra.id,
+                'nome': obra.nome,
+                'uf': obra.uf,
+                'situacao': obra.situacao,
+                'tipo': obra.tipo,
+                'executores': obra.executores,
+                'natureza': obra.natureza,
+                'endereco': obra.endereco,
+                'funcaoSocial': obra.funcaoSocial,
+                'dataInicialPrevista': obra.dataInicialPrevista.isoformat() if obra.dataInicialPrevista else None,
+                'dataFinalPrevista': obra.dataFinalPrevista.isoformat() if obra.dataFinalPrevista else None,
+                'fontesDeRecurso': obra.fontesDeRecurso,
+                'valorInvestimentoPrevisto': obra.valorInvestimentoPrevisto,
+                'origemRecurso': obra.origemRecurso,
+                'qdtEmpregosGerados': obra.qdtEmpregosGerados,
+                'geometria': obra.geometria
+            }
+            obras_list.append(obra_dict)
+        
+        return jsonify(obras_list)
+        
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
     
 
 # docker exec -it 43fd758db80c  psql -U postgres -d monitorabsb -c "SELECT COUNT(*) FROM obras;"

@@ -21,6 +21,15 @@ export default function FiltroData() {
   const handleDataFimChange = (event: ChangeEvent<HTMLInputElement>) => {
     setDataFim(event.target.value);
   };
+  const aplicarFiltros = async () => {
+    try {
+      const response = await fetch(`/api/filtrar?dataInicio=${dataInicio}&dataFim=${dataFim}`);      
+      const data = await response.json();
+      console.log(data);  
+    } catch (error) {
+      console.error("Erro ao aplicar filtros:", error);
+    }
+  };
 
   return (
     <div className="relative h-screen w-full">
@@ -63,7 +72,7 @@ export default function FiltroData() {
           <button className="clean-btn" onClick={limparFiltros}>
             LIMPAR
           </button>
-          <button className="check-btn">
+          <button className="check-btn" onClick={aplicarFiltros}>
             CONCLUIR
           </button>
         </div>

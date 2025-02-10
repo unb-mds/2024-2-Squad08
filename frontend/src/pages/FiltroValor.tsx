@@ -1,8 +1,8 @@
-import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import "../styles/Filtros.css"; 
+import { useState } from "react";
+import { MapContainer, TileLayer } from 'react-leaflet';
 import Logo from "../components/Logo";
-import React, { useState, useEffect } from "react";
+import "../styles/Filtros.css";
 
 export default function FiltroValor() {
   const position = [-15.7801, -47.9292];

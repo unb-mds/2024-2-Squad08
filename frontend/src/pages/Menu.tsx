@@ -84,6 +84,13 @@ export default function Menu() {
               <FaListCheck className="icon" />
               EXECUTOR
             </button>
+            <button
+              className="blue-btn-map"
+              onClick={() => navigate("/data")}
+            >
+              <IoLocationSharp className="icon" />
+              DATA
+            </button>
           </div>
         </div>
       </div>
