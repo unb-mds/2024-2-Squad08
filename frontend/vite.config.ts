@@ -5,6 +5,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: "0.0.0.0",
+    allowedHosts: ['mds-monitorabsb.1xdiya.easypanel.host'],
     port: 5173,
     watch: {
       usePolling: true,
