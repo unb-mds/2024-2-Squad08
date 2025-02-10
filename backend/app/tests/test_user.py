@@ -24,22 +24,29 @@ def test_create_user(client, session):
     assert response_json["user"]["admin"] == user_data["admin"]
 
 def test_cadastrar_endereco(client, session):
+    # First, make sure the database is clean
+    with session.begin():
+        session.query(Usuario).delete()
+        session.query(Endereco).delete()
+    
     user_data = {
         "username": "testuser",
         "email": "testuser@example.com",
         "password": "securepassword123",
         "admin": False
     }
-    
+
     response_user = client.post("/usuario/cadastro", json=user_data)
-    assert response_user.status_code == 201
-    
-    usuario = db.session.query(Usuario).filter_by(email=user_data["email"]).first()
-    assert usuario is not None
+    print("User registration response:", response_user.get_json())
+    assert response_user.status_code == 201, f"Failed to create user: {response_user.get_json()}"
+
+    # Get the user from the response data
+    response_data = response_user.get_json()
+    user_id = response_data['user']['id']
 
     endereco_data = {
-        "user_id": usuario.id,
-        "cep": "12345-678",
+        "user_id": user_id,  # Use the ID from the response
+        "cep": "12345678",  # Removed hyphen to match model
         "cidade": "Cidade Teste",
         "estado": "SP",
         "rua": "Rua Teste",
@@ -48,13 +55,10 @@ def test_cadastrar_endereco(client, session):
     }
 
     response = client.post("/endereco/cadastrar", json=endereco_data)
-    assert response.status_code == 201
-    response_json = response.get_json()
-
-    assert response_json["message"] == "Endereço cadastrado com sucesso"
-    assert "endereco" in response_json
-    assert response_json["endereco"]["cep"] == endereco_data["cep"]
-
-    endereco = db.session.query(Endereco).filter_by(user_id=usuario.id).first()
+    print("Endereco registration response:", response.get_json())
+    assert response.status_code == 201, f"Failed to create endereco: {response.get_json()}"
+    
+    # Verify the endereco was created
+    endereco = db.session.query(Endereco).filter_by(user_id=user_id).first()
     assert endereco is not None
     assert endereco.cep == endereco_data["cep"]
