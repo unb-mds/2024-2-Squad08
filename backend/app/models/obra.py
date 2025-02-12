@@ -1,6 +1,7 @@
-from datetime import date
+from datetime import date, datetime
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import event
 from . import db
 
 class Obra(db.Model):
@@ -22,3 +23,8 @@ class Obra(db.Model):
     origemRecurso: Mapped[str] = mapped_column(db.String, nullable=False)
     qdtEmpregosGerados: Mapped[int] = mapped_column(db.Integer, nullable=False)
     geometria: Mapped[str | None] = mapped_column(db.String, nullable=True)
+    created_at: Mapped[date] = mapped_column(db.DateTime, nullable=False)
+
+    def __repr__(self):
+        return f"<Obra {self.nome}>"
+    

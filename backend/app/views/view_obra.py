@@ -86,9 +86,9 @@ def sync_obras(uf):
 @cross_origin()
 def get_obras_coordinates():
     try:
-        print("Starting get_obras_coordinates function")  # Debug print
-        obras = db.session.query(Obra).all()  # Changed from Obra.query.all()
-        print(f"Found {len(obras)} obras")  # Debug print
+        print("Starting get_obras_coordinates function") 
+        obras = db.session.query(Obra).all()  
+        print(f"Found {len(obras)} obras") 
         
         coordinates_list = []
         for obra in obras:
@@ -117,7 +117,7 @@ def get_obras_coordinates():
         import traceback
         print(f"Error in get_obras_coordinates: {str(e)}")
         print("Traceback:")
-        print(traceback.format_exc())  # This will print the full stack trace
+        print(traceback.format_exc())  
 
 @obra_bp.route('/<int:obra_id>/coordinates', methods=['GET'])
 @cross_origin()
@@ -233,9 +233,7 @@ def filter_obras():
 @cross_origin()
 def get_executores():
     try:
-        # Vai buscar os executores que nao sejam iguais, se eu não me engano tem uns 60
         executores = db.session.query(Obra.executores.distinct()).all()
-        # Remove aspas duplas e formata a lista, pois no banco os executores estão entre aspas duplas
         executores = [e[0].replace('"', '') for e in executores]
         return jsonify({'success': True, 'data': executores})
     except Exception as e:
