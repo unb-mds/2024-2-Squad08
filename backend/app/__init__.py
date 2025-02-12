@@ -31,6 +31,12 @@ def create_app(config_name="default"):
     
     # Initialize extensions
     db.init_app(app)
+    
+    # Modificação aqui: Criar todas as tabelas se não existirem
+    with app.app_context():
+        db.create_all()
+    
+    # Initialize migrations after db
     migrate = Migrate(app, db)
     
     # Register blueprints
