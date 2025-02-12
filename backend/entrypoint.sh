@@ -9,7 +9,6 @@ done
 
 echo "Postgres is up - executing migrations"
 
-flask db init || true  # Initialize if not already initialized
 flask db migrate -m "Initial migration" || true  # Create migration if needed
 flask db upgrade  # Apply migrations
 
