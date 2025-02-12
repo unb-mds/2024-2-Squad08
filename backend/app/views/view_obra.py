@@ -12,7 +12,9 @@ from binascii import unhexlify
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy import func
 from flask import jsonify, request
-
+from flask import current_app
+from .geojson import load_ra_geometries
+from shapely.geometry import Point
 
 obra_bp = Blueprint('obras', __name__)
 
@@ -254,4 +256,67 @@ def get_tipos():
     
     except Exception as e:
         print(f"Error in get_tipos: {str(e)}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+    
+@obra_bp.before_app_first_request
+def setup_ra_geometries():
+    current_app.config['RA_GEOMETRIES'] = load_ra_geometries()
+
+
+@obra_bp.route('/filterRegion', methods=['GET'])
+@cross_origin()
+def filter_by_region():
+    try:
+        
+        regions = request.args.getlist('regions')
+        if not regions:
+            regions = request.args.getlist('regions[]')
+        if not regions:
+            return jsonify({'success': False, 'error': 'Nenhuma região foi selecionada'}), 400
+
+        # Função de normalização (pode ser importada ou redefinida aqui)
+        def normalize_region_name(region: str) -> str:
+            return "".join(region.split()).lower()
+        
+        # Normaliza os valores recebidos
+        regions = [normalize_region_name(r) for r in regions]
+
+        
+        ra_geometries = current_app.config.get('RA_GEOMETRIES')
+        if not ra_geometries:
+            return jsonify({'success': False, 'error': 'GeoJSON das RA não foi carregado'}), 500
+
+        obras = Obra.query.all()
+        filtered_obras = []
+
+        for obra in obras:
+            if not obra.geometria:
+                continue
+            # converte a geometria para coordenadas (latitude, longitude)
+            coords = parse_wkt_to_coordinates(obra.geometria)
+            if not coords:
+                continue
+
+
+            point = Point(coords[1], coords[0])  # (lon, lat)
+
+            # verifica se o ponto tá contido em alguma das regiões selecionadas
+            for region in regions:
+                polygon = ra_geometries.get(region)
+                if polygon and polygon.contains(point):
+                    filtered_obras.append({
+                        'id': obra.id,
+                        'nome': obra.nome,
+                        'valorInvestimentoPrevisto': obra.valorInvestimentoPrevisto,
+                        'situacao': obra.situacao,
+                        'tipo': obra.tipo,
+                        'executor': obra.executores,
+                        'latitude': coords[0],
+                        'longitude': coords[1]
+                    })
+                    break  # Se estiver dentro de uma das regiões selecionadas, não precisa testar as demais
+
+        return jsonify({'success': True, 'data': filtered_obras})
+    except Exception as e:
+        print(f"Error in filter_by_region: {str(e)}")
         return jsonify({'success': False, 'error': str(e)}), 500
