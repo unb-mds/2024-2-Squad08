@@ -9,6 +9,7 @@ services:
       - FLASK_DEBUG=1
     volumes:
       - ./backend:/app
+      - migrations_volume:/app/migrations
     ports:
       - "5000:5000"
     depends_on:
@@ -62,6 +63,7 @@ services:
 volumes:
   postgres_data:
   frontend_node_modules:
+  migrations_volume:
 
 networks:
   app-network:
