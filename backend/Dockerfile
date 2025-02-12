@@ -10,14 +10,19 @@ RUN apt-get update && apt-get install -y \
 
 COPY requirements.txt .
 RUN pip install --upgrade pip
+RUN pip install --no-cache-dir numpy
 RUN pip install --no-cache-dir -r requirements.txt
 
-RUN mkdir -p /app/migrations && chmod -R 777 /app/migrations
-
 COPY . .
+COPY regioesAdm.json /app/regioesAdm.json
+
 ENV FLASK_APP=run.py
 ENV FLASK_ENV=development
+ENV FLASK_DEBUG=1
 
 EXPOSE 5000
 
-CMD ["flask", "run", "--host=0.0.0.0"]
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
