@@ -1,11 +1,16 @@
+from flask import Flask
+from flask_jwt_extended import JWTManager
+from flask_cors import CORS  
+from sqlalchemy import inspect
+from .models import db
+from .views.main import main_bp
+from .views.view_usuario import usuario_bp
 from .views.view_obra import obra_bp  
 from .views.view_endereco import endereco_bp  
 from dotenv import load_dotenv
-from flask_migrate import Migrate, upgrade  
 from flask_migrate import Migrate
 import os
 from datetime import timedelta
-from app.config import config  
 from app.config import config
 
 def init_db(app):
@@ -13,39 +18,36 @@ def init_db(app):
         inspector = inspect(db.engine)
         if not inspector.get_table_names():
             db.create_all()
+            # Uncomment if you have a load_initial_data function
+            # load_initial_data()
 
 def create_app(config_name="default"):
     load_dotenv() 
-
-    app = Flask(__name__)
-
-    if config_name != 'testing':
-        CORS(app, resources={r"/*": {"origins": "*"}})
     
-    app.config.from_object(config[config_name])
+    app = Flask(__name__)
+    
+    # Database configuration
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL',
         'postgresql://postgres:password@postgres:5432/monitorabsb')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
+    
     if config_name != 'testing':
         CORS(app, resources={r"/*": {"origins": "*"}})
         app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', '123') 
         app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(days=7) 
         jwt = JWTManager(app)
-
+    
+    # Initialize extensions
     db.init_app(app)
     migrate = Migrate(app, db)
-
-    if config_name != 'testing':
-        migrate = Migrate(app, db)
-        with app.app_context():
-            upgrade()
-
+    
+    # Register blueprints
     app.register_blueprint(main_bp) 
     app.register_blueprint(obra_bp, url_prefix='/obras')  
     app.register_blueprint(usuario_bp, url_prefix='/usuario')
     app.register_blueprint(endereco_bp, url_prefix='/endereco')
-
+    
+    # Initialize database if needed
     init_db(app)
     
     return app
