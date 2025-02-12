@@ -14,6 +14,7 @@ RUN pip install --no-cache-dir numpy
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
+COPY regioesAdm.json /app/regioesAdm.json
 
 ENV FLASK_APP=run.py
 ENV FLASK_ENV=development
