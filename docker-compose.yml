@@ -24,8 +24,8 @@ services:
       - POSTGRES_DB=monitorabsb
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+    # volumes:
+    #   - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     networks:
@@ -66,7 +66,6 @@ services:
         - rabbitmq_go_net
 
 volumes:
-  postgres_data:
   frontend_node_modules:
 
 networks:

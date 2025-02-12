@@ -13,14 +13,6 @@ import os
 from datetime import timedelta
 from app.config import config
 
-def init_db(app):
-    with app.app_context():
-        inspector = inspect(db.engine)
-        if not inspector.get_table_names():
-            db.create_all()
-            # Uncomment if you have a load_initial_data function
-            # load_initial_data()
-
 def create_app(config_name="default"):
     load_dotenv() 
     
@@ -46,8 +38,5 @@ def create_app(config_name="default"):
     app.register_blueprint(obra_bp, url_prefix='/obras')  
     app.register_blueprint(usuario_bp, url_prefix='/usuario')
     app.register_blueprint(endereco_bp, url_prefix='/endereco')
-    
-    # Initialize database if needed
-    init_db(app)
     
     return app
