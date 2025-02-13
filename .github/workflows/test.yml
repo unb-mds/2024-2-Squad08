@@ -1,9 +1,10 @@
-name: Run Vitest Tests
+name: Frontend Tests
 
 on:
   push:
     branches:
       - main
+      - deploy
   pull_request:
 
 jobs:
