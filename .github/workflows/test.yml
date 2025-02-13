@@ -1,4 +1,4 @@
-name: Run Jest Tests
+name: Run Vitest Tests
 
 on:
   push:
@@ -17,9 +17,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
+          cache: npm
 
       - name: Instalar dependências
-        run: npm install
+        run: |
+          cd frontend
+          npm install
 
-      - name: Rodar testes com Jest
-        run: npm test
+      - name: Rodar testes com Vitest
+        run: |
+          cd frontend
+          npx vitest --run src/tests
