@@ -1,11 +1,11 @@
+import React, { useEffect, useState } from 'react'; 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import '../styles/MapaGeral.css'; 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Logo from "../components/Logo";
-// import tipoIcon from '../assets/Geral.png';
-import { useObrasCoordinates } from '../hooks/useObras';
+import { useObrasCoordinates, ObraCoordinates } from '../hooks/useObras';
 import education from '../assets/education.png';
 import construction from '../assets/contruction.png';
 import sport from '../assets/sport.png';
@@ -87,32 +87,36 @@ const iconeRoad = new L.Icon({
   className: 'custom-marker' 
 });
 
+const defaultCenter: [number, number] = [-15.792, -47.929];
+
 export default function MapInterface() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [filteredObras, setFilteredObras] = useState<ObraCoordinates[]>([]);
   const { obras, loading, error } = useObrasCoordinates();
 
-  console.log('Obras data:', obras);
+  useEffect(() => {
+    const state = location.state as {
+      filteredObras?: ObraCoordinates[],
+    };
+    
+    if (state && state.filteredObras && state.filteredObras.length > 0) {
+      setFilteredObras(state.filteredObras);
+    } else {
+      setFilteredObras(obras);
+    }
+  }, [obras, location.state]);
 
-  if (loading) {
-    return (
-      <div className="flex flex-col h-screen bg-gray-900 items-center justify-center">
-        <div className="text-white">Carregando...</div>
-      </div>
-    );
-  }
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
-  if (error) {
-    return (
-      <div className="flex flex-col h-screen bg-gray-900 items-center justify-center">
-        <div className="text-white">{error}</div>
-      </div>
-    );
-  }
-
-  const defaultCenter: [number, number] = [-15.792, -47.929];
-  const mapCenter = obras.length > 0 
-    ? [obras[0].latitude, obras[0].longitude] as [number, number]
-    : defaultCenter;
+  
+  const mapCenter: [number, number] =
+    filteredObras.length > 0 &&
+    filteredObras[0].latitude !== undefined &&
+    filteredObras[0].longitude !== undefined
+      ? [filteredObras[0].latitude, filteredObras[0].longitude]
+      : defaultCenter;
 
   return (
     <div className="flex flex-col h-screen bg-gray-900">
@@ -124,9 +128,9 @@ export default function MapInterface() {
         >
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            attribution='&copy; OpenStreetMap contributors'
           />
-          {obras.map((obra) => (
+          {filteredObras.map((obra) => (
             <Marker
               key={obra.id}
               position={[obra.latitude, obra.longitude]} 
@@ -136,7 +140,6 @@ export default function MapInterface() {
                   navigate(`/info/${obra.id}`);
                 },
               }}
-              
             >
               <Popup>
                 <div>
@@ -150,16 +153,12 @@ export default function MapInterface() {
             </Marker>
           ))}
         </MapContainer>
-
-        {/* Botão fixo */}
         <button
           className="btn-map"
           onClick={() => navigate("/")}
         >
           MENU
         </button>
-
-        {/* Logo fixa sobre o mapa */}
         <div className="logo-container">
           <Logo />
         </div>

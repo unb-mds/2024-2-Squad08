@@ -6,9 +6,7 @@ class ObraService:
         self.api_consumer = api_consumer
 
     def sync_obras_for_uf(self, uf: str) -> Dict[str, Any]:
-        """
-        Synchronize obras for a specific UF
-        """
+        
         obras_data = self.api_consumer.fetch_obras(uf)
         if not obras_data:
             return { 

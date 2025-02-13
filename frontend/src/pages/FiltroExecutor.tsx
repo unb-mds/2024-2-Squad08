@@ -1,30 +1,71 @@
+import React, { useState, useEffect } from "react";
 import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import "../styles/Filtros.css"; 
 import Logo from "../components/Logo";
-import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function FiltroExecutor() {
+  const navigate = useNavigate();
   const position = [-15.7801, -47.9292];
-  const [statusFiltroExecutores, setStatusFiltroExecutores] = useState<string[]>([]); 
-  
+  const [statusFiltroExecutores, setStatusFiltroExecutores] = useState<string[]>([]);
+  const [executores, setExecutores] = useState<string[]>([]);
+
+  useEffect(() => {
+    const fetchExecutores = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/obras/executores');
+        const data = await response.json();
+        if (data.success) {
+          setExecutores(data.data);
+        } else {
+          console.error('Erro ao buscar executores:', data.error);
+        }
+      } catch (error) {
+        console.error('Erro ao buscar executores:', error);
+      }
+    };
+
+    fetchExecutores();
+  }, []);
+
   const handleCheckboxChange = (value: string) => {
     setStatusFiltroExecutores((prev) =>
       prev.includes(value)
-        ? prev.filter((item) => item !== value) 
-        : [...prev, value] 
+        ? prev.filter((item) => item !== value)
+        : [...prev, value]
     );
   };
 
   const handleLimpar = () => {
-    setStatusFiltroExecutores([]); 
+    setStatusFiltroExecutores([]);
   };
 
   const handleConcluir = async () => {
     try {
-      const response = await fetch(`/api/filtrar?executores=${statusFiltroExecutores.join(',')}`);
-      const obras = await response.json();
-      console.log('Obras filtradas:', obras);
+      const params = new URLSearchParams();
+      if (statusFiltroExecutores.length > 0) {
+        
+        params.append('executores', statusFiltroExecutores[0]);
+      }
+      const url = `http://localhost:5000/obras/filterExec?${params.toString()}`;
+      const response = await fetch(url);
+      const data = await response.json();
+
+      if (data.success) {
+        const obrasNormalizadas = data.data.map((obra: any) => {
+          // Normaliza: usa "executores" ou "executor" e remove aspas duplas
+          const executorField = obra.executores || obra.executor || '';
+          return {
+            ...obra,
+            executores: executorField.replace(/"/g, ''),
+          };
+        });
+        // Redireciona para a página do mapa, passando os dados filtrados no state
+        navigate("/mapa", { state: { filteredObras: obrasNormalizadas } });
+      } else {
+        console.error('Erro ao buscar obras:', data.error);
+      }
     } catch (error) {
       console.error('Erro ao buscar obras:', error);
     }
@@ -39,115 +80,35 @@ export default function FiltroExecutor() {
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          attribution='&copy; OpenStreetMap contributors'
         />
       </MapContainer>
       
-      <Logo /> 
-        <div className="filter-container">
-            <h1>ESCOLHA O EXECUTOR</h1>
-
-            <div className="checkbox-filter executer">
-                <label>
-                  <input 
-                    type="checkbox" 
-                    value="DNIT" 
-                    checked={statusFiltroExecutores.includes("iniciada")}
-                    onChange={() => handleCheckboxChange("iniciada")}
-                  />
-                  Departamento Nacional de Infraestrutura de Transportes
-                </label>
-
-                <label>
-                  <input 
-                    type="checkbox" 
-                    value="CBMDF" 
-                    checked={statusFiltroExecutores.includes("CBMDF")}
-                    onChange={() => handleCheckboxChange("CBMDF")}
-                  />
-                  Corpo de Bombeiros Militar do Distrito Federal
-                </label>
-
-                <label>
-                  <input 
-                    type="checkbox" 
-                    value="SEA" 
-                    checked={statusFiltroExecutores.includes("SEA")}
-                    onChange={() => handleCheckboxChange("SEA")}
-                  />
-                  Secretaria de Estado da Agricultura
-                </label>
-
-                <label>
-                  <input 
-                    type="checkbox" 
-                    value="ADR" 
-                    checked={statusFiltroExecutores.includes("ADR")}
-                    onChange={() => handleCheckboxChange("ADR")}
-                  />
-                  Abastecimento e Desenvolvimento Rural 
-                </label>
-
-                <label>
-                  <input 
-                    type="checkbox" 
-                    value="DER" 
-                    checked={statusFiltroExecutores.includes("DER")}
-                    onChange={() => handleCheckboxChange("DER")}
-                  />
-                  Departamento de Estradas de Rodagem 
-                </label>
-
-                <label>
-                  <input 
-                    type="checkbox" 
-                    value="FUB" 
-                    checked={statusFiltroExecutores.includes("FUB")}
-                    onChange={() => handleCheckboxChange("FUB")}
-                  />
-                  Fundação Univesidade de Brasília
-                </label>
-
-                <label>
-                  <input 
-                    type="checkbox" 
-                    value="MIDR" 
-                    checked={statusFiltroExecutores.includes("MIDR")}
-                    onChange={() => handleCheckboxChange("MIDR")}
-                  />
-                  Ministério  da Integração e do Desenvolvimento Regional
-                </label>
-
-                <label>
-                  <input 
-                    type="checkbox" 
-                    value="CE" 
-                    checked={statusFiltroExecutores.includes("CE")}
-                    onChange={() => handleCheckboxChange("CE")}
-                  />
-                  Comando do Exército
-                </label>
-
-                <label>
-                  <input 
-                    type="checkbox" 
-                    value="IFECTB" 
-                    checked={statusFiltroExecutores.includes("IFECTB")}
-                    onChange={() => handleCheckboxChange("IFECTB")}
-                  />
-                  Instituto Federal Educação, Ciência e Tecnologia de Brasília
-                </label>
-            </div>
-
-            <div className="filter-btn">
-                <button className="clean-btn" onClick={handleLimpar}>
-                  LIMPAR
-                </button>
-                <button className="check-btn" onClick={handleConcluir}>
-                  CONCLUIR
-                </button>
-            </div>
+      <Logo />
+      <div className="filter-container">
+        <h1>ESCOLHA O EXECUTOR</h1>
+        <div className="checkbox-filter executer">
+          {executores.map((executor, index) => (
+            <label key={index}>
+              <input 
+                type="checkbox" 
+                value={executor} 
+                checked={statusFiltroExecutores.includes(executor)}
+                onChange={() => handleCheckboxChange(executor)}
+              />
+              {executor}
+            </label>
+          ))}
         </div>
+        <div className="filter-btn">
+          <button className="clean-btn" onClick={handleLimpar}>
+            LIMPAR
+          </button>
+          <button className="check-btn" onClick={handleConcluir}>
+            CONCLUIR
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
