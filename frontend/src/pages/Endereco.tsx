@@ -1,160 +1,139 @@
-import React, { useState } from 'react';
-import { MapContainer, TileLayer } from 'react-leaflet';
+import React, { useEffect } from 'react';
+import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import "../styles/Registros.css"; 
+import "../styles/Registros.css";
 import Logo from "../components/Logo";
 import { useNavigate } from "react-router-dom";
+import useAddress from '../hooks/useAddress';
+import { useAuth } from '../Context/AuthContext';
+import L from 'leaflet';
+
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+    iconRetinaUrl: '/marker-icon-2x.png',
+    iconUrl: '/marker-icon.png',
+    shadowUrl: '/marker-shadow.png'
+});
+
+function MapUpdater({ position }) {
+    const map = useMap();
+    useEffect(() => {
+        map.setView(position, 15);
+    }, [position, map]);
+    return null;
+}
 
 export default function Endereco() {
-  const position = [-15.7801, -47.9292];
-  const navigate = useNavigate();  
+    const position = [-15.7801, -47.9292];
+    const navigate = useNavigate();
+    const { user } = useAuth();
+    const {
+        address,
+        error,
+        loading,
+        setField,
+        handleCepChange,
+        registerAddress
+    } = useAddress();
 
-  const [cep, setCep] = useState('');
-  const [cidade, setCidade] = useState('');
-  const [estado, setEstado] = useState('');
-  const [rua, setRua] = useState('');
-  const [bairro, setBairro] = useState('');
-  const [numero, setNumero] = useState('');
-  const [error, setError] = useState('');
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        
+        const user = JSON.parse(localStorage.getItem('user') || 'null');
+        const userId = user?.id;
 
-  const handleCepChange = async (e) => {
-    const newCep = e.target.value;
-    setCep(newCep);
-
-    if (newCep.length > 0 && newCep.length < 8) {
-      setError('CEP inválido!');
-      setCidade('');
-      setEstado('');
-      setRua('');
-      setBairro('');
-      return;
-    }
-
-    if (newCep.length === 8) { 
-      try {
-        const response = await fetch(`https://viacep.com.br/ws/${newCep}/json/`);
-        const data = await response.json();
-
-        if (data.erro) {
-          setError('CEP não encontrado!');
-          setCidade('');
-          setEstado('');
-          setRua('');
-          setBairro('');
-        } else {
-          setCidade(data.localidade || '');
-          setEstado(data.uf || '');
-          setRua(data.logradouro || '');
-          setBairro(data.bairro || '');
-          setError('');
+        if (!userId) {
+            console.log('Usuário não está logado');
+            navigate('/login');
+            return;
         }
-      } catch (err) {
-        setError('Erro ao buscar o endereço!');
-        setCidade('');
-        setEstado('');
-        setRua('');
-        setBairro('');
-      }
-    } else {
-      setError('');
-    }
-  };
 
-  const handleAddress = () => {
-    if (!cep || !cidade || !estado || !rua || !bairro || !numero) {
-      setError('Preencha todos os campos!');
-      return;
-    }
-    try {
-      // const response = await fetch('/add_address', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({
-      //     user_id: 1, 
-      //     cep, cidade, estado, rua, bairro, numero
-      //   }),
-      // });
-      // const data = await response.json();
-      
-      if (response.ok) {
-        setError('');
-        navigate('/'); 
-      } else {
-        setError(data.error);
-      }
-    } catch (err) {
-      setError('Erro ao tentar cadastrar o endereço.');
-    }
-  };
+        try {
+            console.log('Iniciando submissão do formulário...');
+            const success = await registerAddress(userId); // Passar o userId obtido
+            console.log('Resultado do cadastro:', success);
+            
+            if (success) {
+                alert('Endereço cadastrado com sucesso!');
+                navigate('/');
+            }
+        } catch (err) {
+            console.error('Erro no handleSubmit:', err);
+        }
+    };
 
-  return (
-    <div className="relative h-screen w-full">
-      <MapContainer 
-        center={position} 
-        zoom={10} 
-        style={{ height: '100%', width: '100%' }}
-      >
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        />
-      </MapContainer>
-      
-      <Logo /> 
+    return (
+        <div className="relative h-screen w-full">
+            <MapContainer
+                center={position}
+                zoom={10}
+                style={{ height: '100%', width: '100%' }}
+            >
+                <TileLayer
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                />
+            </MapContainer>
 
-      <div className="login">
-        <h1>CADASTRAR ENDEREÇO</h1>
+            <Logo />
 
-        <div className="input-container-login">
-          <input 
-            type="text" 
-            placeholder='CEP' 
-            value={cep}
-            onChange={handleCepChange}
-          />
-          <input 
-            type="text" 
-            placeholder='Cidade' 
-            value={cidade}
-            onChange={(e) => setCidade(e.target.value)}
-          />
-          <input 
-            type="text" 
-            placeholder='Estado' 
-            value={estado}
-            onChange={(e) => setEstado(e.target.value)}
-          />
-          <input 
-            type="text" 
-            placeholder='Rua' 
-            value={rua}
-            onChange={(e) => setRua(e.target.value)}
-          />
-          <input 
-            type="text" 
-            placeholder='Bairro' 
-            value={bairro}
-            onChange={(e) => setBairro(e.target.value)}
-          />
-          <input 
-            type="text" 
-            placeholder='Número' 
-            value={numero}
-            onChange={(e) => setNumero(e.target.value)}
-          />
+            <div className="login">
+                <h1>{localStorage.getItem('token') ? 'EDITAR ENDEREÇO' : 'CADASTRAR ENDEREÇO'}</h1>
+                <form onSubmit={handleSubmit} className="input-container-login">
+                    <input
+                        type="text"
+                        placeholder='CEP'
+                        value={address.cep}
+                        onChange={(e) => handleCepChange(e.target.value)}
+                        disabled={loading}
+                    />
+                    <input
+                        type="text"
+                        placeholder='Cidade'
+                        value={address.cidade}
+                        onChange={(e) => setField('cidade', e.target.value)}
+                        disabled={loading}
+                    />
+                    <input
+                        type="text"
+                        placeholder='Estado'
+                        value={address.estado}
+                        onChange={(e) => setField('estado', e.target.value)}
+                        disabled={loading}
+                    />
+                    <input
+                        type="text"
+                        placeholder='Rua'
+                        value={address.rua}
+                        onChange={(e) => setField('rua', e.target.value)}
+                        disabled={loading}
+                    />
+                    <input
+                        type="text"
+                        placeholder='Bairro'
+                        value={address.bairro}
+                        onChange={(e) => setField('bairro', e.target.value)}
+                        disabled={loading}
+                    />
+                    <input
+                        type="text"
+                        placeholder='Número'
+                        value={address.numero}
+                        onChange={(e) => setField('numero', e.target.value)}
+                        disabled={loading}
+                    />
 
-          <button 
-            className="btn-login"
-            onClick={handleAddress}
-          >
-            Salvar
-          </button>
+                    <button
+                        type="submit"
+                        className="btn-login"
+                        disabled={loading}
+                    >
+                        {loading ? 'Salvando...' : 'Salvar'}
+                    </button>
+                </form>
+
+                {error && <p className="error-message">{error}</p>}
+            </div>
         </div>
-
-        {/* Mensagem de erro com className */}
-        {error && <p className="error-message">{error}</p>}
-
-      </div>
-    </div>
-  );
+    );
 }

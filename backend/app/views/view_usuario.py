@@ -22,7 +22,6 @@ def create_user():
         password = data.get('password')
         admin = str(data.get('admin', False)).lower() == 'true'
 
-        # Validate required fields
         if not all([username, email, password]):
             missing_fields = []
             if not username: missing_fields.append('username')
@@ -33,21 +32,17 @@ def create_user():
                 'missing_fields': missing_fields
             }), 400
 
-        # Validate email format
         if not match(r"[^@]+@[^@]+\.[^@]+", email):
             return jsonify({'error': 'Formato de email inválido'}), 400
 
-        # Check for existing username
         existing_user = db.session.query(Usuario).filter_by(username=username).first()
         if existing_user:
             return jsonify({'error': 'Esse usuário já existe'}), 400
 
-        # Check for existing email
         existing_email = db.session.query(Usuario).filter_by(email=email).first()
         if existing_email:
             return jsonify({'error': 'Email já registrado'}), 400
 
-        # Create new user
         hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
         usuario = Usuario(
             username=username,

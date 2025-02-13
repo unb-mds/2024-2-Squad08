@@ -139,7 +139,8 @@ class ObraAPIConsumer:
                     'valorInvestimentoPrevisto': valor_investimento,
                     'origemRecurso': origem_recurso,
                     'qdtEmpregosGerados': self._sanitize_empregos_gerados(obra_data.get('qdtEmpregosGerados')),
-                    'geometria': geometria
+                    'geometria': geometria, 
+                    'created_at': datetime.now()
                 }
 
                 existing_obra = Obra.query.filter_by(nome=obra_dict['nome']).first()

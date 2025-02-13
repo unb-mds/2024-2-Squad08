@@ -1,4 +1,3 @@
-// FiltroRegiao.tsx (modificação)
 import { useState } from "react";
 import { MapContainer, TileLayer } from 'react-leaflet';
 import axios from 'axios';
@@ -19,29 +18,40 @@ const regioesAdministrativas = [
 
 export default function FiltroRegiao() {
   const [statusFiltro, setStatusFiltro] = useState<string[]>([]);
+  const [error, setError] = useState<string | null>(null); // Novo estado para exibir erros
   const navigate = useNavigate();
 
   const handleCheckboxChange = (value: string) => {
-    setStatusFiltro((prev) =>
+    setStatusFiltro((prev) => 
       prev.includes(value) ? prev.filter((item) => item !== value) : [...prev, value]
     );
   };
 
   const limparFiltros = () => {
     setStatusFiltro([]);
+    setError(null); // Limpar erro ao resetar os filtros
   };
 
   const handleConcluir = async () => {
+    if (statusFiltro.length === 0) {
+      setError("Selecione pelo menos uma região antes de continuar.");
+      return;
+    }
+
     try {
+      setError(null); // Resetar erro antes da requisição
       const response = await axios.get('http://localhost:5000/obras/filterRegion', {
         params: { regions: statusFiltro }
       });
-      if (response.data.success) {
-        // Navega para a tela do mapa, passando as obras filtradas via state
+
+      if (response.data.success && response.data.data.length > 0) {
         navigate("/mapa", { state: { filteredObras: response.data.data } });
+      } else {
+        setError("Nenhuma obra encontrada para os filtros selecionados.");
       }
     } catch (error) {
       console.error("Erro ao filtrar obras por região:", error);
+      setError("Ocorreu um erro ao buscar as obras. Tente novamente mais tarde.");
     }
   };
 
@@ -72,6 +82,8 @@ export default function FiltroRegiao() {
             </label>
           ))}
         </div>
+
+        {error && <p className="error-message">{error}</p>}
 
         <div className="filter-btn">
           <button className="clean-btn" onClick={limparFiltros}>LIMPAR</button>

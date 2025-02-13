@@ -42,3 +42,6 @@ typing_extensions==4.12.2
 tzlocal==5.2
 urllib3==2.3.0
 werkzeug==2.2.3
+pika==1.2.0
+celery==5.4.0
+redis==5.2.1
