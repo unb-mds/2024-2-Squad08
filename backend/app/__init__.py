@@ -24,7 +24,12 @@ def create_app(config_name="default"):
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     
     if config_name != 'testing':
-        CORS(app, resources={r"/*": {"origins": "*"}})
+        CORS(app, resources={r"/*": {
+            "origins": ["https://monitorabsb.mash1r0.site", "http://localhost:5173"],
+            "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+            "allow_headers": ["Content-Type", "Authorization"],
+            "supports_credentials": True
+        }})
         app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', '123') 
         app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(days=7) 
         jwt = JWTManager(app)

@@ -23,7 +23,8 @@ class Obra(db.Model):
     origemRecurso: Mapped[str] = mapped_column(db.String, nullable=False)
     qdtEmpregosGerados: Mapped[int] = mapped_column(db.Integer, nullable=False)
     geometria: Mapped[str | None] = mapped_column(db.String, nullable=True)
-    created_at: Mapped[date] = mapped_column(db.DateTime, nullable=False)
+    created_at: Mapped[datetime | None] = mapped_column(db.DateTime, nullable=True)
+
 
     def __repr__(self):
         return f"<Obra {self.nome}>"

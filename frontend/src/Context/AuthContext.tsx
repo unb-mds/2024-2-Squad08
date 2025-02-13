@@ -87,6 +87,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                 const userData = response.data.user;
                 const { token } = response.data;
                 localStorage.setItem('token', token);
+                localStorage.setItem('user', JSON.stringify(userData));
                 setUser({
                     id: userData.id,
                     username: userData.username,
@@ -103,8 +104,14 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         }
     }
 
+    const logout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        setUser(null);
+    }
+
     return (
-        <AuthContext.Provider value={{ user, signup, login, validateEmail, validatePassword }}>
+        <AuthContext.Provider value={{ user, signup, login, validateEmail, logout, validatePassword }}>
             {children}
         </AuthContext.Provider>
     );

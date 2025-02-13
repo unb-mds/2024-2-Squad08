@@ -20,7 +20,7 @@ export default function Cadastro() {
   const handleRegister = async () => {
       const result = await signup(usuario, email, password);
       if (result.ok) {
-          navigate('/endereco');
+          navigate('/login');
       } else {
           setError(result.error || 'Erro ao fazer cadastro');
       }

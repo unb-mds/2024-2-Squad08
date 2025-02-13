@@ -74,7 +74,7 @@ export const useObrasCoordinates = (): UseObrasCoordinatesReturn => {
   ) => {
     try {
       setLoading(true);
-      const response = await axios.get(`${API_URL}/filterExec`, {
+      const response = await axios.get(`${API_URL}/obras/filterExec`, {
         params: { tipo, situacao, 'valores[]': valores, executores },
       });
       if (response.data.success) {

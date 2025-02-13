@@ -9,6 +9,7 @@ services:
       - POSTGRES_PASSWORD=password
     volumes:
       - ./backend:/app
+      - migrations_data:/app/migrations
     ports:
       - "5000:5000"
     depends_on:
@@ -67,7 +68,7 @@ services:
 
 volumes:
   frontend_node_modules:
-
+  migrations_data:
 networks:
   app-network:
     driver: bridge
