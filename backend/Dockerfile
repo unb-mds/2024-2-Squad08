@@ -8,9 +8,14 @@ RUN apt-get update && apt-get install -y \
     postgresql-client \
     && rm -rf /var/lib/apt/lists/*
 
+VOLUME /app/migrations
+
+RUN mkdir -p /app/migrations && \
+    chown -R root:root /app/migrations && \
+    chmod -R 777 /app/migrations
+
 COPY requirements.txt .
 RUN pip install --upgrade pip
-RUN pip install --no-cache-dir numpy
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .

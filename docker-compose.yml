@@ -3,12 +3,13 @@ services:
     build: ./backend
     container_name: flask_app
     environment:
-      - DATABASE_URL=${DATABASE_URL}
-      - FLASK_APP=run.py
-      - FLASK_ENV=development
-      - FLASK_DEBUG=1
+      - DATABASE_URL=postgresql://postgres:password@postgres:5432/monitorabsb
+      - POSTGRES_DB=monitorabsb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
     volumes:
       - ./backend:/app
+      - migrations_data:/app/migrations
     ports:
       - "5000:5000"
     depends_on:
@@ -16,33 +17,25 @@ services:
         condition: service_healthy
     networks:
       - app-network
+
+  postgres:
+    image: postgres:15
+    container_name: postgres_db
+    environment:
+      - POSTGRES_DB=monitorabsb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    # volumes:
+    #   - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
       timeout: 5s
       retries: 5
-
-  postgres:
-    image: postgres:15
-    container_name: postgres_db
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 10s
-    environment:
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ./initdb:/docker-entrypoint-initdb.d
-    ports:
-      - "${POSTGRES_PORT}:5432"
-    networks:
-      - app-network
       
   frontend:
     container_name: react_app
@@ -58,11 +51,26 @@ services:
       - app-network
     depends_on:
       - backend
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+        - 5672:5672
+        - 15672:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+    volumes:
+        - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+        - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+        - rabbitmq_go_net
 
 volumes:
-  postgres_data:
   frontend_node_modules:
-
+  migrations_data:
 networks:
   app-network:
+    driver: bridge
+  rabbitmq_go_net:
     driver: bridge

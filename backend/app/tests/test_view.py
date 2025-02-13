@@ -71,3 +71,23 @@ def test_coordinates(client, session):
     assert first_obra['situacao'] == obra_data['situacao']
     assert first_obra['executores'] == obra_data['executores']
     assert first_obra['valorInvestimentoPrevisto'] == obra_data['valorInvestimentoPrevisto']
+
+@pytest.fixture
+def mock_obras(session):
+    obra = Obra(
+        nome="Test Obra",
+        tipo="Test Type",
+        situacao="Em andamento",
+        created_at=datetime.now()
+    )
+    session.add(obra)
+    
+    # Create test user
+    user = Usuario(
+        email="test@example.com",
+        username="testuser"
+    )
+    session.add(user)
+    session.commit()
+    return obra
+
