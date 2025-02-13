@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import "../styles/Filtros.css"; 
+import "../styles/Filtros.css";
 import Logo from "../components/Logo";
 import { useNavigate } from "react-router-dom";
-
-const API_URL = import.meta.env.VITE_MONITORA_API_URL as string;
 
 export default function FiltroExecutor() {
   const navigate = useNavigate();
@@ -16,10 +14,12 @@ export default function FiltroExecutor() {
   useEffect(() => {
     const fetchExecutores = async () => {
       try {
-        const response = await fetch(`${API_URL}/obras/executores`);
+        const response = await fetch('http://localhost:5000/obras/executores');
         const data = await response.json();
-        if (data.success) {
-          setExecutores(data.data);
+        console.log("Executores recebidos:", data);
+
+        if (data.success && Array.isArray(data.data)) {
+          setExecutores(data.data.map((executor: string) => executor.trim()));
         } else {
           console.error('Erro ao buscar executores:', data.error);
         }
@@ -46,21 +46,21 @@ export default function FiltroExecutor() {
   const handleConcluir = async () => {
     try {
       const params = new URLSearchParams();
-      if (statusFiltroExecutores.length > 0) {
-        params.append('executores', statusFiltroExecutores[0]);
-      }
-      const url = `${API_URL}/obras/filterExec?${params.toString()}`;
+      statusFiltroExecutores.forEach((executor) => params.append('executores', executor));
+
+      const url = `http://localhost:5000/obras/filterExec?${params.toString()}`;
+      console.log("URL da requisição:", url);
+
       const response = await fetch(url);
       const data = await response.json();
+      console.log("Dados recebidos:", data);
 
-      if (data.success) {
-        const obrasNormalizadas = data.data.map((obra: any) => {
-          const executorField = obra.executores || obra.executor || '';
-          return {
-            ...obra,
-            executores: executorField.replace(/"/g, ''),
-          };
-        });
+      if (data.success && Array.isArray(data.data)) {
+        const obrasNormalizadas = data.data.map((obra: any) => ({
+          ...obra,
+          executores: (obra.executores || obra.executor || '').replace(/"/g, '').trim()
+        }));
+
         navigate("/mapa", { state: { filteredObras: obrasNormalizadas } });
       } else {
         console.error('Erro ao buscar obras:', data.error);
@@ -72,11 +72,7 @@ export default function FiltroExecutor() {
 
   return (
     <div className="relative h-screen w-full">
-      <MapContainer 
-        center={position} 
-        zoom={10} 
-        style={{ height: '100%', width: '100%' }}
-      >
+      <MapContainer center={position} zoom={10} style={{ height: '100%', width: '100%' }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; OpenStreetMap contributors'
