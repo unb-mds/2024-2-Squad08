@@ -12,13 +12,13 @@ from flask_migrate import Migrate
 import os
 from datetime import timedelta
 from app.config import config
+from flask import Flask, request, make_response
 
 def create_app(config_name="default"):
     load_dotenv() 
     
     app = Flask(__name__)
     
-    # Database configuration
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL',
         'postgresql://postgres:password@postgres:5432/monitorabsb')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -34,14 +34,23 @@ def create_app(config_name="default"):
         app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(days=7) 
         jwt = JWTManager(app)
     
+    # Handle CORS preflight requests
+    @app.before_request
+    def handle_options_request():
+        if request.method == "OPTIONS":
+            response = make_response()
+            response.headers["Access-Control-Allow-Origin"] = "*"
+            response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
+            response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
+            return response, 200
+
     # Initialize extensions
     db.init_app(app)
     
-    # Modificação aqui: Criar todas as tabelas se não existirem
+    # Ensure tables exist
     with app.app_context():
         db.create_all()
     
-    # Initialize migrations after db
     migrate = Migrate(app, db)
     
     # Register blueprints

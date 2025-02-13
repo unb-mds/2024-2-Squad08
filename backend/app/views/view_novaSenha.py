@@ -43,7 +43,6 @@ def esqueci_senha():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# Rota para redefinir a senha
 @novaSenha_bp.route("/senha/<token>", methods=["POST"])
 def redefinir_senha(token):
     user = Usuario.query.filter_by(reset_token=token).first()
@@ -51,7 +50,6 @@ def redefinir_senha(token):
     if not user or user.token_expired_at < datetime.utcnow():
         return jsonify({"error": "Token inválido ou expirado"}), 400
 
-    # Pegando a nova senha do usuário
     data = request.get_json()
     new_password = data.get("new_password")
     confirm_password = data.get("confirm_password")
