@@ -30,7 +30,7 @@ export default function InformacoesGerais() {
   useEffect(() => {
     const fetchObraDetails = async () => {
       try {
-        const response = await axios.get(`${API_URL}/obras/${obraId}`);
+        const response = await axios.get(`${API_URL}/obras/${obraId}/coordinates`);
         if (response.data.success) {
           setObra(response.data.data);
           setError(null);
