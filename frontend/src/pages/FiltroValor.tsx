@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useObrasCoordinates } from '../hooks/useObras';
 
-const API_URL = 'http://localhost:5000/obras'; 
+const API_URL = import.meta.env.VITE_MONITORA_API_URL as string; 
 
 export default function FiltroValor() {
   const navigate = useNavigate();

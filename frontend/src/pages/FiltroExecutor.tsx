@@ -5,6 +5,8 @@ import "../styles/Filtros.css";
 import Logo from "../components/Logo";
 import { useNavigate } from "react-router-dom";
 
+const API_URL = import.meta.env.VITE_MONITORA_API_URL as string;
+
 export default function FiltroExecutor() {
   const navigate = useNavigate();
   const position = [-15.7801, -47.9292];
@@ -14,7 +16,7 @@ export default function FiltroExecutor() {
   useEffect(() => {
     const fetchExecutores = async () => {
       try {
-        const response = await fetch('http://localhost:5000/obras/executores');
+        const response = await fetch(`${API_URL}/obras/executores`);
         const data = await response.json();
         if (data.success) {
           setExecutores(data.data);
@@ -45,23 +47,20 @@ export default function FiltroExecutor() {
     try {
       const params = new URLSearchParams();
       if (statusFiltroExecutores.length > 0) {
-        
         params.append('executores', statusFiltroExecutores[0]);
       }
-      const url = `http://localhost:5000/obras/filterExec?${params.toString()}`;
+      const url = `${API_URL}/obras/filterExec?${params.toString()}`;
       const response = await fetch(url);
       const data = await response.json();
 
       if (data.success) {
         const obrasNormalizadas = data.data.map((obra: any) => {
-          // Normaliza: usa "executores" ou "executor" e remove aspas duplas
           const executorField = obra.executores || obra.executor || '';
           return {
             ...obra,
             executores: executorField.replace(/"/g, ''),
           };
         });
-        // Redireciona para a página do mapa, passando os dados filtrados no state
         navigate("/mapa", { state: { filteredObras: obrasNormalizadas } });
       } else {
         console.error('Erro ao buscar obras:', data.error);
