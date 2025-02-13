@@ -63,6 +63,13 @@ export default function Menu() {
               </button>
             )}
           </div>
+          <button
+            className="blue-btn-map"
+            onClick={() => navigate("/mapa")}
+          >
+            <BiLogIn className="icon" />
+            VER MAPA
+          </button>
         </div>
 
         <h1 className="inter-text">OU</h1>
