@@ -20,7 +20,10 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    /* Adicione esta linha */
+    "types": ["@testing-library/jest-dom", "jest"]
   },
   "include": ["src"]
 }
