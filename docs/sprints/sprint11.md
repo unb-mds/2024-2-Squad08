@@ -1,6 +1,6 @@
 
 **Objetivo da Sprint:**
-O objetivo da Sprint 11 foi 
+O objetivo da Sprint 11 foi aprimorar a experiência do usuário por meio da implementação da responsividade em telas essenciais do sistema, garantindo uma melhor adaptação em diferentes dispositivos. Além disso, foi iniciada a implementação da funcionalidade de filtros por tipo, permitindo aos usuários uma navegação mais eficiente e personalizada.
 
 **Datas da Sprint:**
 
