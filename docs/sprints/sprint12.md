@@ -12,6 +12,7 @@ O objetivo da Sprint 11 foi
 | Tarefa | Responsável | Status |
 |--------|-------------|-----------------------|
 | Criação das releases notes | Beatriz Lins | Concluído | 
+| Criar logica de filtro por regiões administrativas | Paulo Cerqueira | Concluído | 
 | Testes unitários do frontend | Beatriz Lins | Concluído | 
 | Testes de integração do backend | Beatriz Lins | Concluído | 
 | Testes de integração do backend | Daniel Ferreira | Concluído | 
