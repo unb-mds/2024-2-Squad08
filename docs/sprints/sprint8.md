@@ -20,6 +20,7 @@ O objetivo da Sprint 08 foi avançar no desenvolvimento das funcionalidades e in
 | Implementar API de preenchimento automático de CEP | Beatriz Lins | Concluído |
 | Criar e testar pins personalizados para cada filtro | Beatriz Lins | Concluído |
 | Backend das páginas de filtro | Beatriz Lins | Concluído |
+| Criar um dump da base para testes locais | Daniel Ferreira | Concluído |
 
 
 
