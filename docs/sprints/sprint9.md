@@ -13,6 +13,7 @@ O objetivo da Sprint 09 foi atualizar a documentação.
 |--------|-------------|-----------------------|
 | Atualização da documentação | Beatriz Lins | Concluído |
 | Adicionar backup no docker build | Daniel Ferreira | Concluído |
+| Backend iniciar o banco de dados com Docker e enviar os dados para o mapa | Daniel Ferreira | Concluído |
 | Frontend corrigir rota de informações das obras | Paulo Cerqueira | Concluído |
 
 
