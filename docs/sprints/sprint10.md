@@ -17,6 +17,10 @@ O objetivo da Sprint 10 foi implementar e integrar funcionalidades de filtro ava
 | Conexão com backend da página de filtro por executor | Beatriz Lins | Concluído |
 | Atualizando banco de dados | Erick Alves | Concluído | 
 | Atualização do init e requirements do projeto | Erick Alves | Concluído | 
+| Exibir informações das obras no Frontend | Paulo Cerqueira | Concluído |
+| Adicionar a coluna "tipos" no dump da base de dados | Paulo Cerqueira | Concluído |
+| Fazer exemplo de filtro de valor | Daniel Ferreira | Concluído |
+
 
 
 
