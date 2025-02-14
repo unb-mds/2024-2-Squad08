@@ -25,15 +25,7 @@ interface UseObrasCoordinatesReturn {
   ) => Promise<void>;
 }
 
-interface ImportMeta {
-  env: {
-    VITE_API_URL: string;
-  };
-}
-
-export const API_URL = import.meta.env.VITE_MONITORA_API_URL as string;
-
-console.log('Environment Variables:', import.meta.env);
+const API_URL = 'http://localhost:5000/obras';
 
 export const useObrasCoordinates = (): UseObrasCoordinatesReturn => {
   const [obras, setObras] = useState<ObraCoordinates[]>([]);
@@ -43,7 +35,7 @@ export const useObrasCoordinates = (): UseObrasCoordinatesReturn => {
   const fetchObras = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${API_URL}/obras/coordinates`);
+      const response = await axios.get(`${API_URL}/coordinates`);
       if (response.data.success) {
         const obrasNormalizadas = response.data.data.map((obra: any) => {
           const executorField = obra.executores || obra.executor || '';
@@ -74,7 +66,7 @@ export const useObrasCoordinates = (): UseObrasCoordinatesReturn => {
   ) => {
     try {
       setLoading(true);
-      const response = await axios.get(`${API_URL}/obras/filterExec`, {
+      const response = await axios.get(`${API_URL}/filterExec`, {
         params: { tipo, situacao, 'valores[]': valores, executores },
       });
       if (response.data.success) {

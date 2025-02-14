@@ -25,12 +25,13 @@ export default function InformacoesGerais() {
   const [obra, setObra] = useState<ObraDetails | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const API_URL = import.meta.env.VITE_MONITORA_API_URL as string;
 
   useEffect(() => {
     const fetchObraDetails = async () => {
       try {
-        const response = await axios.get(`${API_URL}/obras/${obraId}/coordinates`);
+        const response = await axios.get(
+          `http://localhost:5000/obras/${obraId}/coordinates`
+        );
         if (response.data.success) {
           setObra(response.data.data);
           setError(null);

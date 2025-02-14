@@ -4,23 +4,23 @@ import "../styles/Filtros.css";
 import Logo from "../components/Logo";
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 export default function FiltroTipo() {
   const navigate = useNavigate();
   const position = [-15.7801, -47.9292];
   const [statusFiltro, setStatusFiltro] = useState<string[]>([]);
   const [tipos, setTipos] = useState<string[]>([]);
-  const API_URL = import.meta.env.VITE_MONITORA_API_URL as string;
+
 
   useEffect(() => {
     const fetchTipos = async () => {
       try {
-        const response = await axios.get(`${API_URL}/obras/tipos`);
-        if (response.data.success) {
-          setTipos(response.data.data);
+        const response = await fetch('http://localhost:5000/obras/tipos');
+        const data = await response.json();
+        if (data.success) {
+          setTipos(data.data);
         } else {
-          console.error('Erro ao buscar tipos:', response.data.error);
+          console.error('Erro ao buscar tipos:', data.error);
         }
       } catch (error) {
         console.error('Erro ao buscar tipos:', error);
@@ -28,7 +28,7 @@ export default function FiltroTipo() {
     };
 
     fetchTipos();
-  }, [API_URL]);
+  }, []);
 
   const handleCheckboxChange = (value: string) => {
     setStatusFiltro((prev) =>
@@ -44,23 +44,30 @@ export default function FiltroTipo() {
 
   const handleConcluir = async () => {
     try {
-      const url = new URL(`${API_URL}/obras/filterExec`);
+      
+      const url = new URL('http://localhost:5000/obras/filterExec');
+      
+      
       statusFiltro.forEach(tipo => {
         url.searchParams.append('tipo', tipo);
       });
   
+      
       console.log('URL da requisição:', url.toString());
   
       const response = await fetch(url.toString());
+      
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       
+      
       const rawData = await response.text();
       console.log('Resposta bruta:', rawData);
       
       const data = JSON.parse(rawData);
+  
       
       console.log('Dados parseados:', data);
   
