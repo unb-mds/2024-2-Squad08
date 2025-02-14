@@ -18,3 +18,4 @@ O objetivo da Sprint 11 foi aprimorar a experiência do usuário por meio da imp
 | Responsividade da tela de redefinição de senha | Beatriz Lins | Concluído | 
 | Criação de função de filtros por tipo | Erick Alves | Aguardando pull request | 
 | Criação da lógica da função de filtros por tipo | Erick Alves | Aguardando pull request | 
+| Resolver problema do UTF-8 no dump da base de dados | Paulo Cerqueira | Concluído | 
