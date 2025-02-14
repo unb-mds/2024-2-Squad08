@@ -17,7 +17,7 @@ services:
         condition: service_healthy
     networks:
       - app-network
-
+    entrypoint: ["/entrypoint.sh"]
   postgres:
     image: postgres:15
     container_name: postgres_db
@@ -25,8 +25,9 @@ services:
       - POSTGRES_DB=monitorabsb
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
-    # volumes:
-    #   - postgres_data:/var/lib/postgresql/data
+    volumes:
+      - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql
+      # - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     networks:

@@ -2,10 +2,12 @@ FROM python:3.10
 
 WORKDIR /app
 
+# Instala dependências necessárias, incluindo netcat-openbsd
 RUN apt-get update && apt-get install -y \
     gcc \
     python3-dev \
     postgresql-client \
+    netcat-openbsd \
     && rm -rf /var/lib/apt/lists/*
 
 VOLUME /app/migrations

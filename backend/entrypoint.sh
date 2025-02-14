@@ -1,11 +1,19 @@
-#!/bin/bash
+#!/bin/sh
 
-set -e
-
+# Espera o banco de dados estar pronto
 echo "Waiting for postgres..."
-while ! pg_isready -h postgres_db -p 5432 -U postgres; do
+while ! nc -z postgres_db 5432; do
     sleep 1
 done
+echo "PostgreSQL started"
 
-echo "Starting Flask application..."
-flask run --host=0.0.0.0 --port=5000
+# Verifica se é a primeira execução checando se existe alguma migração
+if [ ! -f "/app/migrations/versions/*.py" ]; then
+    echo "Initializing database..."
+    # Executa as migrações iniciais
+    alembic upgrade head --config /alembic.ini
+fi
+
+# Inicia a aplicação
+exec "$@"
+

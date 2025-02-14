@@ -44,7 +44,8 @@ export const useObrasCoordinates = (): UseObrasCoordinatesReturn => {
     try {
       setLoading(true);
       const response = await axios.get(`${API_URL}/obras/coordinates`);
-      if (response.data.success) {
+      console.log('Resposta da API:', response);
+        if (response.data.success) {
         const obrasNormalizadas = response.data.data.map((obra: any) => {
           const executorField = obra.executores || obra.executor || '';
           return {
