@@ -12,7 +12,8 @@ O objetivo da Sprint 09 foi atualizar a documentação.
 | Tarefa | Responsável | Status |
 |--------|-------------|-----------------------|
 | Atualização da documentação | Beatriz Lins | Concluído |
-
+| Adicionar backup no docker build | Daniel Ferreira | Concluído |
+| Frontend corrigir rota de informações das obras | Paulo Cerqueira | Concluído |
 
 
 
