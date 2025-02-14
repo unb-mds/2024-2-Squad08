@@ -5,7 +5,6 @@
 instance/*
 !instance/.gitignore
 .webassets-cache
-.env
 backend/.env
 
 ### Flask.Python Stack ###
@@ -16,6 +15,12 @@ __pycache__/
 
 # C extensions
 *.so
+backend/migrations/
+backend/migrations/versions/
+migrations/
+migrations/*
+migrations/versions/*
+!migrations/.gitkeep
 
 # Distribution / packaging
 .Python

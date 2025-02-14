@@ -6,12 +6,15 @@ import { MdConstruction } from "react-icons/md";
 import { TbMoneybag } from "react-icons/tb";
 import { MapContainer, TileLayer } from 'react-leaflet';
 import { useNavigate } from "react-router-dom";
+import { RiLogoutCircleFill } from "react-icons/ri";
 import Logo from "../components/Logo";
+import { useAuth } from '../Context/AuthContext';
 import "../styles/Menu.css";
 
 export default function Menu() {
   const position = [-15.7801, -47.9292];
   const navigate = useNavigate();
+  const { logout } = useAuth();
 
   return (
     <div className="relative h-screen w-full">
@@ -30,15 +33,36 @@ export default function Menu() {
         <div className="login-container">
           <h1>O QUE VOCÊ QUER FAZER?</h1>
           <div className="button-group">
-            <button
-              className="purple-btn-map"
-              onClick={() => navigate("/login")}
-            >
-              <BiLogIn className="icon" />
-              LOGIN
-            </button>
+            {localStorage.getItem('token') ? (
+              <>
+                <button
+                  className="purple-btn-map"
+                  onClick={() => navigate("/endereco")}
+                >
+                  <IoLocationSharp className="icon" />
+                  ENDEREÇO
+                </button>
+                <button
+                  className="red-btn-map"
+                  onClick={() => {
+                    logout();
+                    navigate("/login");
+                  }}
+                >
+                  <RiLogoutCircleFill className="icon" />
+                  LOGOUT
+                </button>
+              </>
+            ) : (
+              <button
+                className="purple-btn-map"
+                onClick={() => navigate("/login")}
+              >
+                <BiLogIn className="icon" />
+                LOGIN
+              </button>
+            )}
           </div>
-          
           <button
             className="blue-btn-map"
             onClick={() => navigate("/mapa")}

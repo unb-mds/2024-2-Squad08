@@ -34,6 +34,17 @@ def create_app(config_name="default"):
         app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(days=7) 
         jwt = JWTManager(app)
     
+    # Handle CORS preflight requests
+    @app.before_request
+    def handle_options_request():
+        if request.method == "OPTIONS":
+            response = make_response()
+            response.headers["Access-Control-Allow-Origin"] = "*"
+            response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
+            response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
+            return response, 200
+
+    # Initialize extensions
     db.init_app(app)
     migrate = Migrate(app, db)
     

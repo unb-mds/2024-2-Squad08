@@ -9,7 +9,12 @@ endereco_bp = Blueprint('endereco', __name__)
 @endereco_bp.route("/cadastrar", methods=['POST', 'OPTIONS'])
 def cadastrar_endereco():
     if request.method == 'OPTIONS':
-        return '', 204
+        response = jsonify({'message': 'CORS preflight successful'})
+        response.headers.add("Access-Control-Allow-Origin", request.headers.get("Origin", "*"))
+        response.headers.add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+        response.headers.add("Access-Control-Allow-Headers", "Content-Type, Authorization")
+        response.headers.add("Access-Control-Allow-Credentials", "true")
+        return response, 204
 
     try:
         data = request.get_json() if request.is_json else request.form

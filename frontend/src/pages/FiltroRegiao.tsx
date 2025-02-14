@@ -26,24 +26,25 @@ export default function FiltroRegiao() {
       prev.includes(value) ? prev.filter((item) => item !== value) : [...prev, value]
     );
   };
-
+  
   const limparFiltros = () => {
     setStatusFiltro([]);
   };
-
+  
+  const API_URL = import.meta.env.VITE_MONITORA_API_URL as string;
+  
   const handleConcluir = async () => {
-    try {
-      const response = await axios.get('http://localhost:5000/obras/filterRegion', {
-        params: { regions: statusFiltro }
-      });
-      if (response.data.success) {
-        // Navega para a tela do mapa, passando as obras filtradas via state
-        navigate("/mapa", { state: { filteredObras: response.data.data } });
+      try {
+        const response = await axios.get(`${API_URL}/obras/filterRegion`, {
+          params: { regions: statusFiltro }
+        });
+        if (response.data.success) {
+          navigate("/mapa", { state: { filteredObras: response.data.data } });
+        }
+      } catch (error) {
+        console.error("Erro ao filtrar obras por região:", error);
       }
-    } catch (error) {
-      console.error("Erro ao filtrar obras por região:", error);
-    }
-  };
+    };
 
   const position = [-15.7801, -47.9292];
 
